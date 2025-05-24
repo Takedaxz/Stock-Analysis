@@ -1,0 +1,2 @@
+!cd TechnicalAnalysis
+!python main.py
