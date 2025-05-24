@@ -1,2 +1,4 @@
-!cd TechnicalAnalysis
-!python main.py
+##To run all files
+
+1.  !cd TechnicalAnalysis
+2.  !python main.py
