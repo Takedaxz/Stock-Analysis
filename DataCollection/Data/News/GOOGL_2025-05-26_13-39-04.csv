@@ -1,0 +1,609 @@
+ticker,publish_date,publish_time,title,body_text,url
+GOOGL,2025-05-26,01:48,Uranium stocks extend gains as Trump signs orders to boost nuclear industry By Investing.com,"Investing.com-- mining and nuclear technology stocks in Asia extended gains on Monday after U.S. President Donald Trump signed executive orders aimed at reviving the U.S. nuclear industry.
+
+Australia’s Paladin Energy Ltd (ASX: ), Boss Resources Ltd (ASX: ), Deep Yellow Ltd (ASX: ), and Nexgen (NYSE: ) Energy rose between 6.9% and 16% by the market close on Monday. China’s China National Nuclear Power Co Ltd (SS: ), China Nuclear Engineering Corp Ltd (SS: ), and CGN Power Co Ltd (HK: ) advanced between 1.5% and 6% by the midday break.
+
+Trump on late-Friday signed four nuclear energy-related orders to speed up reactor testing, allow the Departments of Energy and Defense to build nuclear reactors on federal land, overhaul the Nuclear Regulatory Commission, and boost U.S. mining and enrichment of uranium.
+
+The move presents the prospect of increased demand for uranium in the U.S., which is likely to drive up prices of the material. Demand for more reactor technology- a bulk of which is developed by China and Russia- is also expected to increase, benefiting Chinese companies in the sector.
+
+Global uranium demand has steadily declined since Japan’s Fukushima disaster in 2011, with Europe, the U.S., and Japan rapidly scuttling reactors and switching to alternative electricity sources on safety concerns.
+
+But nuclear energy proponents were seen gaining traction in recent years, especially amid expectations of increased electricity requirements from the artificial intelligence industry.
+
+Major AI spenders such as Meta Platforms (NASDAQ: ) and Alphabet (NASDAQ: ) were also recently seen funding nuclear energy agreements to meet rapidly growing electricity demands from AI.
+
+Australia is the world’s fourth-largest uranium producer, while China is no.8. Kazakhstan is the world’s biggest uranium producer, according to data from the World Nuclear Association.",https://www.investing.com/news/stock-market-news/uranium-stocks-extend-gains-as-trump-signs-orders-to-boost-nuclear-industry-4063424
+GOOGL,2025-05-25,06:00,"5 big analyst AI moves: Tesla ’most undervalued AI play’, MongoDB downgraded By Investing.com","Investing.com -- Here are the biggest analyst moves in the area of artificial intelligence (AI) for this week.
+
+InvestingPro subscribers always get first dibs on market-moving AI analyst comments. Upgrade today!
+
+Nvidia shares ‘attractively valued’ ahead of Q1 earnings: Stifel
+
+Stifel remains positive on NVIDIA Corporation (NASDAQ: ) ahead of the company’s fiscal first-quarter earnings report, describing the stock as “attractively valued” despite ongoing headwinds from China-related restrictions and a mixed macro backdrop. Nvidia is set to report results on May 28.
+
+The broker expects results and guidance to come in largely in line with expectations but acknowledged that recent export controls on Nvidia’s H20 AI chips in China have weighed on revenue. Still, Stifel sees strong momentum building for the second half of the year.
+
+“Our supply chain discussions continue to point to significant acceleration into 2H,” Stifel analysts wrote, highlighting Nvidia’s growing footprint in regions like the UAE and Saudi Arabia, aided by favorable U.S. policy moves. These trends are viewed as incremental positives that complement an overall resilient supply chain.
+
+The analysts noted that investors are likely to remain focused on three key areas: ongoing demand from hyperscalers and the durability of infrastructure spending, the evolving impact of China export restrictions, and any margin pressure associated with early production ramps of the new GB200 and GB300 chips.
+
+Despite these uncertainties, Stifel sees no threat to Nvidia’s dominance in the AI space. “We do not expect any change to NVDA’s leadership positioning in shaping global AI infrastructure,” the note said.
+
+The brokerage reiterated its bullish stance on valuation, highlighting Nvidia’s central role in the AI ecosystem. “We continue to view shares as attractively valued within the context of that positioning,” the analysts concluded.
+
+Tesla is ‘most undervalued AI play,” says Wedbush
+
+Meanwhile this week, Wedbush Securities raised its 12-month price target on Tesla Inc (NASDAQ: ) to a Street-high $500 from $350, citing a major valuation opportunity tied to the company’s autonomous vehicle and AI strategy. The brokerage reiterated its Outperform rating, describing Tesla as a leader entering a ""golden age of autonomous growth.""
+
+Analysts Daniel Ives and Sam Brandeis highlighted the upcoming launch of Tesla’s autonomous platform in Austin as a key catalyst, calling it the start of a new era for the company.
+
+They estimate the AI and autonomy market opportunity for Tesla to be worth at least $1 trillion, referring to the automaker as “the most undervalued AI play in the market today.” Tesla’s long-term positioning, they said, could rival other tech leaders like Nvidia, Microsoft (NASDAQ: ), and Alphabet (NASDAQ: ).
+
+Wedbush expects significant value to be unlocked through Tesla’s full self-driving (FSD) technology and the rollout of its autonomous Cybercab service. The firm sees adoption of FSD exceeding 50%, which would meaningfully shift Tesla’s financial model and expand margins.
+
+Although Tesla faced early 2025 headwinds, including controversy over Elon Musk’s ties to the Trump administration, Wedbush said those concerns are “in the rear-view mirror” and sees a “recommitted Musk” driving the company’s AI and robotics ambitions.
+
+Despite ongoing challenges in China and Europe, the analysts believe the main narrative for Tesla now centers on the coming “AI revolution,” which could push the company’s market cap to $2 trillion by the end of 2026 in a bullish case.
+
+Evercore reiterates bullish view on Dell after annual user conference
+
+Evercore ISI reiterated its Outperform rating on Dell Technologies (NYSE: ) following the company’s annual “Dell World” conference, voicing confidence in Dell’s growing role in enterprise artificial intelligence. The broker remains bullish on Dell’s positioning as businesses ramp up adoption of generative AI solutions.
+
+“We continue to believe that DELL is well-positioned to benefit from the acceleration of enterprise Gen AI adoption,” Evercore wrote in a note recapping the event’s first day.
+
+CEO Michael Dell used the keynote to unveil a range of new offerings, including AI servers powered by Nvidia’s Blackwell and AMD (NASDAQ: ) chips, an updated lineup of AI PCs, and enhanced networking and managed AI services.
+
+A major theme was the expected shift of enterprise AI workloads back on-premise, driven by cost advantages. “DELL expects 85% of enterprises to move Gen AI workloads on-prem in the next 24 months due to better costs with on-prem inferencing compared to on public clouds,” the note said.
+
+Evercore emphasized Dell’s deep technical experience in building next-gen AI systems for cloud providers and AI model developers, now being applied to enterprise clients. This background gives the company “invaluable technical expertise that it can bring over to the enterprise level,” the analysts noted.
+
+Among the standout announcements was the Dell Pro Max Plus, billed as “the first mobile-workstation with an enterprise-grade NPU,” designed for edge inferencing in a portable format. On the infrastructure side, new servers featuring Nvidia’s B300 and GB300 chips aim to enhance AI inference capabilities.
+
+“With today’s announcements, we think DELL can be an enterprise customer’s ‘one-stop shop’ for all its AI infrastructure needs through the lifecycle,” Evercore concluded.
+
+MongoDB downgraded on weaker-than-expected AI tailwinds
+
+Loop Capital downgraded MongoDB (NASDAQ: ) to Hold from Buy and sharply cut its price target to $190 from $350, citing concerns over the company’s cloud database platform, Atlas.
+
+The brokerage in a Tuesday note pointed to ""lackluster market adoption"" of Atlas, suggesting the trend could persist and weigh on the company’s ability to capitalize on AI-related workloads.
+
+“While AI hype continues to grow,” Loop Capital analysts said, “MongoDB may not see a proportional benefit in the near term,” noting that the cloud database market remains “highly fragmented” and companies are unlikely to standardize on a single vendor for AI deployments. This, they warned, could result in a slower buildout of AI workloads on MongoDB’s platform relative to broader adoption trends.
+
+Loop also flagged feedback from industry contacts suggesting that the rise of generative AI is reducing development complexity, making consolidation onto a single database platform less compelling. “This could lead to organizations opting for low-cost alternatives, including open source platforms such as PostgreSQL,” the broker wrote.
+
+Despite MongoDB’s efforts to gain traction with large enterprises, Loop Capital sees limited success. “The need to consolidate and standardize on one platform within a large organization… is becoming less relevant.""
+
+HSBC ups Bilibili to Buy on undemanding valuation, strong outlook, AI investments
+
+In another rating change, HSBC upgraded Bilibili Inc (NASDAQ: ) to Buy from Hold, pointing out a stronger outlook across gaming, advertising, and profitability, alongside what it sees as an attractive valuation. The bank also raised its price target to $22.50 from $21.50, suggesting about 25% upside from current levels.
+
+HSBC analysts pointed to the outperformance of Sanmou Season 7 (S7), saying it “beat our/Street expectations,” and expressed optimism about the upcoming Season 8, expected to launch later this month with significant enhancements.
+
+The bank also revised its game revenue forecasts upward by 6% to 8% for 2025 through 2027 and boosted its overall revenue projections by 2%, citing “better-than-expected VAS driven by quality user growth.”
+
+Bilibili’s first-quarter results topped expectations, with non-GAAP net profit coming in 25% above HSBC’s estimate and 40% above the Street. The surprise was attributed to “lower-than-expected R&D and G&A expense.”
+
+Looking ahead, HSBC forecasts 20% revenue growth in the second quarter, led by a 61% year-over-year increase in gaming, 19% in advertising, and 10% in value-added services. The bank believes “more resilient performance in high-margin game and ad businesses can support stronger earnings prospects.”
+
+In advertising, growth is being driven by improved ad load, rising eCPM, and expanding user traffic. HSBC expects continued gains as “ad tech improvement is expected to further enhance user targeting and conversion.”
+
+The note also highlights Bilibili’s investment in AI, including work on fine-tuning open-source models and plans to launch a text-to-video tool for creators by the end of 2025.
+
+At 22x estimated 2025 earnings and with non-GAAP EPS growth projected at 48% in 2026, HSBC sees the stock’s valuation as compelling.",https://www.investing.com/news/stock-market-news/5-big-analyst-ai-moves-tesla-most-undervalued-ai-play-mongodb-downgraded-4063000
+GOOGL,2025-05-25,04:21,Street Call of the Week By Investing.com,"Investing.com -- Here is your Pro Recap of the top takeaways from Wall Street analysts for the past week.
+
+InvestingPro subscribers always get first dibs on market-moving AI analyst comments. Upgrade today!
+
+Reddit
+
+What happened? On Monday, Wells Fargo downgraded Reddit Inc (NYSE: ) to Equal-weight with a $115 price target.
+
+*TLDR: Reddit faces AI-driven user pressure. Growth outlook dims.
+
+What’s the full story? Wells Fargo anticipates Reddit’s user base faces structural challenges as Google (NASDAQ: ) integrates AI-driven search features, likely pressuring logged-out user engagement and, subsequently, ad revenue. The bank forecasts ad revenue to fall 6% and 14% below consensus in 2026 and 2027, respectively, with EBITDA trailing by 2% and 15%. Logged-out users, accounting for 55% of the total user base but just 15% of ad revenue, remain critical for scale and long-term growth. However, their engagement—20% of logged-in users’ time—is concentrated on low-ad-load comment pages, limiting monetization.
+
+Wells Fargo slashes the three-year logged-in DAU growth outlook to 10% from 13%, citing reduced user acquisition potential. The bank doubts Reddit can meet ad growth expectations on logged-in users alone, as achieving Meta-like monetization appears unrealistic.
+
+Reddit’s high-margin data licensing business, while lucrative, conflicts with community health and ad-based monetization, posing long-term risks. The bank warns of disintermediation as AI-powered search increasingly bypasses Reddit, delivering direct answers sourced from its data. Wells Fargo suggests Reddit prioritize internal monetization of its content and data over licensing revenue, despite forgoing ~$150M in incremental high-margin income.
+
+The bank sees Reddit’s path to a 15% annual return—requiring a 25% revenue CAGR and 15x FY28 EBITDA multiple—as overly ambitious, given the challenges ahead.
+
+Hewlett Packard Enterprises
+
+What happened? On Tuesday, Evercore upgraded HP Inc (NYSE: ) to Outperform with a $22 price target.
+
+*TLDR: HPE upgraded; upside to $30. Multiple catalysts drive value.
+
+What’s the full story? Evercore upgrades Hewlett Packard Enterprise (NYSE: ) to Outperform, citing an attractive risk/reward profile with potential upside to $30 and downside support around $15.
+
+The brokerage highlights four key scenarios: 1) The Juniper deal closes, driving double-digit EPS growth and a $23-24 stock price; 2) No Juniper deal but HPE improves margins via cost cuts, potentially reaching $26-31; 3) The Juniper deal fails, leaving HPE rangebound at $15-16; and 4) A sum-of-the-parts analysis suggests $25-30 in value from premium multiples in networking and storage. Evercore sees multiple pathways to upside, particularly for long-term investors.
+
+The brokerage believes HPE’s current valuation offers a compelling entry point, with catalysts including cost synergies, margin improvements, and potential value unlocking. Despite operational challenges and integration risks, Evercore views the stock as poised for meaningful upside, driven by a mix of strategic execution and activism.
+
+The upgrade reflects confidence in HPE’s ability to navigate its near-term hurdles and deliver long-term shareholder value.
+
+UnitedHealth Group
+
+What happened? On Wednesday, HSBC downgraded Unitedhealth Group (NYSE: ) to Reduce with a $270 price target.
+
+*TLDR: UNH downgraded; recovery risks intensify. Earnings cuts loom.
+
+What’s the full story? HSBC downgrades UnitedHealth Group (UNH), emphasizing risks that disrupt its recovery narrative. The firm identifies three critical concerns: 1) Medical loss ratio (MLR) pressures in 2025, with consensus estimates exceeding prior guidance, potentially spilling into 2026; 2) Underappreciated policy risks for Optum Rx, including PBM reforms and drug pricing models; and 3) A justified lower multiple due to declining ROEs. HSBC argues these risks outweigh the allure of a 30% historical P/E discount.
+
+The firm expects prolonged earnings cuts as new leadership resets expectations and navigates Medicare Advantage complexities for 2026-27. Balancing bids, benefits, and star ratings remains a challenge, while potential Medicaid funding cuts add further pressure. HSBC believes recovery will be delayed, and the stock’s underappreciated risks warrant caution.
+
+Planet Fitness
+
+What happened? On Thursday, Stifel upgraded Planet Fitness Inc (NYSE: ) to Buy with a $120 price target.
+
+*TLDR: Planet Fitness stabilizes; growth catalysts emerge. Pricing and policy boost outlook.
+
+What’s the full story? Stifel sees Planet Fitness as a gym empire on the mend, with gross joins stabilizing and a handful of catalysts poised to keep comp sales growing in the mid-to-high single digits.
+
+The analysts argue the company’s marketing has room to sharpen further, while a likely Black Card price hike could juice comps by 3-4%. Efforts to elevate the Black Card Spa’s allure add another layer of optimism.
+
+The wildcard? The “One, Big, Beautiful Bill” in Congress could let gym memberships slide into HSA-eligible expenses, potentially turbocharging membership growth. Stifel bumps up its comp and unit growth estimates, betting on steady member growth and a pricing tailwind stretching years ahead. For now, the barbells are looking up.
+
+Waste Management
+
+What happened? On Friday, JPMorgan upgraded Waste Management Inc (NYSE: ) to Overweight with a $277 price target.
+
+What’s the full story? JPMorgan upgrades Waste Management (WM) to Overweight, setting a December 2025 price target of $277 based on 16x FY1 EV/EBITDA and a 3% free cash flow yield, roughly 1x above current levels but in line with the broader waste index. The bank notes WM’s valuation has lagged peers, which re-rated 1-5x in the past year, as skepticism persists around the Stericycle (NASDAQ: ) acquisition and renewable (RNG) project spending.
+
+However, JPMorgan expects WM’s valuation gap to narrow, driven by high single-digit (HSD) revenue and HSD-low double-digit (LDD) EBITDA growth targets over the next five years. Key drivers include cost and revenue synergies from Healthcare Solutions/Stericycle and accelerating sustainability initiatives.
+
+The bank sees potential to lift Stericycle’s core growth from low single digits (LSD) to mid-single digits (MSD) through improved pricing and cross-selling, with Healthcare Solutions’ EBITDA margins reaching the mid-20% range long term. Upside optionality includes future M&A and additional EBITDA accretion from sustainability projects, particularly with favorable RVO announcements.
+
+For investors willing to look past near-term skepticism, WM’s runway for growth appears compelling.",https://www.investing.com/news/stock-market-news/street-call-of-the-week-4063138
+GOOGL,2025-05-23,19:39,Four partners leave Paul Weiss following law firm’s deal with Trump By Reuters,"By Sara Merken
+
+(Reuters) - Four partners are leaving law firm Paul Weiss, after it struck a deal in March with U.S. President Donald Trump to lift an executive order that targeted the firm.
+
+Karen Dunn, Bill Isaacson, Jeannie Rhee and Jessica Phillips said in an internal email obtained by Reuters they were departing to form a new practice together.
+
+""We were disappointed not to be able to tell each of you personally and individually the news that we have decided to leave Paul, Weiss to start a new law firm,"" the email said. ""It has been an honor to work alongside such talented lawyers and to call so many of you our friends.""
+
+The four did not immediately respond to requests for comment.
+
+The email did not mention Paul Weiss’ deal with Trump, in which the firm pledged $40 million in free legal work to support mutually agreed causes with the administration. Eight other law firms have since made similar deals with the White House.
+
+""We are grateful to Bill, Jeannie, Jessica and Karen for their many contributions to the firm,"" Paul Weiss Chairman Brad Karp said in a statement on Friday.
+
+Dunn, co-chair of the firm’s litigation department, is a leading Washington lawyer and prominent Democrat, having served in the Obama White House and later on the debate prep team for Trump’s 2024 election opponent Kamala Harris.
+
+She is Google (NASDAQ: )’s lead attorney in a lawsuit by the U.S. Justice Department accusing the company of monopolizing digital advertising markets.
+
+Rhee joined Paul Weiss in 2019, after serving on the prosecution team led by Special Counsel Robert Mueller that probed any connections between Trump’s 2016 presidential campaign and Moscow.
+
+Isaacson, a veteran antitrust lawyer, joined Paul Weiss in 2020 from Boies Schiller Flexner along with Dunn and Phillips.
+
+Four law firms have sued the Trump administration over executive orders like the one Trump rescinded against Paul Weiss, which threatened the firms’ access to government officials and federal contracting work.
+
+A judge on Friday struck down Trump’s order against Jenner & Block, following a similar ruling this month for Perkins Coie.",https://www.investing.com/news/stock-market-news/four-partners-leave-paul-weiss-following-law-firms-deal-with-trump-4062655
+GOOGL,2025-05-23,19:08,Telegram ’surprised’ as Vietnam orders messaging app to be blocked By Reuters,"By Francesco Guarascio and Phuong Nguyen
+
+HANOI (Reuters) -Vietnam’s technology ministry has ordered telecommunication service providers to block the messaging app Telegram for not cooperating in combating alleged crimes committed by its users, in a move that Telegram said was surprising.
+
+In a document, dated May 21 and signed by the deputy head of the telecom department at the technology ministry, telecommunication companies were ordered to take measures to block Telegram and report on them to the ministry by June 2.
+
+The ministry was acting on behalf of the country’s cybersecurity department after police reported that 68% of the 9,600 Telegram channels and groups in Vietnam violated the law, citing fraud, drug trafficking and ""cases suspected of being related to terrorism"" among the illegal activities carried out through the app, the document seen by Reuters said.
+
+The ministry asked telecommunication service providers ""to deploy solutions and measures to prevent Telegram’s activities in Vietnam,"" the document said.
+
+After publication of the Reuters article, the government confirmed the measures against Telegram on its web portal.
+
+""Telegram is surprised by those statements,"" a company representative told Reuters on Friday.
+
+""We have responded to legal requests from Vietnam on time. This morning, we received a formal notice from the Authority of Communications regarding a standard service notification procedure required under new telecom regulations. The deadline for the response is May 27, and we are processing the request,"" the Telegram representative said.
+
+A technology ministry official said the move followed Telegram’s failure to share user data with the government when asked as part of criminal investigations.
+
+The Vietnamese police and state news outlets have repeatedly warned people of possible crime, frauds and data breaches on Telegram channels and groups.
+
+Telegram, which competes globally with other social media apps such as Facebook (NASDAQ: )’s WhatsApp and WeChat, was still available in Vietnam on Friday.
+
+Vietnam’s ruling Communist Party maintains tight media censorship and tolerates little dissent. The country has repeatedly asked companies like Facebook, Google (NASDAQ: )’s YouTube and TikTok to coordinate with authorities to stamp out content deemed ""toxic"", including offensive, false and anti-state content.
+
+Telegram is accused of not applying laws that require social media to monitor, remove and block information that violate the law, according to the document.
+
+Also, the document said that according to information from the police, ""many groups with tens of thousands of participants were created by opposition and reactionary subjects spreading anti-government documents"".
+
+The free-to-use platform with close to 1 billion users worldwide has been involved in controversies across the world on security and data breach concerns, including in France where its founder, Pavel Durov, was briefly detained last year.
+
+French President Emmanuel Macron is set to visit Vietnam from Sunday.",https://www.investing.com/news/economy-news/telegram-surprised-as-vietnam-orders-messaging-app-to-be-blocked-4062644
+GOOGL,2025-05-23,14:14,"Oracle to buy $40 billion of Nvidia chips for OpenAI’s US data center, FT reports By Reuters","(Reuters) -Oracle will spend around $40 billion on Nvidia (NASDAQ: )’s higher-performance chips to power OpenAI’s new U.S. data center, the Financial Times reported on Friday.
+
+The data center, situated in Abilene, Texas, is part of the U.S. Stargate Project, led by top AI firms in the country, to boost America’s heft in the artificial intelligence industry amid heating global competition.
+
+The cloud service provider will purchase around 400,000 of Nvidia’s most powerful GB200 chips and lease the computing power to OpenAI, the report said, citing several people familiar with the matter.
+
+OpenAI and Oracle (NYSE: ) did not immediately respond to Reuters’ requests for comment, while an Nvidia spokesperson declined to comment.
+
+The data center is expected to be fully operational by mid-next year, and Oracle has agreed to lease the site for 15 years, the report said.
+
+JPMorgan has provided a bulk of the debt financing across two loans totaling $9.6 billion, while the site’s owners, Crusoe and U.S. investment firm Blue Owl Capital, have invested around $5 billion in cash, the FT report added.
+
+The data center will help OpenAI reduce its dependence on its largest backer Microsoft (NASDAQ: ) as the ChatGPT maker’s demand for power has outstripped the supply Microsoft can provide.
+
+For Oracle, the data center and Stargate present an opportunity for the firm to boost its cloud computing capabilities and catch up to market leaders Microsoft, Amazon (NASDAQ: ) and Google (NASDAQ: ).
+
+OpenAI, Oracle, and Nvidia are also involved in a Stargate project in the Middle East, where a new massive AI data center will be constructed in the United Arab Emirates, likely using over a hundred thousand Nvidia chips.
+
+The first phase of the UAE data center will come online in 2026.",https://www.investing.com/news/stock-market-news/oracle-to-buy-40-billion-of-nvidia-chips-for-openais-us-data-center-ft-reports-4062372
+GOOGL,2025-05-23,06:05,"Wedbush sets Street-high target on Tesla, calls it ’most undervalued AI play’ By Investing.com","Investing.com -- Wedbush Securities has raised its 12-month price target on Tesla (NASDAQ: ) stock to a Street-high $500 from $350, citing a “massive stage of valuation creation ahead” linked to the company’s autonomous vehicle and AI strategy.
+
+The brokerage reiterated its Outperform rating on the automaker, positioning Tesla as a leader in what it calls the dawning ""golden age of autonomous growth.""
+
+According to Wedbush analysts Daniel Ives and Sam Brandeis, the upcoming launch of Tesla’s autonomous platform in Austin next month will be a pivotal moment, kicking off a new era of growth.
+
+The analysts believe Tesla’s AI and full self-driving (FSD) technology will be central to this expansion, estimating the AI and autonomy opportunity alone to be worth at least $1 trillion.
+
+They see Tesla as “the most undervalued AI play in the market today,” comparing its long-term AI potential to other tech giants such as Nvidia (NASDAQ: ), Microsoft (NASDAQ: ), and Alphabet (NASDAQ: ).
+
+Ives and Brandeis suggest that the company’s autonomous vehicle platform, including the anticipated Cybercab service, could unlock significant value as it scales across Tesla’s installed base.
+
+Wedbush acknowledged early 2025 as a challenging period for Tesla, marked by controversy surrounding Elon Musk’s role in the Trump administration and the DOGE department. However, they now view those issues as “in the rear-view mirror,” noting a “recommitted Musk” focused on Tesla’s AI and robotics roadmap.
+
+Wedbush forecasts the adoption of Tesla’s FSD solution to exceed 50%, which, in turn, should notably change the company’s financial model and margins. In a bullish scenario, the broker believes Tesla’s market capitalization could double to $2 trillion by the end of 2026.
+
+“Rome was not built in a day...and neither will Tesla’s autonomous and robotics strategic vision,” the analysts said.
+
+“There will be many setbacks....but given its unmatched scale and scope globally we believe Tesla has the opportunity to own the autonomous market and down the road license its technology to other auto players both in the U.S. and around the globe,” they added.
+
+While challenges in markets like China and Europe persist, where growth in the Model Y segment remains a concern, the analysts believe the main focus for investors is the “AI revolution” that is coming to Tesla.",https://www.investing.com/news/stock-market-news/wedbush-sets-streethigh-target-on-tesla-calls-it-most-undervalued-ai-play-4061602
+GOOGL,2025-05-23,05:22,Workday Inc receives Investment Bank Analyst Rating Update By Investing.com,"Risk Disclosure: Trading in financial instruments and/or cryptocurrencies involves high risks including the risk of losing some, or all, of your investment amount, and may not be suitable for all investors. Prices of cryptocurrencies are extremely volatile and may be affected by external factors such as financial, regulatory or political events. Trading on margin increases the financial risks.
+
+Before deciding to trade in financial instrument or cryptocurrencies you should be fully informed of the risks and costs associated with trading the financial markets, carefully consider your investment objectives, level of experience, and risk appetite, and seek professional advice where needed.
+
+Fusion Media would like to remind you that the data contained in this website is not necessarily real-time nor accurate. The data and prices on the website are not necessarily provided by any market or exchange, but may be provided by market makers, and so prices may not be accurate and may differ from the actual price at any given market, meaning prices are indicative and not appropriate for trading purposes. Fusion Media and any provider of the data contained in this website will not accept liability for any loss or damage as a result of your trading, or your reliance on the information contained within this website.
+
+It is prohibited to use, store, reproduce, display, modify, transmit or distribute the data contained in this website without the explicit prior written permission of Fusion Media and/or the data provider. All intellectual property rights are reserved by the providers and/or the exchange providing the data contained in this website.
+
+Fusion Media may be compensated by the advertisers that appear on the website, based on your interaction with the advertisements or advertisers.",https://www.investing.com/news/pro/jpmorgan-maintains-workday-at-overweight-with-a-price-target-of-29500-4061513
+GOOGL,2025-05-23,04:58,JMP maintains Alphabet stock Market Perform amid AI search shift By Investing.com,"On Friday, JMP Securities analyst Andrew Boone maintained a Market Perform rating on Alphabet Inc. (NASDAQ: ), the $2.08 trillion tech giant with an impressive 13% year-over-year revenue growth, following the company’s annual advertising product event. Boone highlighted Google’s adaptation of its advertising strategy to align with advancements in AI search capabilities, such as the U.S. introduction of AI Mode in Google search. According to InvestingPro data, the company maintains excellent financial health with a ""GREAT"" overall score, supported by strong profitability metrics.
+
+Google Marketing Live, now in its 12th year, showcased the tech giant’s latest advertising products, emphasizing the integration of AI into search functions. The company is testing ads within AI Mode and expanding its Smart Bidding Exploration. This move is expected to increase Google’s ad load by allowing paid search to address a broader range of queries, potentially sustaining search revenue estimates in the short term.
+
+Boone noted that AI search is broadening the total addressable market (TAM) for search by enabling more complex and nuanced questions to be answered. The increased ad load could contribute to maintaining revenue projections for Google’s search business. However, Boone also pointed out that the rising competition for search queries could limit the valuation of Alphabet’s stock.
+
+Despite these developments, JMP Securities sees the competitive landscape as a constraint on Alphabet’s stock valuation. Boone’s reaffirmation of the Market Perform rating suggests a neutral outlook on the company’s shares, signaling that the firm does not foresee significant stock movement in either direction based on the current information. InvestingPro analysis indicates the stock is trading near its Fair Value, with a P/E ratio of 19.24 and strong cash flows that sufficiently cover interest payments.
+
+Alphabet Inc. is actively evolving its approach to online advertising, leveraging AI to enhance its search engine’s capabilities and meet the changing demands of the digital advertising space. The company’s efforts to test new ad formats in AI Mode and expand its advertising reach through Smart Bidding Exploration indicate a strategic move to capitalize on AI-driven search trends. For deeper insights into Alphabet’s AI strategy and comprehensive financial analysis, check out the detailed Pro Research Report available on InvestingPro, which covers this and 1,400+ other top US stocks with expert analysis and actionable intelligence.
+
+In other recent news, Alphabet’s Google is under investigation by the U.S. Justice Department for potential antitrust law violations related to its agreement with AI startup Character.AI. The probe focuses on whether Google structured the deal to avoid formal government merger scrutiny, although Google has not been accused of any wrongdoing at this stage. Meanwhile, Stifel analysts have maintained their Buy rating on Alphabet shares, setting a price target of $200.00. This decision follows Google’s Marketing Live event, which showcased advancements in advertising products and AI integration. Similarly, BMO Capital Markets reiterated its Outperform rating and $200.00 price target, highlighting improvements in ad spend efficiency and Google’s plans to expand AI Overview Ads. These developments underscore Alphabet’s strategic direction and continued focus on innovation within the advertising and AI sectors.
+
+This article was generated with the support of AI and reviewed by an editor. For more information see our T&C.",https://www.investing.com/news/analyst-ratings/jmp-maintains-alphabet-stock-market-perform-amid-ai-search-shift-93CH-4061469
+GOOGL,2025-05-23,04:49,"Analysis-Amid ’Jensanity’, Nvidia signals plans to keep AI crown By Reuters","By Max A. Cherney and Wen-Yee Lee
+
+TAIPEI (Reuters) -Nvidia CEO Jensen Huang flew out of Taipei on Friday after a week revelling in the adoration of Taiwan’s tech industry, and delivering a subtle but crucial message from the U.S. AI chip king on how it plans to keep its crown.
+
+While ’Jensanity’ swirled around Huang at the Computex trade fair, Nvidia (NASDAQ: ) itself was at a crossroads. Having grown to become the world’s most valuable chip company, investors fear a drop in spending on artificial intelligence infrastructure as well as damage to sales from U.S. trade friction.
+
+U.S. restrictions on high-tech exports have seen Nvidia lose market share in China as it withdraws chips and designs inferior alternatives compliant with evolving U.S. policy.
+
+Now, cloud computing giants such as Microsoft (NASDAQ: ) and Alphabet (NASDAQ: )’s Google have signalled cuts to AI spending. And while the 62-year old CEO has in the past month announced deals worth hundreds of billions of dollars in regions such as the Gulf, analysts said such deals are likely to become scarce.
+
+""Is every country going to announce a $10 billion or $50 billion data centre like the Saudis? Of course not,"" said Seaport Research analyst Jay Goldberg. ""They’re sort of running out of obvious deals.""
+
+When asked by Reuters how Nvidia planned to deal with AI spending slowdown, Huang said, ""AI infrastructure is being built out (everywhere) - that’s one of the reasons I’m travelling around the world... AI infrastructure is going to be a part of society.""
+
+NEW GROWTH
+
+At Computex, Huang revealed a means of growth that does not rely on mega sovereign infrastructure arrangements: new technology that expands Nvidia’s grip on the AI market.
+
+The tech’s centrepiece is called NVLink Fusion. It allows companies to plug custom chips into Nvidia’s AI infrastructure, thereby becoming a platform upon which others can build.
+
+""Instead of having to build the entire rack of equipment themselves, (companies) could innovate or differentiate on the custom (chip) itself,"" said Nick Kucharewski, vice president at Marvell (NASDAQ: ) Technology.
+
+The bet is that drawing companies to build hardware that utilises Nvidia’s Fusion platform will drive demand for the underlying AI network and data centre parts that Nvidia sells.
+
+Nvidia has also begun to reach into the enterprise market. This week, it launched a line of servers that Huang described as an ""enterprise AI supercomputer"".
+
+Huang’s pitch was that the servers open up a multi-billion dollar market because customers can use them for ""everything"", such as graphics, virtual machines and AI applications.
+
+The enterprise market is large but difficult to break into, said Seaport Research’s Goldberg. Deals tend to be small - compared with a sovereign data centre - and more expensive and time-consuming to win.
+
+""My sense is we’re sort of bumping up against the limits of expanding the customer base,"" Goldberg said.
+
+TAIWAN ECOSYSTEM
+
+Nvidia works with some of Taiwan’s biggest names in tech, such as Taiwan Semiconductor Manufacturing Co, which makes many of its chips. However, the underlying infrastructure for AI would not be possible without the hundreds of Taiwanese companies big and small supplying components and manufacturing know-how needed to construct Nvidia’s complex AI systems.
+
+""The purpose of Computex was to bring together the ecosystem and the supply chain,"" said Ian Cutress, chief analyst at consultancy More Than Moore.
+
+Such a network is necessary to support the deals announced in the Gulf and that are likely coming elsewhere in the world in the coming months, Cutress said.
+
+Taiwanese industry has embraced Huang, who is perceived as a local-born hero hailing from Taiwan’s historic capital of Tainan before migrating to the U.S. when he was nine years old.
+
+By the time he flew out on Friday, Huang had appeared on stage or at banquets with nearly every prominent Taiwanese tech executive, including Chairman Young Liu of AI server builder Foxconn (SS: ) who called him the ""leader of Team Taiwan"".
+
+MediaTek CEO Rick Tsai gave Huang chunks of guava in a plastic bag from the Nvidia leader’s favoured fruit stall in Taipei during one of the chip designer’s events.
+
+Solomon Technology, a provider of industrial automation and AI-based inspection solutions which uses Nvidia’s software tools, said working with Nvidia is a win-win situation.
+
+Shares of Solomon have surged 241% since Huang mentioned the firm at Nvidia’s GPU Technology Conference in March last year.
+
+""The collaboration with Nvidia has given us greater visibility. We weren’t very well-known before, but with Nvidia’s support, many more people know us now,"" said Solomon Chairman Johnny Chen.",https://www.investing.com/news/stock-market-news/analysisamid-jensanity-nvidia-signals-plans-to-keep-ai-crown-4061462
+GOOGL,2025-05-23,04:15,Google Inc receives Investment Bank Analyst Rating Update By Investing.com,"Risk Disclosure: Trading in financial instruments and/or cryptocurrencies involves high risks including the risk of losing some, or all, of your investment amount, and may not be suitable for all investors. Prices of cryptocurrencies are extremely volatile and may be affected by external factors such as financial, regulatory or political events. Trading on margin increases the financial risks.
+
+Before deciding to trade in financial instrument or cryptocurrencies you should be fully informed of the risks and costs associated with trading the financial markets, carefully consider your investment objectives, level of experience, and risk appetite, and seek professional advice where needed.
+
+Fusion Media would like to remind you that the data contained in this website is not necessarily real-time nor accurate. The data and prices on the website are not necessarily provided by any market or exchange, but may be provided by market makers, and so prices may not be accurate and may differ from the actual price at any given market, meaning prices are indicative and not appropriate for trading purposes. Fusion Media and any provider of the data contained in this website will not accept liability for any loss or damage as a result of your trading, or your reliance on the information contained within this website.
+
+It is prohibited to use, store, reproduce, display, modify, transmit or distribute the data contained in this website without the explicit prior written permission of Fusion Media and/or the data provider. All intellectual property rights are reserved by the providers and/or the exchange providing the data contained in this website.
+
+Fusion Media may be compensated by the advertisers that appear on the website, based on your interaction with the advertisements or advertisers.",https://www.investing.com/news/pro/citizens-jmp--maintains-alphabet-a-at-market-perform-4061436
+GOOGL,2025-05-22,18:06,Disney seeks to stop YouTube from hiring veteran to oversee sports and media By Reuters,"(Reuters) -Walt Disney (NYSE: ) seeks to stop Alphabet (NASDAQ: )’s YouTube, which announced on Thursday that it has appointed long-time executive Justin Connolly as its global head of media and sports.
+
+Disney filed a lawsuit against YouTube in a state court in Los Angeles late Wednesday to stop the appointment, alleging breach of contract, unfair competition and interference with a contractual relationship.
+
+Disney claimed that YouTube is and has been aware of Connolly’s employment agreement, which required him to work for Disney through at least March 1, 2027. He signed a new three-year contract in November 2024 that gave him a one-time right to terminate it until March 2027.
+
+It seeks a preliminary and permanent injunction to prevent Connolly from further breaching the contract.
+
+YouTube did not immediately respond to a Reuters request for comment.
+
+Connolly will manage the platform’s relationships with major media companies as well as take charge of the company’s growing live-sports portfolio, according to a source familiar with the matter.
+
+The popular video sharing platform has been aggressively pursuing live sports for the past few years, alongside competitors such as Netflix (NASDAQ: ) and Amazon (NASDAQ: ), in a bid to take advantage of its massive user base and large sports audience.
+
+YouTube inked a $14 billion NFL streaming deal in 2022, which enables it to stream big football matches, while Amazon and other media firms also rushed to secure big sports streaming deals.
+
+The platform has also expanded beyond traditional video sharing and into live TV, music and podcasts, and generates billions in advertising revenue from its vast content reserves.
+
+Connolly spent over two decades at ESPN and Disney and exited his role as head of platform distribution earlier this week as Disney gears up to launch its ESPN sports streaming platform.",https://www.investing.com/news/stock-market-news/youtube-hires-former-disney-veteran-to-oversee-sports-and-media-4061043
+GOOGL,2025-05-22,17:51,"Google’s Youtube hiring former Disney exec Justin Connolly, sources say","Risk Disclosure: Trading in financial instruments and/or cryptocurrencies involves high risks including the risk of losing some, or all, of your investment amount, and may not be suitable for all investors. Prices of cryptocurrencies are extremely volatile and may be affected by external factors such as financial, regulatory or political events. Trading on margin increases the financial risks.
+
+Before deciding to trade in financial instrument or cryptocurrencies you should be fully informed of the risks and costs associated with trading the financial markets, carefully consider your investment objectives, level of experience, and risk appetite, and seek professional advice where needed.
+
+Fusion Media would like to remind you that the data contained in this website is not necessarily real-time nor accurate. The data and prices on the website are not necessarily provided by any market or exchange, but may be provided by market makers, and so prices may not be accurate and may differ from the actual price at any given market, meaning prices are indicative and not appropriate for trading purposes. Fusion Media and any provider of the data contained in this website will not accept liability for any loss or damage as a result of your trading, or your reliance on the information contained within this website.
+
+It is prohibited to use, store, reproduce, display, modify, transmit or distribute the data contained in this website without the explicit prior written permission of Fusion Media and/or the data provider. All intellectual property rights are reserved by the providers and/or the exchange providing the data contained in this website.
+
+Fusion Media may be compensated by the advertisers that appear on the website, based on your interaction with the advertisements or advertisers.",https://www.investing.com/news/assorted/googles-youtube-hiring-former-disney-exec-justin-connolly-sources-say--reuters-432SI-4061011
+GOOGL,2025-05-22,15:46,"Apple eyes 2026 smart glasses launch amid AI hardware race, Bloomberg reports By Investing.com","Investing.com -- Apple Inc (NASDAQ: ) is accelerating development on smart glasses targeted for release in late 2026, marking a deeper push into AI-integrated consumer hardware, Bloomberg reported earlier. The iPhone maker has shelved a previously considered Apple Watch with a built-in camera, shifting focus entirely toward glasses that could rival Meta Platforms’ (NASDAQ: ) Ray-Ban partnership and Google’s (NASDAQ: ) recently-announced partnership with Warby Parker (NYSE: ) for AI glasses.
+
+Sources familiar with the roadmap told Bloomberg that Apple plans to begin large-scale prototype production with overseas suppliers by the end of this year. The N401 project, as it is now known internally, represents a wider effort to introduce ambient computing wearables powered by Apple’s AI systems, including Siri.
+
+The glasses are expected to support cameras, microphones, and speakers, enabling them to analyze the user’s surroundings and perform voice-activated tasks. The device would handle functions such as phone calls, music playback, turn-by-turn navigation, and real-time translation, mirroring capabilities found in Meta’s latest Ray-Ban smart glasses.
+
+This has been a pivotal week for AI and hardware competition, with multiple announcements signaling heightened urgency in the space. On Wednesday, OpenAI said it would acquire Jony Ive’s secretive AI hardware startup, io, in a move aimed at developing devices that may one day challenge the iPhone’s ubiquity.
+
+Ive is Apple’s former Chief Design Officer and helped define the aesthetics of the iPhone and Apple Watch. OpenAI’s plan to release its first hardware products next year suggests that competition for ambient AI wearables is not only intensifying but also threatening Apple on its home turf.
+
+Meanwhile, at Google’s Tuesday I/O developer conference, the company announced its smart glasses alongside a partnership with Warby Parker aimed at creating lighter, more comfortable AI-powered frames. This signals serious intent from Alphabet to gain a foothold in AI-native wearables while bringing its technology to retail scale.
+
+Apple remains committed to releasing eventual augmented reality (AR) spectacles that merge digital content directly into the user’s field of view. Those plans are still years away, positioning the 2026 smart glasses as a precursor to the company’s long-term AR vision and its response to a rapidly evolving AI hardware landscape.",https://www.investing.com/news/stock-market-news/apple-eyes-2026-smart-glasses-launch-amid-ai-hardware-race-bloomberg-reports-4060561
+GOOGL,2025-05-22,13:56,"Amazon tests AI audio summaries for products, expanding tech giant’s AI push (May 21) By Reuters","(This May 21 story has been corrected to fix a typo in the headline)
+
+(Reuters) - Amazon (NASDAQ: ) is testing AI-powered short-form audio summaries on select product detail pages, the e-commerce giant said on Wednesday, as tech companies continue to integrate artificial intelligence across their platforms.
+
+The new feature offers summaries about products based on an AI-driven analysis of product details, customer reviews, and other related information from the internet.
+
+Currently available for a subset of U.S. customers, the company plans to expand to more products and customers in the coming months.
+
+Users can access these audio summaries by tapping the ""Hear the highlights"" button in the Amazon shopping app.
+
+Amazon has intensified its focus on AI integration across its business, recently revitalizing Alexa+, a voice assistant powered by generative artificial intelligence.
+
+The company has also integrated tools such as Rufus, its generative AI-powered shopping assistant that answers various shopping queries, and Shopping Guides, which provide guidance and product recommendations, onto its website.
+
+Tech companies have been rapidly deploying AI tech to consumers, spurred by the popularity of OpenAI’s ChatGPT chatbot.
+
+Last month, OpenAI updated ChatGPT’s web search capabilities to improve online shopping for users with personalized product recommendations with images, reviews, and direct purchase links.
+
+Big Tech majors, including Google (NASDAQ: ) and Meta (NASDAQ: ), have constantly rolled out new AI-driven features and updates across their products.",https://www.investing.com/news/stock-market-news/amazon-tests-ai-audio-summaries-for-products-expanding-tech-giants-ai-push-may-21-4060447
+GOOGL,2025-05-22,11:56,"Google faces DOJ probe over Character.AI deal, Bloomberg Law reports By Reuters","(Reuters) -The U.S. Justice Department is probing whether Alphabet (NASDAQ: )’s Google violated antitrust law in its agreement with Character.AI that allows the tech giant to use the AI startup’s technology, Bloomberg Law reported on Thursday.
+
+Antitrust enforcers have recently told Google they are examining whether the company structured the agreement with Character.AI to avoid formal government merger scrutiny, the report said, citing people with knowledge of the matter.
+
+Google last year signed a licensing deal with Character.AI that granted the search engine giant a non-exclusive license to the chatbot maker’s large language model technology.
+
+The company also hired Character.AI co-founders Noam Shazeer and Daniel De Freitas, both former Google employees.
+
+""We’re always happy to answer any questions from regulators,"" a Google spokesperson said. ""We’re excited that talent from Character.AI joined the company but we have no ownership stake and they remain a separate company.""
+
+Character.AI did not immediately respond to a Reuters request for comment, while the DOJ declined to comment.
+
+The DOJ can scrutinize whether the deal itself is anti-competitive even if it did not require a formal review, the report said, adding the antitrust probe was in the early stages and may not lead to an enforcement action.
+
+Other tech giants have struck similar deals in the past year in their push for growth in the heated generative AI race.
+
+Microsoft (NASDAQ: ) struck a $650 million deal with Inflection AI in March 2024, to use the AI startup’s models and hire its staff, while Amazon (NASDAQ: ) hired AI firm Adept’s co-founders and some of its team last June. Both deals had drawn regulatory scrutiny.
+
+Google is already under pressure from regulators, with the DOJ seeking to break up the company’s dominance in the online search market and in digital advertising technology in two separate cases.
+
+Earlier this month, the U.S. Federal Trade Commission backed the DOJ’s proposal to make Google share search data with competitors.",https://www.investing.com/news/stock-market-news/google-faces-doj-probe-over-deal-for-ai-tech-bloomberg-law-reports-4060282
+GOOGL,2025-05-22,07:02,TSX finishes slightly higher after index inches back from record high By Investing.com,"Investing.com - Canada’s main stock exchange closed slightly higher on Thursday, after the index edged away from a recent record high in the prior session.
+
+By the 4:00 ET close, the index standard rose by 2 points or 0.1%.
+
+’s S&P/TSX composite index gained 14.8 points or 0.1%, having fallen by 214.46 points, or 0.8%, on Wednesday, retreating from an all-time closing high and ending a 10-day winning streak.
+
+A jump in Canadian 10-year yields to their highest level since January weighed on equities. Investors have been cutting bets that the Bank of Canada will pursue interest rate reductions since recent data showed hot underlying inflation in April.
+
+In earnings, Canada’s banking giant Toronto Dominion Bank (TSX: ) beat Q2 estimates in eps and revenue, with the stock jumping 3.8% in trading as of 1:10 ET.
+
+U.S. stocks mixed
+
+U.S. stock indexes traded in a muted fashion Thursday, steadying after the previous session’s sharp selloff on concerns over high U.S. debt levels.
+
+At the 4:00 ET close, the Dow Jones was flat, and the dropped 2.6 points or 0.04%. However, the gained 53.1 points, or 0.3%.
+
+The main averages slumped on Wednesday, with the blue chip falling over 800 points.
+
+After U.S. President Donald Trump’s trip to the Middle East, G42, OpenAI, Oracle (NYSE: ), NVIDIA (NASDAQ: ), Softbank (OTC: ), and Cisco (NASDAQ: ) announced a historic partnership to build the Stargate UAE cluster in Abu Dhabi.
+
+Additionally, AI lab Anthropic unveiled their Claude 4 models, boasting wins in coding benchmarks. And Bloomberg reported Apple (NASDAQ: )’s commitment to AI-powered smart glasses, rivaling a popular Meta Platforms Inc (NASDAQ: ) and Ray-Ban glasses partnership and a recently-announced Google (NASDAQ: ) and Warby Parker Inc (NYSE: ) partnership.
+
+House passes tax and spending bill
+
+U.S. President Donald Trump’s tax and spending bill narrowly passed the House of Representatives on Thursday morning, overcoming days of political wrangling between Republicans in control of the lower chamber of Congress.
+
+The measure passed by a narrow 215-214 margin, with one member voting present, as all Democrats opposed the bill.
+
+The bill now moves to the Senate, where some lawmakers are pushing for revisions, with a vote on approval expected by August.
+
+The U.S. House Rules Committee on late Wednesday approved President Donald Trump’s expansive tax and spending bill after a nearly 22-hour session, media reports showed.
+
+Along with the extension of 2017 tax cuts, the legislation would slash taxes charged on tips and car loans, while boosting spending on defense and border security. Reductions to key food and health programs for low-income Americans are also included in the bill.
+
+Nonpartisan analysts have said the changes would add between $3 trillion to $5 trillion to the U.S.’s $36.2 trillion debt load.
+
+Earlier, it was uncertain if House Speaker Mike Johnson would secure enough Republican support to pass the bill. Some GOP lawmakers demanded deeper spending cuts to offset Trump’s desired tax breaks, although Johnson said he was confident he could secure their backing to overcome united Democratic opposition.
+
+hits record high
+
+Bitcoin surged to a fresh record high above $111,000 on Thursday, driven by optimism over U.S. regulatory progress, particularly the advancement of the GENIUS Act aimed at establishing a national framework for stablecoins.
+
+As of 6:00 ET, Bitcoin ( ) was up 2.3%, pricing in at $110,881. The cryptocurrency has climbed over 18% in May so far.
+
+Crude falls on OPEC+ output talk
+
+Oil prices fell further Thursday on renewed oversupply concerns, following a report suggesting that a group of top producers was considering raising output levels once more.
+
+At 6:00 ET, Futures fell 1.3% to $64.07 per barrel and futures dropped 0.2% to $60.64 per barrel.
+
+The Organization of the Petroleum Exporting Countries and allies, a group known as OPEC+, is discussing whether to agree on another large production increase at their meeting on June 1, Bloomberg News reported on Thursday.
+
+An output hike of 411,000 barrels a day (bpd) for July is among the options under discussion, although no final agreement has yet been reached, the report said, citing delegates.
+
+OPEC+ has been in the process of unwinding output cuts, with additions to the market in May and June.
+
+Gold prices inch lower
+
+Gold prices dipped in European trade on Thursday, pulling back from recent gains due to a strengthening in the U.S. that threatens the appeal of bullion from holders of foreign currencies.
+
+However, demand for safe havens somewhat remained bolstered by persistent concerns over high U.S. debt levels and the passage of Trump’s tax bill.
+
+dipped 0.6% to $3,294.77 an ounce, while for June were flat at $3.294.80 by 1:20 ET.
+
+(Scott Kanowsky also contributed to this article)",https://www.investing.com/news/stock-market-news/tsx-futures-point-higher-after-index-inches-back-from-record-high-4059223
+GOOGL,2025-05-22,05:52,Wall Street stocks end mostly flat in choppy trade as Treasury yields ease By Reuters,"By Chibuike Oguh
+
+NEW YORK (Reuters) - U.S. stocks closed a choppy session little changed on Thursday, erasing initial declines as Treasury yields eased off recent highs after the House of Representatives passed U.S. President Donald Trump’s tax and spending bill.
+
+Recent concerns about the U.S. deficit have pushed up Treasury yields and pressured stocks, but longer-dated yields fell on Thursday, allowing stocks to take a breather. The benchmark U.S. 10-year note yield fell 5.4 basis points to 4.543% after hitting its highest since February.
+
+The benchmark and the ended flat, while the Nasdaq edged higher. All three major Wall Street indexes had posted their biggest single-day percentage drops in a month on Wednesday as Treasury yields spiked on U.S. debt worries.
+
+The Republican-controlled House voted by a slim margin to pass the bill, which would fulfill many of Trump’s campaign pledges to his political base, but will increase the $36.2 trillion U.S. debt pile by $3.8 trillion over the next decade, according to the nonpartisan Congressional Budget Office.
+
+Investors are also weighing the impact of Trump’s tariffs on U.S. imports, including on consumer prices.
+
+""The problem today was the tax bill, which appears to have passed,"" said George Young, partner and portfolio manager at Villere & Co in New Orleans. ""But we are thinking about bigger potential problems and the two main things on the table are tariffs and interest rates.""
+
+""The market hates uncertainty and we’ve still got this overhang of the tariffs and the bond market, which is totally apolitical and totally international,"" Young added.
+
+The Dow Jones Industrial Average fell just 1.35 points to 41,859.09, the S&P 500 lost merely 2.60 points or 0.04% at 5,842.01 and the gained 53.09 points, or 0.28%, at 18,925.74.
+
+Eight out of 11 S&P 500 subsectors finished lower, led by utilities, healthcare, energy and consumer staples stocks. Consumer discretionary, communication services and technology stocks advanced.
+
+Megacap growth stocks, including Nvidia (NASDAQ: ), Amazon (NASDAQ: ) and Tesla (NASDAQ: ), gained. Alphabet (NASDAQ: ) was 1.3% firmer after touching a nearly three-month high. Apple (NASDAQ: ) ended down 0.36%.
+
+Snowflake (NYSE: ) jumped more than 13% after the cloud computing firm raised its fiscal 2026 product revenue forecast.
+
+Analog Devices (NASDAQ: ) fell 4.6% despite the semiconductor manufacturer beating Wall Street estimates for quarterly results.
+
+Shares of solar energy companies including First Solar (NASDAQ: ) dropped as Trump’s tax bill is expected to end a number of green-energy subsidies. First Solar finished down 4.3%.
+
+Declining issues outnumbered advancers by a 1.17-to-1 ratio on the NYSE. There were 68 new highs and 99 new lows on the NYSE.
+
+The S&P 500 posted four new 52-week highs and nine new lows while the Nasdaq Composite recorded 49 new highs and 109 new lows.
+
+Volume on U.S. exchanges was 16.09 billion shares, compared with the 17.56 billion average for the full session over the last 20 trading days.",https://www.investing.com/news/stock-market-news/us-stock-futures-muted-as-trumps-tax-bill-stokes-debt-concerns-4059030
+GOOGL,2025-05-21,22:24,Treasury yields ease with US stocks flat to up; investors assess US tax bill By Reuters,"By Caroline Valetkevitch
+
+NEW YORK (Reuters) - Thirty-year U.S. bond yields reached their highest level in 19 months before easing on Thursday, with worries lingering over the U.S. fiscal outlook and demand for government debt, while stocks on Wall Street ended flat to slightly higher.
+
+The U.S. dollar strengthened after recent losses.
+
+Yields rose earlier after the U.S. House of Representatives passed President Donald Trump’s tax bill by a single vote, adding to worries about the country’s debt load.
+
+Moody’s late last week became the last of the major credit rating agencies to strip the U.S. of its coveted triple-A status.
+
+The recent selloff sent bond prices lower, which attracted some buyers. Yields, which move inversely to prices, dipped.
+
+The 30-year bond yield was down 3.7 basis points at 5.0521% late Thursday. The yield on benchmark U.S. 10-year notes was down to 4.551%. During the session it had reached 4.629%, the highest since February 12.
+
+The Nasdaq ended higher, while the and Dow finished flat, following sharp declines in the previous session. Shares of Nvidia (NASDAQ: ) were up 0.8%, while Alphabet (NASDAQ: ) climbed 1.4%.
+
+""Tech is the market’s security blanket at this point,"" said Jake Dollarhide, chief executive of Longbow Asset Management in Tulsa, Oklahoma. ""It’s seen as the leader.""
+
+The fell 1.35 points to 41,859.09, the S&P 500 fell 2.60 points, or 0.04%, to 5,842.01 and the rose 53.09 points, or 0.28%, to 18,925.74.
+
+Shares of solar energy companies fell as Trump’s tax bill is expected to end a number of green-energy subsidies. First Solar (NASDAQ: ) shares ended down 4.3%.
+
+The bill would deliver new tax breaks on tips and car loans and boost spending on the military and border enforcement. The Congressional Budget Office estimates Trump’s tax-cut bill will add $3.8 trillion to the $36.2 trillion in U.S. debt over the next decade.
+
+Soft demand for a $16 billion sale of 20-year bonds on Wednesday increased concerns about reduced interest in U.S. debt.
+
+Benchmark 10-year yields and 30-year yields have both risen by around 50 basis points this month.
+
+""The Treasury market is looking for a circuit breaker,"" said Ed Al-Hussainy, senior rates analyst at Columbia Threadneedle Investments. Among other things, ""this can come in the form of poor labor market data to bring forward (Federal Reserve) cuts and trigger a reassessment of the strength of the economy.""
+
+Also on Thursday, German long-term bond yields hit a two-month high.
+
+MSCI’s gauge of stocks across the globe fell 2.94 points, or 0.34%, to 871.01. The pan-European index fell 0.64%.
+
+Data showed Britain’s government borrowed more than expected in April, euro zone business activity unexpectedly slipped back into contraction territory.
+
+The euro stumbled after the data, while the U.S. dollar rose after three days of losses. The euro was last down 0.41% at $1.1283. Against the Japanese yen, the dollar strengthened 0.29% to 144.08.
+
+, meanwhile, rose again to an all-time high, partly as investors sought out alternatives to U.S. assets. Bitcoin was last up 3.25% at $111,795.31.
+
+A report that OPEC+ is discussing a production increase for July weighed on oil prices.
+
+futures fell 47 cents, or 0.72%, to settle at $64.44 a barrel. U.S. West Texas Intermediate crude eased 37 cents, or 0.6%, to settle at $61.20.
+
+fell 0.57% to $3,295.06 an ounce.",https://www.investing.com/news/stock-market-news/treasury-yields-rise-stocks-decline-on-us-fiscal-outlook-worries-4058567
+GOOGL,2025-05-21,21:05,Stock market today: S&P 500 ends flat as US debt concerns weigh on sentiment By Investing.com,"Investing.com-- The S&P 500 closed just below the flatline Thursday following the recent rout as dip-buying in tech was kept in check by fragile sentiment amid ongoing concerns over high U.S. debt levels.
+
+At 4:00 p.m. ET (20:00 GMT), the fell 1 point, or 0%, and the index gained 0.03%, while the added 0.3%.
+
+The main averages slumped on Wednesday, with the blue chip falling over 800 points, weighed down by a spike in U.S. Treasury yields.
+
+Tech leads market bounce off lows
+
+Dip-buying in tech stocks, led by Alphabet (NASDAQ: ), helped the broader market steady, with the latter adding to this weeks gains following its developer conference earlier this week.
+
+The tech giant used the event to defend its Search product, which is under threat from newer generative AI rivals.
+
+Elsewhere in tech, Snowflake (NYSE: ) stock surged after the cloud-based data storage company raised its fiscal 2026 forecast for product revenue, betting on strong demand for its data analytics services as enterprises prioritize artificial intelligence spending.
+
+House passes tax and spending bill
+
+U.S. President Donald Trump’s tax bill narrowly passed the House on Thursday morning, overcoming days of political wrangling between Republicans in control of the lower chamber of Congress.
+
+The measure passed by a narrow 215-214 margin, with all Democrats opposing the bill.
+
+The bill now moves to the Senate, where some lawmakers are pushing for revisions, with a vote on approval expected by August.
+
+The U.S. House Rules Committee on late Wednesday approved President Donald Trump’s expansive tax and spending bill after a nearly 22-hour session, media reports showed.
+
+Along with the extension of 2017 tax cuts, the legislation would slash taxes charged on tips and car loans, while boosting spending on defense and border security. Reductions to key food and health programs for low-income Americans are also included in the bill.
+
+Critics have expressed concerns over potential cuts to social programs and increased national debt. Nonpartisan analysts have estimated that the reductions could add between $3 trillion to $5 trillion to the country’s $36.2 trillion debt pile over the next decade.
+
+Jobless claims point to still-solid labor market
+
+Economic concerns, exacerbated by the trade turmoil over the last couple of months, have also weighed on stock markets.
+
+The number of Americans filing dropped last week, suggesting the economy maintained a steady pace of job growth in May.
+
+Initial claims for state unemployment benefits fell 2,000 to a seasonally adjusted 227,000 for the week ended May 17, the Labor Department said on Thursday.
+
+S&P Global’s cooled to 50.6 last month, down from 53.5 in March and only slightly above the 50-point level denoting expansion.
+
+The index’s tracker of the manufacturing sector is seen slowing to 49.9 in May, while the services gauge is expected to edge up slightly to 51.0.
+
+Urban Outfitters shines on earnings stage
+
+Urban Outfitters (NASDAQ: ) stock soaring following a stronger-than-expected quarterly report - the second straight quarter of strong revenue gains and the third consecutive quarter of accelerating EPS growth.
+
+Analog Devices (NASDAQ: ) stock rose after the chipmaker beat expectations for quarterly revenue, driven by upbeat demand for its chips used in the automotive and industrial sectors.
+
+Additionally, Nike (NYSE: ) stock rose 2% after the footwear retailer said it is planning to raise prices of some products from next week and will sell items on Amazon (NASDAQ: ) after six years.
+
+(Peter Nurse, Ambar Warrick contributed to this article.)",https://www.investing.com/news/stock-market-news/us-stock-futures-flat-after-rising-yields-spook-wall-street-4058548
