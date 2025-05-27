@@ -55,7 +55,8 @@ def app():
         
         st.markdown(f"**Importance:** {row.importance} / 5")
         
-        st.write(f"**Summary:** {row.summary}")
+        escaped_summary = row.summary.replace("*", "\\*").replace("_", "\\_").replace("`", "\\`").replace("$", "\\$")
+        st.markdown(f"**Summary:** {escaped_summary}")
         
         st.write(f"**Summary in Thai:** {row.translate}")
             
