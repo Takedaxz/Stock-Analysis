@@ -31,6 +31,7 @@ def app():
         return
 
     df['publish_datetime'] = pd.to_datetime(df['publish_date'] + ' ' + df['publish_time'])
+    df['publish_datetime'] = df['publish_datetime'] + pd.Timedelta(hours=7)
 
     df = df.sort_values(by='publish_datetime', ascending=False)
     
@@ -49,8 +50,7 @@ def app():
         
         st.subheader(f"{number}. [{row.title}]({row.url})")
 
-        st.markdown(f"**Date**: {row.publish_date}")
-        st.markdown(f"**Time**: {row.publish_time}")
+        st.markdown(f"**Date Time**: {row.publish_datetime.strftime('%Y-%m-%d %H:%M')} (UTC+7:00)")
         
         st.markdown(f"**Sentiment:** <span style='color:{sentiment_color.get(row.sentiment, 'black')};'>**{row.sentiment}**</span>", unsafe_allow_html=True)
         
