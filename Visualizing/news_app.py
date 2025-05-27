@@ -47,9 +47,10 @@ def app():
         
         st.markdown(f"---")
         
-        st.subheader(f"{number}. Date : {row.publish_date} Time: {row.publish_time}")
-        
-        st.markdown(f"#### [{row.title}]({row.url})")
+        st.subheader(f"{number}. [{row.title}]({row.url})")
+
+        st.markdown(f"**Date**: {row.publish_date}")
+        st.markdown(f"**Time**: {row.publish_time}")
         
         st.markdown(f"**Sentiment:** <span style='color:{sentiment_color.get(row.sentiment, 'black')};'>**{row.sentiment}**</span>", unsafe_allow_html=True)
         
