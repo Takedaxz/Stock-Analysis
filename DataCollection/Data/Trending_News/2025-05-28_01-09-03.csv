@@ -1,4 +1,26 @@
 publish_date,publish_time,title,body_text,url
+2025-05-27,13:31,Merck Declares $0.81 Quarterly Dividend; 4.2% Yield By Investing.com,"Risk Disclosure: Trading in financial instruments and/or cryptocurrencies involves high risks including the risk of losing some, or all, of your investment amount, and may not be suitable for all investors. Prices of cryptocurrencies are extremely volatile and may be affected by external factors such as financial, regulatory or political events. Trading on margin increases the financial risks.
+
+Before deciding to trade in financial instrument or cryptocurrencies you should be fully informed of the risks and costs associated with trading the financial markets, carefully consider your investment objectives, level of experience, and risk appetite, and seek professional advice where needed.
+
+Fusion Media would like to remind you that the data contained in this website is not necessarily real-time nor accurate. The data and prices on the website are not necessarily provided by any market or exchange, but may be provided by market makers, and so prices may not be accurate and may differ from the actual price at any given market, meaning prices are indicative and not appropriate for trading purposes. Fusion Media and any provider of the data contained in this website will not accept liability for any loss or damage as a result of your trading, or your reliance on the information contained within this website.
+
+It is prohibited to use, store, reproduce, display, modify, transmit or distribute the data contained in this website without the explicit prior written permission of Fusion Media and/or the data provider. All intellectual property rights are reserved by the providers and/or the exchange providing the data contained in this website.
+
+Fusion Media may be compensated by the advertisers that appear on the website, based on your interaction with the advertisements or advertisers.",https://www.investing.com/news/assorted/merck-declares-081-quarterly-dividend-42-yield-432SI-4065814
+2025-05-27,12:38,Qualcomm-backed study finds Apple’s in-house modem falls short in 5G tests By Investing.com,"Investing.com -- Qualcomm Incorporated (NASDAQ: ) is touting a new study highlighting the performance edge of its 5G modem chips over Apple Inc’s (NASDAQ: ) first in-house modem, as both tech giants vie for wireless supremacy. The report, conducted by Cellular Insights and funded by Qualcomm, found that Android smartphones powered by its Snapdragon X75 and X80 modems significantly outperformed Apple’s C1 modem in download and upload speeds, particularly in challenging urban 5G environments.
+
+Apple’s iPhone 16e, the first device equipped with its custom-built modem, lagged behind competitors while connected to T-Mobile’s standalone 5G network in New York City. According to the study, Qualcomm-powered Android phones recorded up to 35% faster download speeds and as much as 91% faster upload performance.
+
+While Apple’s modem kept pace under ideal signal conditions close to cell towers, performance gaps widened in low-signal areas such as indoors or at greater distances. “Performance deltas became increasingly pronounced as signal conditions deteriorated,” the Cellular Insights report stated, citing more consistent throughput and superior carrier aggregation on Qualcomm hardware.
+
+The test results come at a strategic inflection point for both companies. Apple spent years developing the C1 modem to reduce reliance on outside suppliers, with Qualcomm previously serving as Apple’s exclusive provider and generating nearly 20% of its revenue from the relationship at its peak.
+
+Qualcomm’s modems leveraged advanced features such as 4CC downlink and 2CC uplink carrier aggregation, while the iPhone 16e lacked observed ULCA and had fewer active component carriers. “Greater platform maturity” and support for features like FDD+FDD ULCA were described as key differentiators in the report.
+
+Despite being commissioned by Qualcomm, the study offers early insights into the technical hurdles Apple faces in bringing critical infrastructure components in-house. The C1 modem marks a first attempt in a segment where Qualcomm has a two-decade development lead and wide licensing moat.
+
+Wall Street has taken note: Qualcomm shares rose 2.6% amid the report’s publication, reflecting investor confidence in its continuing technological advantage. Apple stock was left unchanged, up 2.5%, but the company could face scrutiny over whether future iterations of its modem can close the performance gap.",https://www.investing.com/news/stock-market-news/qualcommbacked-study-finds-apples-inhouse-modem-falls-short-in-5g-tests-4065762
 2025-05-27,10:33,US Consumer bounces back sharply in May By Investing.com,"Investing.com -- Consumer confidence rebounded in May, ending a five-month streak of declines, according to new data from The Conference Board.
 
 The Consumer Confidence Index jumped 12.3 points to 98.0, rising from April’s 85.7 reading, and coming in above the consensus forecast of 87.1.
@@ -20,23 +42,6 @@ While inflation and affordability remained concerns, average 12-month inflation 
 However, it was noted that on a six-month moving average basis, confidence remains down.
 
 Despite lingering anxieties over affordability, Guichard said that “the monthly improvement was largely driven by consumer expectations” and the overall rebound was broad-based.",https://www.investing.com/news/economy-news/us-consumer-bounces-back-sharply-in-may-4065501
-2025-05-27,10:29,Eli Lilly expands pain pipeline with acquisition of SiteOne Therapeutics By Investing.com,"Investing.com -- Eli Lilly and Company (NYSE: ) is expanding its neuroscience pipeline through the acquisition of SiteOne Therapeutics in a deal worth up to $1 billion, deepening its bet on non-opioid pain treatments. The centerpiece of the acquisition is STC-004, a Phase 2-ready Nav1.8 inhibitor that could offer significant relief to patients suffering from chronic pain without the risks associated with addictive medications.
-
-The transaction follows growing investor momentum behind non-opioid alternatives as public and regulatory pressure continues to intensify around opioid misuse. Lilly said the acquisition aligns with its ambition to lead in next-generation pain therapeutics while bolstering its research focus in neurology.
-
-""The global burden of chronic pain continues to increase, and an effective non-opioid treatment remains elusive,"" said Mark Mintun, Lilly’s Group Vice President of Neuroscience Research and Development. ""Lilly is eager to continue the development of STC-004 with the outstanding SiteOne team as part of our efforts to advance novel, addiction-free pain therapies.""
-
-SiteOne, a privately held biotech, has spent years developing its proprietary platform around Nav1.8 channel inhibition, which plays a key role in pain signal transmission. The deal represents a strategic milestone for the company, which has yet to commercialize a product but has generated growing interest from pharmaceutical partners.
-
-""At SiteOne, we’ve spent more than a decade advancing a vision to deliver safer, more effective, non-opioid therapies for patients suffering from pain and other sensory hyperexcitability disorders,"" said John Mulcahy, Ph.D., CEO and cofounder of SiteOne Therapeutics. ""Lilly shares our deep commitment to scientific rigor, innovation, and patient-centered drug development.""
-
-Lilly will pay an upfront fee and additional milestone-based payments tied to regulatory and commercial achievements, bringing the total value of the transaction to a possible $1 billion. The company said the acquisition will be accounted for under generally accepted accounting principles (GAAP) and reflected in its future financial guidance.
-
-Investment banks and legal teams are positioned behind both sides of the transaction, with J.P. Morgan Securities acting as exclusive financial advisor to Lilly and Jones Day serving as legal counsel. SiteOne was advised by Centerview Partners, while Skadden, Arps, Slate, Meagher & Flom LLP and Cooley LLP served as legal counsel.
-
-Pending closing conditions, the acquisition marks Lilly’s continued strategic push to diversify beyond its dominant diabetes and oncology portfolio. As competition intensifies in central nervous system therapies, the move could position Lilly on the front edge of a potentially transformative class of pain treatments.
-
-Lilly stock is up nearly 1% following the announcement.",https://www.investing.com/news/stock-market-news/eli-lilly-expands-pain-pipeline-with-acquisition-of-siteone-therapeutics-4065495
 2025-05-27,09:41,"Lynx: Risk priced in, Nvidia could surprise to the upside By Investing.com","Investing.com -- Nvidia stock could break out to new highs following its earnings report, according to Lynx Equity, which has raised its price target from $140 to $160.
 
 “After a couple of quarters of inline results, we think NVDA has the potential to provide upside to muted investor expectations,” the firm wrote in a new note.
@@ -56,21 +61,6 @@ Tariff risks appear largely mitigated, according to the firm. “NVDA has in pla
 Lynx also pointed to “mega deals” such as the $500 billion Stargate project and new funding for AI clients like OpenAI and CoreWeave as likely to support future revenue growth.
 
 “NVDA is on the verge of breaking out of the range and is headed for new highs,” Lynx concluded, maintaining a bullish stance into the earnings release.",https://www.investing.com/news/stock-market-news/lynx-risk-priced-in-nvidia-could-surprise-to-the-upside-4065322
-2025-05-27,09:16,Trump Media & Technology Group Announces $2.5B BTC Treasury Deal By Investing.com,"Trump Media and Technology Group Corp. (Nasdaq, NYSE Texas: DJT) (""Trump Media"" or the ""Company""), operator of the social media platform Truth Social, the streaming platform Truth+, and the FinTech brand Truth.Fi, announced today that it has entered into subscription agreements with approximately 50 institutional investors, under which the Company agreed to issue and sell approximately $1.5 billion in the Company’s common stock and $1.0 billion in principal amount of 0.00% convertible senior secured notes, for gross proceeds of an aggregate approximately $2.5 billion, in a private placement offering (the “Offering”).
-
-The Offering is expected to close on or about May 29, 2025, subject to satisfaction of customary closing conditions.
-
-The Company intends to use the proceeds for the creation of a Bitcoin treasury. One of the largest Bitcoin treasury deals of any public company, the move closes Trump Media’s previously announced special acquisition fund, which is one of numerous ways, including through potential mergers and acquisitions, that the Company is aiming to expand its reach throughout the America First economy.
-
-Trump Media’s CEO and Chairman Devin Nunes said, “We view Bitcoin as an apex instrument of financial freedom, and now Trump Media will hold cryptocurrency as a crucial part of our assets. Our first acquisition of a crown jewel asset, this investment will help defend our Company against harassment and discrimination by financial institutions, which plague many Americans and U.S. firms, and will create synergies for subscription payments, a utility token, and other planned transactions across Truth Social and Truth+. It’s a big step forward in the Company’s plans to evolve into a holding company by acquiring additional profit-generating, crown jewel assets consistent with America First principles.”
-
-The $2.5 billion Offering, comprising approximately $1.5 billion in Trump Media common stock at the last market price and $1.0 billion in convertible notes at a conversion price equal to a 35 percent premium, will place Bitcoin on Trump Media’s balance sheet alongside existing cash, cash equivalents, and short-term investments totaling $759.0 million as of the end of the first quarter of 2025.
-
-Yorkville Securities, LLC and Clear Street LLC acted as Co-lead placement agents, with BTIG, LLC and Cohen & Company Capital Markets acting as Co-placement agents (collectively, the “Placement Agents”). Cantor Fitzgerald & Co. acted as financial advisor. Nelson Mullins Riley & Scarborough LLP is serving as legal counsel to the Company. Reed Smith LLP is serving as legal counsel to the Placement Agents.
-
-Crypto.com and Anchorage Digital will provide custody for Trump Media’s Bitcoin treasury.
-
-This press release shall not constitute an offer to sell or a solicitation of an offer to buy, nor shall there be any sale of these securities in the United States or any other state or jurisdiction in which such offer, solicitation or sale would be unlawful prior to registration or qualification under the securities laws of any such state or jurisdiction.",https://www.investing.com/news/cryptocurrency-news/trump-media--technology-group-announces-25b-btc-treasury-deal-432SI-4065162
 2025-05-27,09:15,SoundHound shares jump as Piper Sandler starts coverage at Overweight By Investing.com,"Investing.com -- Piper Sandler has initiated coverage on SoundHound AI (NASDAQ: ) with an Overweight rating and a $12 price target, describing the company as a “direct play on the A.I revolution” through its voice-AI platform.
 
 The company’s shares jumped 5% in premarket trading Tuesday.
@@ -109,6 +99,31 @@ The bank believes Apple’s defiance could come at a cost. “CEO Tim Cook’s s
 The firm noted that it has already factored in 10-30% tariffs on all U.S.-bound imports beyond the June quarter and estimates the proposed 25% smartphone tariff would only reduce Apple’s FY26 EPS by about 11 cents.
 
 Despite the pressure, Morgan Stanley believes Apple could neutralize the threat with further U.S. investment, as part of its previously announced $500 billion commitment.",https://www.investing.com/news/stock-market-news/25-tariff-not-enough-to-push-apple-to-reshore-iphone-production--morgan-stanley-4064984
+2025-05-27,08:23,JPM highlights top 6 European investment ideas for next 12–18 months By Investing.com,"Investing.com -- JPMorgan has laid out its top six investment ideas in Europe over the next 12 to 18 months, highlighting a range of sectors it expects to benefit from structural and policy-driven shifts.
+
+First, the Wall Street giant’s strategists, led by Mislav Matejk,a maintain a bullish stance on European defense, citing “increased Defense spending, where European countries are set to shift from an average 2% Defense spending as a share of GDP towards 3.5% later this decade.”
+
+While the group’s valuations appear stretched after strong recent gains, the strategists believe “earnings will deliver” and continue to view the sector as a structural buy.
+
+The second opportunity is linked to Germany’s €500 billion infrastructure fund, which JPMorgan expects to support names across construction materials, industrials, and transportation.
+
+The fund, set to be spent over 12 years, is seen as a key fiscal stimulus driver. Stocks in JPMorgan’s “Germany Whatever It Takes” basket are viewed as well-positioned to benefit from the rollout.
+
+The basket includes stocks such as Siemens (ETR: ), UniCredit SpA (BIT: ), Rheinmetall (ETR: ), Vinci (EPA: ), Siemens Energy AG (ETR: ), and dozens of other stocks.
+
+JPMorgan’s third idea centers on financials. While tactically cautious on banks due to falling rates, the bank sees medium-term upside driven by improving balance sheets, credit flow recovery, and declining cost of equity.
+
+Insurance is also favored, with analysts staying Overweight on this subsector in the medium term, despite short-term valuation concerns.
+
+The fourth theme focuses on beneficiaries of lower energy prices, especially in the chemicals sector. JPMorgan highlights that “chemicals are the only one of the EM-exposed Cyclicals which are starting to perform less poorly,” and reiterates its overweight stance made earlier this year.
+
+Utilities and Telecoms make up the fifth category. JPMorgan sees opportunities in stocks offering high dividend yields, benefiting from higher grid spending and cash flow improvements.
+
+“Our analysts are positive on RWE (LON: ), National Grid (LON: ), and Engie SA (EPA: ),” the note says, while Deutsche Telekom (ETR: ) and Orange SA (EPA: ) are highlighted within telecoms.
+
+Finally, JPMorgan sees value in German small caps. The index has lagged large caps for several years, but the bank believes the underperformance could reverse as fiscal stimulus and industrial exposure provide support.
+
+“MDAX appears attractively priced relative to and is underowned,” the strategists wrote.",https://www.investing.com/news/stock-market-news/jpm-highlights-top-6-european-investment-ideas-for-next-1218-months-4064930
 2025-05-27,08:05,"Next 300 points likely up for the S&P 500, says JPMorgan By Investing.com","Investing.com -- JPMorgan analysts see the next move for the as higher, despite the pullback in U.S. equities last week.
 
 “The SPX fell 2.6% last week, trimming the MTD gain to 4.2% and pushing the YTD return back into negative territory, -1.3%,” JPMorgan said.
@@ -128,27 +143,6 @@ Market volatility was elevated last week amid concerns about the U.S. fiscal out
 Meanwhile, international developed and emerging markets outperformed the U.S. last week, as the dollar continued to weaken, with the DXY falling another 2%.
 
 JPMorgan highlighted that earnings from Nvidia (NASDAQ: ) could serve as a key catalyst, especially as the U.S.-EU trade dynamic experienced both escalation and de-escalation over the weekend.",https://www.investing.com/news/stock-market-news/next-300-points-likely-up-for-the-sp-500-says-jpmorgan-4064865
-2025-05-27,07:54,JPMorgan shifts to bullish stance on crypto amid sector tailwinds By Investing.com,"Investing.com -- JPMorgan has turned bullish on digital assets, citing a range of positive catalysts that could support the sector through the rest of 2025.
-
-“We turn more constructive on digital assets,” strategists led by Nikolaos Panigirtzoglou said in a Monday note, highlighting a change in stance after a period of lackluster performance from both CTAs and crypto hedge funds earlier this year.
-
-One of the key drivers for the renewed optimism is the anticipated wave of institutional adoption. JPMorgan points to “additional buying from MicroStrategy (NASDAQ: ) and other Bitcoin-accumulating corporates.”
-
-The Wall Street bank also points out positive policy developments, such as “more U.S. states allowing to be added to their strategic reserves” and the expected regulatory progress in crypto derivatives and stablecoins.
-
-These changes, according to the bank, could induce “more confidence and greater participation by traditional institutional investors.”
-
-While the sector has seen volatile returns—with digital assets down 17.9% in Q1 after a strong performance in 2024—the bank sees regulatory clarity and broadening use cases as critical tailwinds.
-
-JPMorgan also forecasts a 10% projected return for digital assets, the highest among all alternative investment classes in its updated allocation model.
-
-The more bullish view comes as JPMorgan moves alternatives to an Underweight position overall, cutting exposure to private equity, private credit, and real estate.
-
-In contrast, the bank has upgraded digital assets to an Overweight alongside hedge funds and traditional public equities.
-
-Despite the renewed interest, crypto hedge funds continue to lag, with performance trailing Bitcoin in both 2025 and previous years. JPMorgan notes that “active crypto managers have not performed as well historically compared to passively managed crypto funds.”
-
-The firm also connects crypto inflows to what it calls the “debasement trade,” driven by long-term concerns over inflation, fiscal deficits, and waning trust in fiat currencies. In this environment, Bitcoin is emerging alongside as a structural component in investor portfolios.",https://www.investing.com/news/cryptocurrency-news/jpmorgan-shifts-to-bullish-stance-on-crypto-amid-sector-tailwinds-4064834
 2025-05-27,07:30,New surveys show declining interest in EVs and the Tesla brand around the world By Investing.com,"Investing.com -- Consumer interest in electric vehicles (EVs) and the Tesla (NASDAQ: ) brand is waning across key global markets, according to new survey data.
 
 The latest UBS Evidence Lab Global EV Survey, which included over 10,000 respondents, shows a broad decline in Tesla’s standing as a preferred EV brand in the U.S., China, and Europe.
@@ -174,6 +168,25 @@ Net purchase consideration among Democrats dropped to -46% in May, from -30% in 
 Despite weaker sales volumes tied to shifting sentiment, Stifel’s team believes that progress on Full Self-Driving (FSD) and recent comments from Elon Musk about its rollout could be a more significant driver of Tesla shares in the coming quarters.
 
 UBS’ data also raises questions about Tesla’s autonomous driving strategy. The bank found that only 12% of consumers globally are willing to pay more than $7,600 upfront for autonomous features, while just 18% would pay more than $100 per month. Tesla’s FSD product currently costs $8,000 upfront or $99 monthly.",https://www.investing.com/news/stock-market-news/new-surveys-show-declining-interest-in-evs-and-the-tesla-brand-around-the-world-4064783
+2025-05-27,07:03,StanChart sees Solana price rising over 50% by end of 2025 By Investing.com,"Investing.com -- Standard Chartered has begun coverage on (SOL) with a year-end 2025 price target of $275, implying a gain of more than 50% from current levels around $175.
+
+While the bank acknowledges that Solana is likely to underperform over the next two to three years, it sees longer-term potential for the network once new sectors start to scale.
+
+“Solana is a fast, cheap alternative to Ethereum; as a result, it has dominated memecoin trading,” said Geoff Kendrick, Global Head of Digital Assets Research at Standard Chartered, said, citing the network’s superior transaction throughput and reliability.
+
+However, he notes that memecoin activity is “being discounted to a quantifiable degree by markets,” which has contributed to Solana trading “cheap” relative to its achieved application revenue, or “GDP.”
+
+Most of Solana’s current usage is concentrated in trading applications, particularly decentralized exchanges that facilitate high-volume, low-value memecoin transactions. While this has helped stress-test the network’s capabilities, Kendrick warns that the associated revenues may be unsustainable.
+
+“Solana trades ‘cheap’ on our market cap-to-GDP metric,” the analyst said, attributing this to a “more aggressive discount factor” being applied to future earnings compared to other chains.
+
+“Put another way, Solana’s recent high fees and high activity on the back of memecoin trading may be seen as unsustainable,” Kendrick explained.
+
+Looking ahead, Standard Chartered sees potential for Solana to dominate in emerging sectors like decentralized social media, high-throughput financial applications, and infrastructure platforms, though it expects these use cases to take two to three years to scale.
+
+“The key to Solana’s future success will be to take its core advantage in transaction confirmation (fast, cheap and reliable) and apply it to something other than memecoin trading,” Kendrick continued.
+
+Beyond the near-term challenges, the analyst forecasts SOL at $310 by end-2026 and $500 by end-2029. Standard Chartered’s year-end target for 2025 is $275.",https://www.investing.com/news/cryptocurrency-news/stanchart-sees-solana-price-rising-over-50-by-end-of-2025-4064655
 2025-05-27,06:47,Temu owner PDD Holdings shares fall sharply on big Q1 results miss By Investing.com,"Investing.com -- Temu owner PDD Holdings Inc DRC (NASDAQ: ) saw its shares tumble more than 18% after reporting notably worse-than-expected earnings and revenue for the first quarter of fiscal 2025.
 
 The Chinese online retailer posted Q1 earnings per share (EPS) of RMB11.41, falling well short of analyst expectations of RMB19.44.
@@ -300,7 +313,7 @@ According to reports, one option under consideration is a supply increase of 411
 OPEC+ has been in the process of unwinding output cuts, announcing additions to the market in May and June.
 
 (Reuters contributed reporting.)",https://www.investing.com/news/economy-news/higher-us-futures-new-nvidia-chip-falling-tesla-sales--whats-moving-markets-4064122
-2025-05-27,02:00,  By Investing.com,"Investing.com-- edged marginally higher on Tuesday, trading in a narrow range after last week’s record high, as investors turned their focus to the start of the major 2025 Bitcoin conference in Las Vegas later in the day.
+2025-05-27,02:00,Bitcoin price today: flat at $109.7k post record high; 2025 crypto summit eyed By Investing.com,"Investing.com-- edged marginally higher on Tuesday, trading in a narrow range after last week’s record high, as investors turned their focus to the start of the major 2025 Bitcoin conference in Las Vegas later in the day.
 
 The world’s largest cryptocurrency added 0.1% to $109,710.0 as of 09:53 ET (13:53 GMT).
 
@@ -459,11 +472,41 @@ Singapore’s index was flat, while Australia’s rose 0.5%, buoyed by some stre
 BHP Group Ltd (ASX: ) fell 0.1% after rising as much as 1.5%. A report said the world’s largest miner was in talks to sell some of its Brazilian and gold assets to Nexa Group.
 
 India’s index fell 0.4%, facing some profit-taking after it surged above the 25,000 level on Monday.",https://www.investing.com/news/stock-market-news/asia-stocks-muted-amid-trade-caution-japan-dips-on-boj-rate-hike-comments-4063930
-2025-05-26,19:58,U.S. stocks surge after Trump delays EU tariffs and consumer confidence jumps By Investing.com,"Investing.com-- U.S. stocks rose sharply Tuesday after President Donald Trump postponed plans to impose steep trade tariffs on the European Union, potentially averting a costly trade war. In addition, much stronger-than-expected U.S. consumer confidence data further helped propel stocks.
+2025-05-26,19:58,S&P 500 surges as consumer confidence rebounds. Trump delays EU tariff hike By Investing.com,"Investing.com-- U.S. stocks rose sharply Tuesday after U.S. consumer confidence rebounded following a five-month slump, cooling fears about the economy just days after President President Donald Trump postponed plans to impose steep trade tariffs on the European Union.
 
-At 10:58 AM ET (15:58 GMT), the rose 500 points, or 1.2%, the index gained 89 points, or 1.5%, and the advanced 350 points, or 1.9%.
+At 12:57 p.m. ET (16:57 GMT), the rose 641 points, or 1.5%, the index gained 1.8%, and the advanced 2.3%.
 
 Wall Street was closed on Monday on account of the Memorial Day holiday.
+
+Consumer confidence jumps by the most in four years
+
+Consumer confidence saw a strong rebound in May, ending a five-month decline, largely driven by renewed optimism surrounding economic conditions and boosted further by the U.S.-China trade deal announced mid-month.
+
+According to The Conference Board, the Consumer Confidence Index surged 12.3 points to 98.0, surpassing expectations of just 87.1. The sharp rise was fueled by improvements in both consumers’ short-term outlook—reflected in the Expectations Index jumping 17.4 points to 72.8—and perceptions of current conditions, with the Present Situation Index up 4.8 points to 135.9.
+
+Senior Economist Stephanie Guichard noted that confidence was already improving ahead of the trade deal but accelerated in its aftermath, highlighting the deal’s positive impact on consumer sentiment.
+
+Tech rallies as Nvidia (NASDAQ: )’s earnings loom large; Tesla (NASDAQ: ), Coreweave jump
+
+Big tech stocks led market higher, with Nvidia rising more than 3% ahead of its quarterly results due Wednesday after the market closes.
+
+The company is considered a bellwether for global AI demand, especially in the chipmaking sector, and is sitting on a massive valuation spike over the past two years on this position.
+
+Nvidia is expected to report bumper earnings, especially as Wall Street’s so-called AI Hyperscalers– its biggest customers– continued to spend heavily on AI over the past three months.
+
+Elsewhere, Southwest Airlines (NYSE: ) stock rose after the carrier announced it will charge customers $35 for one checked bag and $45 for the second, bringing an end to its free luggage policy.
+
+Salesforce (NYSE: ) stock gained after the Wall Street Journal reported that the software company is nearing an agreement to acquire Informatica in a deal valued at approximately $8 billion.
+
+The quarterly earnings season is largely at an end, with more than 95% of companies having already reported, with almost 78% having surpassed analyst expectations, according to FactSet.
+
+Numbers from IT service management company Okta (NASDAQ: ) are due after the bell Tuesday.
+
+Elsewhere, Tesla climbed more than 6% after CEO Elon Musk said he would be ""super focused on /xAI and Tesla (plus Starship launch next week), as we have critical technologies rolling out.”
+
+The remarks helped further restore confidence in Musk’s leadership amid concerns that his role within the Trump administration was taking too much of his focus.
+
+CoreWeave Inc (NASDAQ: ) rose more than 15%, shrugging off a downgrade from Barclays to equalweight, citing concerns about limited short-term upside given the stock’s post-IPO run up.
 
 Trump postpones 50% EU tariffs to July
 
@@ -477,14 +520,6 @@ This resulted in a losing week on Wall Street, with all three major indices fall
 
 The July 9 deadline is also around when Trump’s “reciprocal” tariffs are set to take effect, and the market’s remain focused on whether major U.S. trading partners can clinch agreements with Washington before the deadline.
 
-Consumer confidence jumps by the most in four years
-
-Consumer confidence saw a strong rebound in May, ending a five-month decline, largely driven by renewed optimism surrounding economic conditions and boosted further by the U.S.-China trade deal announced mid-month.
-
-According to The Conference Board, the Consumer Confidence Index surged 12.3 points to 98.0, surpassing expectations of just 87.1. The sharp rise was fueled by improvements in both consumers’ short-term outlook—reflected in the Expectations Index jumping 17.4 points to 72.8—and perceptions of current conditions, with the Present Situation Index up 4.8 points to 135.9.
-
-Senior Economist Stephanie Guichard noted that confidence was already improving ahead of the trade deal but accelerated in its aftermath, highlighting the deal’s positive impact on consumer sentiment.
-
 More Fed speeches due
 
 The U.S. president’s latest U-turn on EU tariffs reinforces how unpredictable his trade policies can be and undermines already fragile investor confidence in the U.S. economy.
@@ -495,55 +530,8 @@ Orders for –items designed to last three years or more–fell 6.3% last month 
 
 Transportation equipment, down following four consecutive monthly increases, drove the decrease, falling $20.3 billion or 17.1 percent to $98.8 billion.
 
-Investors are also likely Tuesday to carefully study commentary from Minneapolis Federal Reserve President and New York Fed President , adding to a series of comments from their colleagues last week.
+Minneapolis Federal Reserve President on Tuesday continued to call for a pause rates until there was more uncertainty on the tariff impact.
 
-Nvidia’s earnings loom large
-
-The quarterly earnings season is largely at an end, with more than 95% of companies having already reported, with almost 78% having surpassed analyst expectations, according to FactSet.
-
-Numbers from IT service management company Okta (NASDAQ: ) are due after the bell Tuesday, but most eyes this week will be on fiscal first quarter earnings from Nvidia (NASDAQ: ) after the close on Wednesday.
-
-The company is considered a bellwether for global AI demand, especially in the chipmaking sector, and is sitting on a massive valuation spike over the past two years on this position.
-
-Nvidia is expected to report bumper earnings, especially as Wall Street’s so-called AI Hyperscalers– its biggest customers– continued to spend heavily on AI over the past three months.
-
-Elsewhere, Southwest Airlines (NYSE: ) stock rose after the carrier announced it will charge customers $35 for one checked bag and $45 for the second, bringing an end to its free luggage policy.
-
-Salesforce (NYSE: ) stock gained after the Wall Street Journal reported that the software company is nearing an agreement to acquire Informatica in a deal valued at approximately $8 billion.
-
-Crude awaits OPEC+ meeting
-
-Oil prices slipped lower Tuesday, with investors wary ahead of a closely watched OPEC+ meeting that could provide key signals on future supply levels.
-
-At 11:00 AM ET, Brent futures dropped 0.9% to $63.22 a barrel, and U.S. West Texas Intermediate crude futures fell 1% to $60.55 a barrel.
-
-The Organization of Petroleum Exporting Countries and allies, collectively known as OPEC+, are weighing the possibility of another production boost at their upcoming meeting later this week, Bloomberg News reported last week.
-
-According to reports, one option under consideration is a supply increase of 411,000 barrels per day in July, though no final decision has been made.
-
-OPEC+ has been in the process of unwinding output cuts, announcing additions to the market in May and June.
+Investors are also likely Tuesday to carefully study commentary from Fed Governor Christopher Waller and New York Fed President and adding to a series of comments from their colleagues last week.
 
 Ambar Warrick and Peter Nurse contributed to this article",https://www.investing.com/news/stock-market-news/us-stock-futures-jump-as-trump-delays-50-tariffs-against-the-eu-4063878
-2025-05-26,01:01,"Citi raises short-term gold price target to $3,500 amid tariff concerns By Investing.com","Investing.com -- Citi has revised its short-term price target for gold back to $3,500 per ounce, citing the latest tariff escalation and high geopolitical risks.
-
-The bank, in a note on Sunday, said it expects gold prices to consolidate between $3,100 and $3,500 per ounce, up from its May 12 estimate of $3,000 to $3,300 per ounce.
-
-Despite the upgrade, Citi maintains its cautious stance on gold in the long term.
-
-The bank identifies two key reasons for this: the potential for growth and related equity risks to unwind as the U.S. midterms approach and the Federal Reserve cuts rates, and the fact that households are now holding the most gold they have in half a century.
-
-Citi’s short-term price targets for platinum and palladium remain unchanged at $1,050 per ounce and $900 per ounce, respectively.
-
-The recent platinum rally is seen as headline-driven, and Citi believes a sustainable upside requires a real improvement in end-use demand. The bank views the palladium rally as another opportunity for producer hedging and speculator short selling.
-
-The bank raised its gold price target back to $3,500 per ounce in response to Friday’s fresh U.S. threat of a 50% tariff against the European Union starting in June.
-
-Later on Sunday, U.S. President Donald Trump agreed to EU’s request to extend his proposed 50% tariffs against the bloc by another month, until early July.
-
-Citi has been bullish on gold since 2023, and it first raised its target to $3,500 per ounce in April 2025. This record gold price was surpassed on April 22 due to concerns about the independence of the Federal Reserve.
-
-As trade tensions started to de-escalate, Citi called for a period of consolidation for gold prices and moderated its short-term target to $3,150 per ounce, a price reached on May 15.
-
-Citi expects gold prices to continue to consolidate around current levels in the second half of 2025. The bank anticipates strong range-trading opportunities between $3,100 per ounce and $3,500 per ounce.
-
-Gold demand is robust, with approximately 0.5% of world GDP currently being spent on gold, the highest in half a century of data. Citi attributes this to a combination of high levels of uncertainty boosting investment demand and the absence of an actual recession, particularly in India or China, supporting jewelry demand despite high prices.",https://www.investing.com/news/commodities-news/citi-raises-shortterm-gold-price-target-to-3500-amid-tariff-concerns-4063419
