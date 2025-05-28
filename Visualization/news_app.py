@@ -1,5 +1,6 @@
 #streamlit run Visualization/news_app.py
 import streamlit as st
+import datetime
 import pandas as pd
 def calculate_sentiment_score(df):
     sentiment_scores = {
@@ -25,7 +26,7 @@ def app():
     st.title("News Summary and Sentiment Analysis")
 
     try:
-        df = pd.read_csv('Visualization/ForVisualize/Gemini_news_2025-05-28_14-27-31.csv')
+        df = pd.read_csv('Visualization/ForVisualize/Gemini_news_2025-05-28_22-35-18.csv')
     except FileNotFoundError:
         st.error("File not found.")
         return
@@ -37,7 +38,8 @@ def app():
     
     score = calculate_sentiment_score(df)
     
-    st.markdown(f"### Overall Market Sentiment Score: **{score:.2f}**")
+    st.markdown(f"### Overall Market Sentiment Score : **{score:.2f}**")
+    st.markdown(f"Updated at: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')} (UTC+7:00)")
     
     def display_news_card(row,number):
         sentiment_color = {
