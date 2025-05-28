@@ -1,4 +1,4 @@
-#streamlit run Visualizing/news_app.py
+#streamlit run Visualization/news_app.py
 import streamlit as st
 import pandas as pd
 def calculate_sentiment_score(df):
@@ -25,7 +25,7 @@ def app():
     st.title("News Summary and Sentiment Analysis")
 
     try:
-        df = pd.read_csv('Visualizing/ForVisualize/Gemini_news_2025-05-28_09-54-01.csv')
+        df = pd.read_csv('Visualization/ForVisualize/Gemini_news_2025-05-28_14-27-31.csv')
     except FileNotFoundError:
         st.error("File not found.")
         return
