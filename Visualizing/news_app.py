@@ -25,7 +25,7 @@ def app():
     st.title("News Summary and Sentiment Analysis")
 
     try:
-        df = pd.read_csv('Visualizing/ForVisualize/Gemini_news_2025-05-28_01-11-58.csv')
+        df = pd.read_csv('Visualizing/ForVisualize/Gemini_news_2025-05-28_09-54-01.csv')
     except FileNotFoundError:
         st.error("File not found.")
         return
