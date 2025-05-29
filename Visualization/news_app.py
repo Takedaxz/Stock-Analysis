@@ -35,13 +35,13 @@ def app(filepath=None):
     st.title("News Summary and Sentiment Analysis")
 
     try:
-        sp500 = yf.download(tickers="ES=F", period="6mo",interval="1h", progress=False, multi_level_index=False)
+        sp500 = yf.download(tickers="ES=F", period="3mo",interval="1h", progress=False, multi_level_index=False)
         
         fig = px.line(
             sp500,
             y="Close",
-            title="S&P 500 Futures Price (Last 6 Months)",
-            labels={"Close": "Price (USD)", "Datetime": "Date"},
+            title="S&P 500 Futures Price (Last 3 Months)",
+            labels={"Close": "Price (USD)", "Datetime": "Datetime (UTC+0:00)"},
         )
 
         fig.update_layout(
@@ -59,9 +59,9 @@ def app(filepath=None):
     df = None
     
     if filepath is None:
-        # st.error("No data file specified. Please provide a filepath.")
+        #st.error("No data file specified. Please provide a filepath.")
         try:
-            default_path = os.path.join(os.path.dirname(__file__), "..", "CompletePipeline", "Data", "Gemini_news_2025-05-29_11-46.csv")
+            default_path = os.path.join(os.path.dirname(__file__), "..", "CompletePipeline", "Data", "Gemini_news_2025-05-30_00-55.csv")
             #st.warning(f"Using default file path: `{default_path}`")
             DEFAULT_PATH = default_path
             df = pd.read_csv(default_path)
