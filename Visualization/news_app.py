@@ -5,6 +5,10 @@ import pandas as pd
 import sys
 import os
 import pytz
+import yfinance as yf
+import plotly.graph_objects as go
+import plotly.express as px
+from streamlit_autorefresh import st_autorefresh
 
 def calculate_sentiment_score(df):
     sentiment_scores = {
@@ -26,10 +30,31 @@ def calculate_sentiment_score(df):
     return sentiment_score
 
 def app(filepath=None):
+
     st.set_page_config(layout="wide")
     st.title("News Summary and Sentiment Analysis")
 
-    #st.markdown(f"Passed filepath: `{filepath}`")
+    try:
+        sp500 = yf.download(tickers="ES=F", period="6mo",interval="1h", progress=False, multi_level_index=False)
+        
+        fig = px.line(
+            sp500,
+            y="Close",
+            title="S&P 500 Futures Price (Last 6 Months)",
+            labels={"Close": "Price (USD)", "Datetime": "Date"},
+        )
+
+        fig.update_layout(
+            xaxis_title='Date',
+            yaxis_title='Price (USD)',
+            height=400,
+            width=800,
+            template='plotly_white'
+        )
+
+        st.plotly_chart(fig, use_container_width=True)
+    except Exception as e:
+        st.warning(f"Could not load S&P 500 Futures data. Error: {e}")
 
     df = None
     
