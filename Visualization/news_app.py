@@ -32,12 +32,13 @@ def app(filepath=None):
     #st.markdown(f"Passed filepath: `{filepath}`")
 
     df = None
-
+    
     if filepath is None:
         # st.error("No data file specified. Please provide a filepath.")
         try:
             default_path = os.path.join(os.path.dirname(__file__), "..", "CompletePipeline", "Data", "Gemini_news_2025-05-29_11-46.csv")
             #st.warning(f"Using default file path: `{default_path}`")
+            DEFAULT_PATH = default_path
             df = pd.read_csv(default_path)
         except FileNotFoundError:
             #st.error(f"Default file not found at: `{default_path}`.")
@@ -48,6 +49,7 @@ def app(filepath=None):
     else:
         try:
             df = pd.read_csv(filepath)
+            DEFAULT_PATH = filepath
         except FileNotFoundError:
             #st.error(f"File not found at: `{filepath}`. Please check the path relative to where you ran `streamlit run`.")
             return
@@ -73,11 +75,8 @@ def app(filepath=None):
     else:
         st.markdown(f"### Market Sentiment: <span style='color: gray;'> **{score:.2f}**</span>", unsafe_allow_html=True)
     
-    bangkok_tz = pytz.timezone('Asia/Bangkok')
-    utc_now = datetime.datetime.now(pytz.utc)
-    bangkok_now = utc_now.astimezone(bangkok_tz)
-    # st.markdown(f"### Overall Market Sentiment Score : **{score:.2f}**")
-    st.markdown(f"Updated at: {bangkok_now.strftime('%Y-%m-%d %H:%M')} (UTC+7:00)")
+    time=DEFAULT_PATH.split("/")[-1].split("_")[-2]+" "+DEFAULT_PATH.split("/")[-1].split("_")[-1].split(".")[0].replace("-", ":")
+    st.markdown(f"Updated at: {time} (UTC+7:00)")
     
     def display_news_card(row,number):
         sentiment_color = {
