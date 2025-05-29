@@ -1,7 +1,10 @@
-#streamlit run Visualization/news_app.py
+# Visualization/news_app.py
 import streamlit as st
 import datetime
 import pandas as pd
+import sys
+import os
+
 def calculate_sentiment_score(df):
     sentiment_scores = {
         'Positive': 1,
@@ -21,14 +24,38 @@ def calculate_sentiment_score(df):
     sentiment_score = df['weighted_score'].sum() / total_importance
     return sentiment_score
 
-def app():
+def app(filepath=None):
     st.set_page_config(layout="wide")
     st.title("News Summary and Sentiment Analysis")
 
-    try:
-        df = pd.read_csv('Visualization/ForVisualize/Gemini_news_2025-05-28_22-35-18.csv')
-    except FileNotFoundError:
-        st.error("File not found.")
+    #st.markdown(f"Passed filepath: `{filepath}`")
+
+    df = None
+
+    if filepath is None:
+        # st.error("No data file specified. Please provide a filepath.")
+        try:
+            default_path = os.path.join(os.path.dirname(__file__), "..", "CompletePipeline", "Data", "Gemini_news_2025-05-29_11-46.csv")
+            #st.warning(f"Using default file path: `{default_path}`")
+            df = pd.read_csv(default_path)
+        except FileNotFoundError:
+            #st.error(f"Default file not found at: `{default_path}`.")
+            return
+        except Exception as e:
+            #st.error(f"Error loading default file: {e}")
+            return
+    else:
+        try:
+            df = pd.read_csv(filepath)
+        except FileNotFoundError:
+            #st.error(f"File not found at: `{filepath}`. Please check the path relative to where you ran `streamlit run`.")
+            return
+        except Exception as e:
+            #st.error(f"Error loading file from `{filepath}`: {e}")
+            return
+
+    if df is None or df.empty:
+        st.warning("No data loaded. Please check the file path and content.")
         return
 
     df['publish_datetime'] = pd.to_datetime(df['publish_date'] + ' ' + df['publish_time'])
@@ -37,8 +64,15 @@ def app():
     df = df.sort_values(by='publish_datetime', ascending=False)
     
     score = calculate_sentiment_score(df)
+
+    if score > 0.3:
+        st.markdown(f"### Market Sentiment: <span style='color: green;'> **{score:.2f}**</span>", unsafe_allow_html=True)
+    elif score < -0.3:
+        st.markdown(f"### Market Sentiment: <span style='color: red;'> **{score:.2f}**</span>", unsafe_allow_html=True)
+    else:
+        st.markdown(f"### Market Sentiment: <span style='color: gray;'> **{score:.2f}**</span>", unsafe_allow_html=True)
     
-    st.markdown(f"### Overall Market Sentiment Score : **{score:.2f}**")
+    # st.markdown(f"### Overall Market Sentiment Score : **{score:.2f}**")
     st.markdown(f"Updated at: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')} (UTC+7:00)")
     
     def display_news_card(row,number):
@@ -68,4 +102,8 @@ def app():
         display_news_card(row, idx)
 
 if __name__ == '__main__':
-    app()
+    if len(sys.argv) > 1:
+        data_filepath = sys.argv[1]
+        app(filepath=data_filepath)
+    else:
+        app(filepath=None)
