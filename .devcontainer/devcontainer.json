@@ -17,7 +17,10 @@
       ]
     }
   },
-  "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
+  // Use postCreateCommand for installing dependencies once after the container is created.
+  // This is generally more reliable for Python dependencies than updateContentCommand,
+  // which runs every time content is updated or the container is started.
+  "postCreateCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; pip3 install --no-cache-dir --user -r requirements.txt; pip3 install --no-cache-dir --user streamlit; echo '✅ Packages installed and Requirements met'",
   "postAttachCommand": {
     "server": "streamlit run Visualization/news_app.py --server.enableCORS false --server.enableXsrfProtection false"
   },
