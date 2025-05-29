@@ -4,6 +4,7 @@ import datetime
 import pandas as pd
 import sys
 import os
+import pytz
 
 def calculate_sentiment_score(df):
     sentiment_scores = {
@@ -72,8 +73,11 @@ def app(filepath=None):
     else:
         st.markdown(f"### Market Sentiment: <span style='color: gray;'> **{score:.2f}**</span>", unsafe_allow_html=True)
     
+    bangkok_tz = pytz.timezone('Asia/Bangkok')
+    utc_now = datetime.datetime.now(pytz.utc)
+    bangkok_now = utc_now.astimezone(bangkok_tz)
     # st.markdown(f"### Overall Market Sentiment Score : **{score:.2f}**")
-    st.markdown(f"Updated at: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')} (UTC+7:00)")
+    st.markdown(f"Updated at: {bangkok_now.strftime('%Y-%m-%d %H:%M')} (UTC+7:00)")
     
     def display_news_card(row,number):
         sentiment_color = {
