@@ -61,7 +61,7 @@ def app(filepath=None):
     if filepath is None:
         #st.error("No data file specified. Please provide a filepath.")
         try:
-            default_path = os.path.join(os.path.dirname(__file__), "..", "CompletePipeline", "Data", "Gemini_news_2025-05-30_12-11.csv")
+            default_path = os.path.join(os.path.dirname(__file__), "..", "CompletePipeline", "Data", "Gemini_news_2025-05-30_20-44.csv")
             #st.warning(f"Using default file path: `{default_path}`")
             DEFAULT_PATH = default_path
             df = pd.read_csv(default_path)
@@ -94,11 +94,11 @@ def app(filepath=None):
     score = calculate_sentiment_score(df)
 
     if score > 0.3:
-        st.markdown(f"### Market Sentiment: <span style='color: green;'> **{score:.2f}**</span>", unsafe_allow_html=True)
+        st.markdown(f"### Overall Market Sentiment: <span style='color: green;'> **{score:.2f}**</span>", unsafe_allow_html=True)
     elif score < -0.3:
-        st.markdown(f"### Market Sentiment: <span style='color: red;'> **{score:.2f}**</span>", unsafe_allow_html=True)
+        st.markdown(f"### Overall Market Sentiment: <span style='color: red;'> **{score:.2f}**</span>", unsafe_allow_html=True)
     else:
-        st.markdown(f"### Market Sentiment: <span style='color: gray;'> **{score:.2f}**</span>", unsafe_allow_html=True)
+        st.markdown(f"### Overall Market Sentiment: <span style='color: gray;'> **{score:.2f}**</span>", unsafe_allow_html=True)
     
     time=DEFAULT_PATH.split("/")[-1].split("_")[-2]+" "+DEFAULT_PATH.split("/")[-1].split("_")[-1].split(".")[0].replace("-", ":")
     st.markdown(f"Updated at: {time} (UTC+7:00)")
