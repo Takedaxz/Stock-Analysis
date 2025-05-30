@@ -32,7 +32,7 @@ def calculate_sentiment_score(df):
 def app(filepath=None):
 
     st.set_page_config(layout="wide")
-    st.title("News Summary and Sentiment Analysis")
+    st.title("Trending News Summary and Sentiment")
 
     try:
         sp500 = yf.download(tickers="ES=F", period="3mo",interval="1h", progress=False, multi_level_index=False)
@@ -61,7 +61,7 @@ def app(filepath=None):
     if filepath is None:
         #st.error("No data file specified. Please provide a filepath.")
         try:
-            default_path = os.path.join(os.path.dirname(__file__), "..", "CompletePipeline", "Data", "Gemini_news_2025-05-30_00-55.csv")
+            default_path = os.path.join(os.path.dirname(__file__), "..", "CompletePipeline", "Data", "Gemini_news_2025-05-30_12-11.csv")
             #st.warning(f"Using default file path: `{default_path}`")
             DEFAULT_PATH = default_path
             df = pd.read_csv(default_path)
