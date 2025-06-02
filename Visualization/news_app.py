@@ -9,6 +9,20 @@ import yfinance as yf
 import plotly.graph_objects as go
 import plotly.express as px
 from streamlit_autorefresh import st_autorefresh
+import glob
+
+def get_latest_news_file(data_dir):
+    pattern = os.path.join(data_dir, "*.csv")
+    files = glob.glob(pattern)
+    
+    # Filter out files containing 'news' in their name
+    files = [f for f in files if 'news' not in f.lower()]
+    
+    if not files:
+        return None
+        
+    latest_file = max(files, key=os.path.getmtime)
+    return latest_file
 
 def calculate_sentiment_score(df):
     sentiment_scores = {
@@ -59,17 +73,18 @@ def app(filepath=None):
     df = None
     
     if filepath is None:
-        #st.error("No data file specified. Please provide a filepath.")
         try:
-            default_path = os.path.join(os.path.dirname(__file__), "..", "CompletePipeline", "Data", "Gemini_news_2025-06-01_12-42.csv")
-            #st.warning(f"Using default file path: `{default_path}`")
+            data_dir = os.path.join(os.path.dirname(__file__), "..", "CompletePipeline", "Data")
+            default_path = get_latest_news_file(data_dir)
+            
+            if default_path is None:
+                st.error("No news data files found in the data directory.")
+                return
+                
             DEFAULT_PATH = default_path
             df = pd.read_csv(default_path)
-        except FileNotFoundError:
-            #st.error(f"Default file not found at: `{default_path}`.")
-            return
         except Exception as e:
-            #st.error(f"Error loading default file: {e}")
+            st.error(f"Error loading default file: {e}")
             return
     else:
         try:
