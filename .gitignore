@@ -1,3 +1,4 @@
 .DS_Store
 TechnicalAnalysis/Indicators/Output/*.ipynb
 *.env
+Kaggle
