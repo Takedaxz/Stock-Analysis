@@ -136,12 +136,13 @@ def app(filepath=None):
         
         st.markdown(f"**Sentiment:** <span style='color:{sentiment_color.get(row.sentiment, 'black')};'>**{row.sentiment}**</span>", unsafe_allow_html=True)
         
-        st.markdown(f"**Importance:** {row.importance} / 5")
+        st.markdown(f"**Importance To Stock:** {row.importance} / 5")
         
         escaped_summary = row.summary.replace("*", "\\*").replace("_", "\\_").replace("`", "\\`").replace("$", "\\$")
         st.markdown(f"**Summary:** {escaped_summary}")
         
-        st.write(f"**Summary in Thai:** {row.translate}")
+        escaped_summary_th = row.translate.replace("*", "\\*").replace("_", "\\_").replace("`", "\\`").replace("$", "\\$")
+        st.markdown(f"**Summary in Thai:** {escaped_summary_th}")
             
 
     for idx, row in enumerate(df.itertuples(), start=1):
