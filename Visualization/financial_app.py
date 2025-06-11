@@ -1,4 +1,5 @@
 import streamlit as st
+import yfinance as yf
 import re
 
 def parse_financial_analysis(response):
@@ -20,6 +21,10 @@ def display_financial_analysis(response, stock_name="STOCK"):
     แสดงผลการวิเคราะห์ใน Streamlit
     """
     st.title(f"การวิเคราะห์งบการเงิน: {stock_name}")
+
+    df=yf.download(stock_name, period='1y')
+    st.write(f"Current price: {float(df['Close'].iloc[-1]):.2f}")
+    st.line_chart(df['Close'])
     
     # แยกข้อมูล
     sections = parse_financial_analysis(response)
@@ -62,7 +67,8 @@ def display_financial_analysis(response, stock_name="STOCK"):
             st.info(sections['ข้อเสนอแนะสำหรับนักลงทุน'])
 
 if __name__ == "__main__":
-    with open('DataCollection/Data/FinancialsAnalysis/AMZN_2025-05-28_14-19_analysis.txt', 'r', encoding='utf-8') as file:
+    file_path = 'DataCollection/Data/FinancialsAnalysis/AAPL_2025-06-11_16-30_analysis.txt' 
+    with open(file_path, 'r', encoding='utf-8') as file:
         response = file.read()
-
-    display_financial_analysis(response, stock_name="AMZN")
+    stock_name = file_path.split('/')[-1].split('_')[0]
+    display_financial_analysis(response, stock_name=stock_name)

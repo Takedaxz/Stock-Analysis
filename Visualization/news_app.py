@@ -127,7 +127,8 @@ def app(filepath=None):
         
         st.markdown(f"---")
         
-        st.subheader(f"{number}. [{row.title}]({row.url})")
+        title = row.title.replace("*", "\\*").replace("_", "\\_").replace("`", "\\`").replace("$", "\\$")
+        st.subheader(f"{number}. [{title}]({row.url})")
 
         st.markdown(f"**Date Time**: {row.publish_datetime.strftime('%Y-%m-%d %H:%M')} (UTC+7:00)")
         
