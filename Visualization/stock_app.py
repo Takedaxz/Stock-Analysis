@@ -82,7 +82,7 @@ def app(filepath=None):
     
     st.title(f"{df.ticker[0]} News Summary and Sentiment")
     try:
-        stock = yf.download(tickers=df.ticker[0], period="3mo",interval="1h", progress=False, multi_level_index=False)
+        stock = yf.download(tickers=df.ticker[0], period="3mo",interval="1d", progress=False, multi_level_index=False)
         
         fig = px.line(
             stock,

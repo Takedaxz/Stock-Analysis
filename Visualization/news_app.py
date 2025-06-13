@@ -49,7 +49,7 @@ def app(filepath=None):
     st.title("Trending News Summary and Sentiment")
 
     try:
-        sp500 = yf.download(tickers="ES=F", period="3mo",interval="1h", progress=False, multi_level_index=False)
+        sp500 = yf.download(tickers="ES=F", period="3mo",interval="1d", progress=False, multi_level_index=False)
         
         fig = px.line(
             sp500,
