@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trending News Summary and Sentiment</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: auto; }
+    .card { border: 1px solid #ddd; border-radius: 8px; margin: 16px 0; padding: 16px; }
+    h2 { margin: 0 0 8px 0; }
+  </style>
+</head>
+<body>
+  <h1>Trending News Summary and Sentiment</h1>
+  <div id="news"></div>
+  <script>
+    fetch('http://localhost:8000/news')
+      .then(res => res.json())
+      .then(news => {
+        const container = document.getElementById('news');
+        if (news.length === 0) {
+          container.innerHTML = '<p>No news found.</p>';
+        } else {
+          container.innerHTML = news.map(item => `
+            <div class="card">
+              <h2><a href="${item.url}" target="_blank">${item.title}</a></h2>
+              <p><b>Date Time:</b> ${item.publish_date} ${item.publish_time}</p>
+              <p><b>Sentiment:</b> ${item.sentiment}</p>
+              <p><b>Importance:</b> ${item.importance} / 5</p>
+              <p><b>Summary:</b> ${item.summary}</p>
+              <p><b>Summary in Thai:</b> ${item.translate}</p>
+            </div>
+          `).join('');
+        }
+      });
+  </script>
+</body>
+</html>

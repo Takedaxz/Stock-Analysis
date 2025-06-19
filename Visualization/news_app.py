@@ -15,8 +15,8 @@ def get_latest_news_file(data_dir):
     pattern = os.path.join(data_dir, "*.csv")
     files = glob.glob(pattern)
     
-    # Filter out files containing 'news' in their name
-    files = [f for f in files if 'news' not in f.lower()]
+    # Filter files containing 'news' in their name
+    files = [f for f in files if 'news' in f.lower()]
     
     if not files:
         return None
@@ -80,7 +80,7 @@ def app(filepath=None):
             if default_path is None:
                 st.error("No news data files found in the data directory.")
                 return
-                
+            print(default_path)
             DEFAULT_PATH = default_path
             df = pd.read_csv(default_path)
         except Exception as e:
