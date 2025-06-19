@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For dev only
+    allow_origins=["https://stock-sentiment-analysis.vercel.app"],  # your Vercel domain
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

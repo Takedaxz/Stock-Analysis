@@ -12,7 +12,7 @@
   <h1>Trending News Summary and Sentiment</h1>
   <div id="news"></div>
   <script>
-    fetch('http://localhost:8000/news')
+    fetch('https://stock-analysis-q941.onrender.com/news')
       .then(res => res.json())
       .then(news => {
         const container = document.getElementById('news');
