@@ -1,5 +1,5 @@
 # backend/app.py
-from fastapi import FastAPI
+from fastapi import FastAPI,Query
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient, DESCENDING
 import os
