@@ -206,9 +206,10 @@
 
     @media (max-width: 768px) {
       #indexChart, #rsiChart {
-        height: 300px !important;
+        height: 200px !important;
       }
     }
+
 
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -225,7 +226,7 @@
     <option value="^IXIC">NASDAQ</option>
     <option value="^DJI">Dow Jones</option>
   </select>
-  <canvas id="indexChart"></canvas>
+  <canvas id="indexChart""></canvas>
   <div id="news"></div>
   <script>
     fetch('https://stock-analysis-q941.onrender.com/news')
@@ -293,7 +294,7 @@
       return getComputedStyle(document.body).getPropertyValue('--text').trim();
     }
 
-    let priceChart, rsiChart;
+    let priceChart;
 
     async function loadChart(symbol = '^GSPC') {
       //const res = await fetch(`http://localhost:8000/chart-data?symbol=${encodeURIComponent(symbol)}`);
@@ -307,7 +308,6 @@
       const rsi = data.rsi;
 
       const ctxPrice = document.getElementById('indexChart').getContext('2d');
-      const ctxRSI = document.getElementById('rsiChart').getContext('2d');
 
       if (priceChart) priceChart.destroy();
       const textColor = getCurrentTextColor();
@@ -324,6 +324,7 @@
             backgroundColor: 'rgba(63, 81, 181, 0.05)',
             tension: 0.3,
             fill: true,
+            pointRadius: 0,
             yAxisID: 'y'
           },
           {
@@ -332,6 +333,7 @@
             borderColor: '#FFDE00',
             tension: 0.3,
             fill: false,
+            pointRadius: 0,
             yAxisID: 'y'
           },
           {
@@ -340,6 +342,7 @@
             borderColor: '#4caf50',
             tension: 0.3,
             fill: false,
+            pointRadius: 0,
             yAxisID: 'y'
           },
           {
