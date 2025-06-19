@@ -1,5 +1,6 @@
+#uvicorn dev:app --reload
 # backend/app.py
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient, DESCENDING
 import os
@@ -10,12 +11,12 @@ import ta
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://stock-analysis-theta-inky.vercel.app",],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+load_dotenv("../../SentimentAnalysis/GPT/secret.env")
 MONGO_URI = os.getenv("MONGO_CONNECTION_STRING", "mongodb://localhost:27017")
 client = MongoClient(MONGO_URI)
 db = client["stock_news_db"]
@@ -29,7 +30,7 @@ def get_news():
         .limit(20)
     )
     return news
-
+    
 @app.get("/chart-data")
 def get_chart_data(symbol: str = Query("^GSPC")):
     df = yf.download(symbol, period="6mo",interval="1d", progress=False, multi_level_index=False)

@@ -1,36 +1,425 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Trending News Summary and Sentiment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: sans-serif; max-width: 800px; margin: auto; }
-    .card { border: 1px solid #ddd; border-radius: 8px; margin: 16px 0; padding: 16px; }
-    h2 { margin: 0 0 8px 0; }
+    :root {
+      --bg: #f5f7fa;
+      --text: #333;
+      --card-bg: #ffffff;
+      --highlight: #3f51b5;
+      --positive: #2e7d32;
+      --negative: #c62828;
+      --neutral: #616161;
+    }
+
+    body.dark-mode {
+      --bg: #121212;
+      --text: #eeeeee;
+      --card-bg: #1e1e1e;
+      --highlight: #6b78c4;
+      --positive: #81c784;
+      --negative: #ef5350;
+      --neutral: #bdbdbd;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      max-width: 1200px;
+      margin: auto;
+      font-family: "Prompt", sans-serif;
+      padding: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1 {
+      padding-top: 24px;
+      font-size: 2.2em;
+      color: var(--text);
+    }
+
+    h2 {
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.2em;
+    }
+
+    .card {
+      border: none;
+      border-radius: 16px;
+      margin: 24px 0;
+      padding: 28px 32px;
+      background: var(--card-bg);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      position: relative;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-number {
+      display: inline-block;
+      min-width: 36px;
+      height: 36px;
+      background: var(--highlight);
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 36px;
+      font-size: 1em;
+      font-weight: bold;
+      margin-right: 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .sentiment-positive {
+      color: var(--positive);
+      font-weight: bold;
+    }
+
+    .sentiment-negative {
+      color: var(--negative);
+      font-weight: bold;
+    }
+
+    .sentiment-neutral {
+      color: var(--neutral);
+      font-weight: bold;
+    }
+
+    a {
+      color: var(--highlight);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .prompt-regular { font-weight: 400; }
+    .prompt-medium { font-weight: 500; }
+    .prompt-bold { font-weight: 700; }
+
+    #sentiment-score {
+      margin-top: 12px;
+      padding: 12px 20px;
+      background-color: rgba(100, 181, 246, 0.1);
+      border-left: 6px solid var(--highlight);
+      border-radius: 8px;
+    }
+
+    p {
+      margin: 6px 0;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .card {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.6em;
+      }
+
+      h2 {
+        font-size: 1em;
+      }
+    }
+
+    .toggle-button {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid #ccc;
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: background 0.3s ease, color 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toggle-button:hover {
+      background: var(--highlight);
+      color: white;
+    }
+
+    #symbolSelect {
+      padding: 10px 18px;
+      font-size: 1em;
+      border-radius: 10px;
+      border: 1px solid var(--highlight);
+      background-color: var(--card-bg);
+      color: var(--text);
+      margin: 24px 0;
+      cursor: pointer;
+      font-family: "Prompt", sans-serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--highlight) 50%),
+                        linear-gradient(135deg, var(--highlight) 50%, transparent 50%);
+      background-position: calc(100% - 20px) calc(1em + 2px),
+                          calc(100% - 15px) calc(1em + 2px);
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      padding-right: 40px;
+    }
+
+    #symbolSelect:hover {
+      border-color: var(--highlight);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    #symbolSelect:focus {
+      outline: none;
+      border-color: var(--highlight);
+      box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.2);
+    }
+
+    #symbolSelect option {
+      background-color: var(--card-bg);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 1em;
+      font-family: "Prompt", sans-serif;
+    }
+
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Prompt:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h1>Trending News Summary and Sentiment</h1>
+  <button class="toggle-button" onclick="toggleDarkMode()">🌙 / ☀️</button>
+  <h1 class="prompt-bold">Trending News Summary and Sentiment</h1>
+  <div id="sentiment-score"></div>
+  <select id="symbolSelect">
+    <option value="^GSPC">S&P 500</option>
+    <option value="^IXIC">NASDAQ</option>
+    <option value="^DJI">Dow Jones</option>
+  </select>
+  <canvas id="indexChart" height="120"></canvas>
+  <canvas id="rsiChart" height="80"></canvas>
   <div id="news"></div>
   <script>
     fetch('https://stock-analysis-q941.onrender.com/news')
+    //fetch('http://localhost:8000/news')
       .then(res => res.json())
       .then(news => {
+        function calculateSentimentScore(news) {
+          const sentimentScores = { 'Positive': 1, 'Negative': -1, 'Neutral': 0 };
+          let weightedSum = 0;
+          let totalImportance = 0;
+          news.forEach(item => {
+            const score = sentimentScores[item.sentiment] ?? 0;
+            const importance = parseInt(item.importance) || 0;
+            weightedSum += score * importance;
+            totalImportance += importance;
+          });
+          if (totalImportance === 0) return 0;
+          return weightedSum / totalImportance;
+        }
+
+        const score = calculateSentimentScore(news);
+        const scoreDiv = document.getElementById('sentiment-score');
+        let scoreColor = 'gray';
+        if (score > 0.3) scoreColor = 'var(--positive)';
+        else if (score < -0.3) scoreColor = 'var(--negative)';
+        scoreDiv.innerHTML = `<h2 class="prompt-medium">Overall Market Sentiment: <span style='color:${scoreColor};'>${score.toFixed(2)}</span></h2>`;
+
         const container = document.getElementById('news');
         if (news.length === 0) {
           container.innerHTML = '<p>No news found.</p>';
         } else {
-          container.innerHTML = news.map(item => `
-            <div class="card">
-              <h2><a href="${item.url}" target="_blank">${item.title}</a></h2>
-              <p><b>Date Time:</b> ${item.publish_date} ${item.publish_time}</p>
-              <p><b>Sentiment:</b> ${item.sentiment}</p>
-              <p><b>Importance:</b> ${item.importance} / 5</p>
-              <p><b>Summary:</b> ${item.summary}</p>
-              <p><b>Summary in Thai:</b> ${item.translate}</p>
-            </div>
-          `).join('');
+          container.innerHTML = news.map((item, idx) => {
+            const dateTimeStr = `${item.publish_date}T${item.publish_time}`;
+            const utcDate = new Date(dateTimeStr + 'Z');
+            const gmt7Date = new Date(utcDate.getTime() + 7 * 60 * 60 * 1000);
+            const pad = n => n.toString().padStart(2, '0');
+            const formatted = `${gmt7Date.getFullYear()}-${pad(gmt7Date.getMonth()+1)}-${pad(gmt7Date.getDate())} ${pad(gmt7Date.getHours())}:${pad(gmt7Date.getMinutes())}`;
+            let sentimentClass = 'sentiment-neutral';
+            if (item.sentiment === 'Positive') sentimentClass = 'sentiment-positive';
+            else if (item.sentiment === 'Negative') sentimentClass = 'sentiment-negative';
+            return `
+              <div class="card prompt-regular">
+                <h2 class="prompt-medium">
+                  <span class="card-number">${idx + 1}</span>
+                  <a href="${item.url}" target="_blank">${item.title}</a>
+                </h2>
+                <p><b>Date Time :</b> ${formatted} (UTC+7:00)</p>
+                <p><b>Sentiment :</b> <span class="${sentimentClass}">${item.sentiment}</span></p>
+                <p><b>Importance :</b> ${item.importance} / 5</p>
+                <p><b>Summary :</b> ${item.summary}</p>
+                <p><b>Summary in Thai :</b> ${item.translate}</p>
+              </div>
+            `;
+          }).join('');
         }
       });
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      setTimeout(() => {
+        loadChart(document.getElementById('symbolSelect').value);
+      }, 10);
+    }
+    function getCurrentTextColor() {
+      return getComputedStyle(document.body).getPropertyValue('--text').trim();
+    }
+
+    let priceChart, rsiChart;
+
+    async function loadChart(symbol = '^GSPC') {
+      //const res = await fetch(`http://localhost:8000/chart-data?symbol=${encodeURIComponent(symbol)}`);
+      const res = await fetch(`https://stock-analysis-q941.onrender.com/chart-data?symbol=${encodeURIComponent(symbol)}`);
+      const data = await res.json();
+
+      const labels = data.timestamps;
+      const prices = data.prices;
+      const ema5 = data.ema5;
+      const ema20 = data.ema20;
+      const rsi = data.rsi;
+
+      const ctxPrice = document.getElementById('indexChart').getContext('2d');
+      const ctxRSI = document.getElementById('rsiChart').getContext('2d');
+
+      if (priceChart) priceChart.destroy();
+      const textColor = getCurrentTextColor();
+
+      priceChart = new Chart(ctxPrice, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: `${data.symbol}`,
+            data: prices,
+            borderColor: '#3f51b5',
+            backgroundColor: 'rgba(63, 81, 181, 0.05)',
+            tension: 0.3,
+            fill: true,
+            yAxisID: 'y'
+          },
+          {
+            label: 'EMA5',
+            data: ema5,
+            borderColor: '#FFDE00',
+            tension: 0.3,
+            fill: false,
+            yAxisID: 'y'
+          },
+          {
+            label: 'EMA20',
+            data: ema20,
+            borderColor: '#4caf50',
+            tension: 0.3,
+            fill: false,
+            yAxisID: 'y'
+          },
+          {
+            label: 'RSI 70',
+            data: Array(labels.length).fill(70),
+            borderColor: '#e53935',
+            borderDash: [5, 5],
+            pointRadius: 0,
+            yAxisID: 'rsiY'
+          },
+          {
+            label: 'RSI 30',
+            data: Array(labels.length).fill(30),
+            borderColor: '#1e88e5',
+            borderDash: [5, 5],
+            pointRadius: 0,
+            yAxisID: 'rsiY'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: textColor
+            }
+          },
+          tooltip: {
+            mode: 'index'
+          }
+        },
+        scales: {
+          y: {
+            type: 'linear',
+            position: 'left',
+            title: {
+              display: true,
+              text: 'Price',
+              color: textColor
+            },
+            ticks: {
+              color: textColor
+            }
+          },
+          rsiY: {
+            type: 'linear',
+            position: 'right',
+            min: 0,
+            max: 100,
+            grid: {
+              drawOnChartArea: false
+            },
+            title: {
+              display: true,
+              text: 'RSI',
+              color: textColor
+            },
+            ticks: {
+              color: textColor,
+              stepSize: 20
+            }
+          },
+          x: {
+            ticks: {
+              maxTicksLimit: 12,
+              color: textColor
+            }
+          }
+        }
+      }
+    });
+
+    }
+
+    document.getElementById('symbolSelect').addEventListener('change', e => {
+      loadChart(e.target.value);
+    });
+
+    loadChart();
+    setInterval(fetchSP500, 60000);
   </script>
 </body>
 </html>
