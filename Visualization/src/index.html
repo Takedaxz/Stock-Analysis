@@ -204,6 +204,12 @@
       font-family: "Prompt", sans-serif;
     }
 
+    @media (max-width: 768px) {
+      #indexChart, #rsiChart {
+        height: 300px !important;
+      }
+    }
+
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -219,8 +225,7 @@
     <option value="^IXIC">NASDAQ</option>
     <option value="^DJI">Dow Jones</option>
   </select>
-  <canvas id="indexChart" height="120"></canvas>
-  <canvas id="rsiChart" height="80"></canvas>
+  <canvas id="indexChart"></canvas>
   <div id="news"></div>
   <script>
     fetch('https://stock-analysis-q941.onrender.com/news')
@@ -404,7 +409,7 @@
           },
           x: {
             ticks: {
-              maxTicksLimit: 12,
+              maxTicksLimit: window.innerWidth < 600 ? 4 : 12,
               color: textColor
             }
           }
