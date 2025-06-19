@@ -14,8 +14,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-load_dotenv("../../SentimentAnalysis/GPT/secret.env")
-
 MONGO_URI = os.getenv("MONGO_CONNECTION_STRING", "mongodb://localhost:27017")
 client = MongoClient(MONGO_URI)
 db = client["stock_news_db"]
