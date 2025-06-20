@@ -229,8 +229,8 @@
   <canvas id="indexChart""></canvas>
   <div id="news"></div>
   <script>
-    //fetch('https://stock-analysis-q941.onrender.com/news')
-    fetch('http://localhost:8000/news')
+    fetch('https://stock-analysis-q941.onrender.com/news')
+    //fetch('http://localhost:8000/news')
       .then(res => res.json())
       .then(news => {
         function calculateSentimentScore(news) {
