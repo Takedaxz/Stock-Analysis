@@ -229,8 +229,8 @@
   <canvas id="indexChart""></canvas>
   <div id="news"></div>
   <script>
-    fetch('https://stock-analysis-q941.onrender.com/news')
-    //fetch('http://localhost:8000/news')
+    //fetch('https://stock-analysis-q941.onrender.com/news')
+    fetch('http://localhost:8000/news')
       .then(res => res.json())
       .then(news => {
         function calculateSentimentScore(news) {
@@ -261,7 +261,7 @@
           container.innerHTML = news.map((item, idx) => {
             const dateTimeStr = `${item.publish_date}T${item.publish_time}`;
             const utcDate = new Date(dateTimeStr + 'Z');
-            const gmt7Date = new Date(utcDate.getTime() + 7 * 60 * 60 * 1000);
+            const gmt7Date = new Date(utcDate.getTime());
             const pad = n => n.toString().padStart(2, '0');
             const formatted = `${gmt7Date.getFullYear()}-${pad(gmt7Date.getMonth()+1)}-${pad(gmt7Date.getDate())} ${pad(gmt7Date.getHours())}:${pad(gmt7Date.getMinutes())}`;
             let sentimentClass = 'sentiment-neutral';
