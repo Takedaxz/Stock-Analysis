@@ -28,13 +28,13 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(mess
 MAX_WORKERS = 10
 MAX_RETRIES = 8
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.5",
     "Accept-Encoding": "gzip, deflate, br",
     "Connection": "keep-alive",
-    "Cookie":"udid=6fbc4b203fa0a49893a57876b16748e9; inudid=6fbc4b203fa0a49893a57876b16748e9; browser-session-counted=true; proscore_card_opened=1; r_p_s_n=1; workstation_watchlist_opened=0; finbox:attribution:entry:jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbiI6Imh0dHBzOi8vd3d3LmludmVzdGluZy5jb20vcHJvL3Byb3BpY2tzL3RlY2gtdGl0YW5zIiwicmVmZXJyZXIiOiJodHRwczovL3d3dy5pbnZlc3RpbmcuY29tL2VxdWl0aWVzL21pY3Jvc29mdC1jb3JwLWZpbmFuY2lhbC1zdW1tYXJ5IiwidXNlcl9hZ2VudCI6Ik1vemlsbGEvNS4wIChNYWNpbnRvc2g7IEludGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS8xMzYuMC4wLjAgU2FmYXJpLzUzNy4zNiIsImlwIjoiMjAwMTo0NGM4OjQxNTI6ZTUyYzoxNTJkOjQyNjc6ZjQ1NToyZDc4IiwiaWF0IjoxNzQ3ODExODY2fQ.h0bu5AE6XHe1m81g9lVcPh1StwAHi_eEOpzo4QSmcy0; finbox:attribution:entry:jwt.sig=c8SQd6OQQrLbGJfl_2x0hsrqGd8; finboxio-production:jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2aXNpdG9yX2lkIjoidi1qbE9xYUZCcHNsVjBYd3VMaDRfYkkiLCJmaXJzdF9zZWVuIjoiMjAyNS0wNS0yMVQwNzoxNzo0Ni4yNTlaIiwiY2FwdGNoYV92ZXJpZmllZCI6ZmFsc2UsIm11c3RfcmV2ZXJpZnkiOmZhbHNlLCJwcmV2aWV3X2FjY2VzcyI6eyJhc3NldHNfdmlld2VkIjpbXSwiYXNzZXRzX21heCI6NSwidmFsaWRfdW50aWwiOiIyMDI1LTA1LTIxVDA3OjIyOjQ2LjAwMFoifSwicm9sZXMiOlsiYW5vbnltb3VzIiwidmlzaXRvciIsImludmVzdGluZyJdLCJib29zdHMiOltdLCJhc3NldHMiOltdLCJyZWdpb25zIjpbXSwic2NvcGVzIjpbInJvbGU6YW5vbnltb3VzIiwicm9sZTp2aXNpdG9yIiwicm9sZTppbnZlc3RpbmciXSwiZm9yIjoiNDkuMjI5LjEzOS4yMjUiLCJleHAiOjE3NDc5MDYyNzQsImlhdCI6MTc0NzkwNTk3NH0.T74ZgnZFh2ntNFviSyS8_2CwWgLpHdxcIRifUS4JMhk; finboxio-production:jwt.sig=lIap6DPJCArajZ6eqQCFb_133-8; PHPSESSID=443ovuq9fve5u62ntj8s30uq4u; page_equity_viewed=0; user-browser-sessions=1; ses_id=N3llJDQ7MDhiJjs9MGE0MDRsYTpkYDM0Ymo0MGFkZHI2ImNtYDc%2FeTQ7byEzMDklMTAxMGNkMTE8OmBsNjdvbzczZTE0NzBoYjU7PjBrNDM0Y2EyZGozY2I3NDZhMGRuNmRjPGBuPzo0YG8yM2g5MTEjMS1jJzEgPG5gMDZ3byg3OGUkNGQwZGIwOz4wZzQ%2FNGJhPWRrMzdiMTQ1YTNkfDZ9; adBlockerNewUserDomains=1749633399; __cf_bm=B8yTfJJ5ArbYCB3ypzrH239dbPGNHViy1pz2IurqCxk-1750648064-1.0.1.1-XpaY5qb056_yS6.5aNMthx18VnYpyYCkKHRn_5sqevNc5YJ5i4wqT.SzdaDND22KJ0TkdFZLHt4JZwn3LRm0PXqAhJsPW.p1aGaNDKR7k5Oe4cW4UZA3DXrt.eHwYs40; accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTA2NTE2NjUsImp0aSI6IjI2OTAzNTk3MiIsImlhdCI6MTc1MDY0ODA2NSwiaXNzIjoiaW52ZXN0aW5nLmNvbSIsInVzZXJfaWQiOjI2OTAzNTk3MiwicHJpbWFyeV9kb21haW5faWQiOiI1MyIsIkF1dGhuU3lzdGVtVG9rZW4iOiIiLCJBdXRoblNlc3Npb25Ub2tlbiI6IiIsIkRldmljZVRva2VuIjoiIiwiVWFwaVRva2VuIjoiTjNsbEpEUTdNRGhpSmpzOU1HRTBNRFJzWVRwa1lETTBZbW8wTUdGa1pISTJJbU50WURjJTJGZVRRN2J5RXpNRGtsTVRBeE1HTmtNVEU4T21Cc05qZHZiemN6WlRFME56Qm9ZalU3UGpCck5ETTBZMkV5WkdvelkySTNORFpoTUdSdU5tUmpQR0J1UHpvMFlHOHlNMmc1TVRFak1TMWpKekVnUEc1Z01EWjNieWczT0dVa05HUXdaR0l3T3o0d1p6USUyRk5HSmhQV1JyTXpkaU1UUTFZVE5rZkRaOSIsIkF1dGhuSWQiOiIiLCJJc0RvdWJsZUVuY3J5cHRlZCI6ZmFsc2UsIkRldmljZUlkIjoiIiwiUmVmcmVzaEV4cGlyZWRBdCI6MTc1MzE2ODA2NX0.ZMS_lG8n7cErFdRUegZWgb1LKNsRufUcZs5RQCkM2DU; gcc=TH; gsc=10; smd=6fbc4b203fa0a49893a57876b16748e9-1750648065; invab=legacytnb_1|mnofooterad_1|noadnews_0|nostrip_0|regwall_1; __cflb=02DiuGRugds2TUWHMkimYPAcC3JQrXKkBzeomGjyTPkqA; _imntz_error=0; top_strip_variant=%7B%22user_type%22%3A%22loggedin%22%2C%22variant_id%22%3A2%2C%22variant_name%22%3A%22Free%20users%202%2C%20WarrenAI%2C%20red%2Fpurple%20gradient%22%7D; ses_num=1; last_smd=6fbc4b203fa0a49893a57876b16748e9-1750648065; identify_sent=269035972|1750734472677; __eventn_id=6fbc4b203fa0a49893a57876b16748e9; __eventn_uid=269035972; __eventn_id_usr=%7B%22adFreeUser%22%3A0%2C%22investingProUser%22%3A0%2C%22investingProPremiumUser%22%3A0%7D; _gcl_au=1.1.412703761.1750648074; _ga=GA1.1.42286207.1750648074; cf_clearance=vIedzyi6QVb3F3FhBAM.Ma6GREVhsSeGDIRijhY6Vkc-1750648896-1.2.1.1-91raAu65Rb_t9n5Swlt3Y46zYxKT8bQSQv5Jlbvo_xemOKu_QgKHHwBAgQTOMvUeVguuxchZZ3d6zC0dW5.BwP5ITdRAlHIwJVXbgWL302V7xDUrxwHUMW2qmEAMKxdrbACVccyamovtBCkKRmYRPHEEl0rZv6CWxxvk52ilT4PvHUw6Hk.EYM1VG0l2X1I6lToPPJJujlFtlsC6DvyK__bZs65biHwhsJzXRCWWAWzQZi9YQ7byHxYrkbW0MxrZU9f1984Js_nZZgk4VZF0pWrVln.HUj5HyVYyznHECDJcLk4cF59bljlVfbHr_b6PEt8m.0iz7oZ3jYfJztag1qA9X_rH5HKVTfC.t12SyUg; invpc=122; page_view_count=187; lifetime_page_view_count=5; _ga_C4NDLGKVMK=GS2.1.s1750648072$o1$g1$t1750648932$j23$l0$h0$dIilqzmXV2yoWaD8OOJKpR_l2Phtxy7VF9w; _dd_s=aid=a5feaf75-4f9b-4377-9062-06b704ba416d&logs=1&id=8f39c208-45c1-42be-8320-4c24a6254ccd&created=1750648069119&expire=1750649830481",
     "Upgrade-Insecure-Requests": "1",
+    "ngrok-skip-browser-warning":"1",
     "Sec-Fetch-Dest": "document",
     "Sec-Fetch-Mode": "navigate",
     "Sec-Fetch-Site": "none",
@@ -47,7 +47,7 @@ HEADERS = {
 scraper = cloudscraper.create_scraper(
     browser={
         'browser': 'chrome',
-        'platform': 'darwin',
+        'platform': 'windows',
         'mobile': False
     },
     delay=2,
@@ -64,7 +64,7 @@ def fetch_page(page: int):
         url += f"/{page}"
     for attempt in range(1, MAX_RETRIES + 1):
         try:
-            r = scraper.get(url ,headers=HEADERS,timeout=30)
+            r = scraper.get(url, timeout=30)
             r.raise_for_status()
             soup = BeautifulSoup(r.text, "lxml")
             anchors = soup.select(
