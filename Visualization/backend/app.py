@@ -22,12 +22,28 @@ db = client["stock_news_db"]
 collection = db["news_data"]
 
 @app.get("/news")
-def get_news():
-    news = list(
-        collection.find({"ticker": "news"}, {"_id": 0})
-        .sort([("publish_date", DESCENDING), ("publish_time", DESCENDING)])
-        .limit(20)
-    )
+def get_news(ticker: str = Query("news")):
+    # If ticker is a market index, get general news
+    if ticker.startswith("^"):
+        news = list(
+            collection.find({"ticker": "news"}, {"_id": 0})
+            .sort([("publish_date", DESCENDING), ("publish_time", DESCENDING)])
+            .limit(20)
+        )
+    else:
+        # For individual stocks, search for news specific to that ticker
+        news = list(
+            collection.find({"ticker": ticker}, {"_id": 0})
+            .sort([("publish_date", DESCENDING), ("publish_time", DESCENDING)])
+            .limit(20)
+        )
+        # If no specific news found for the ticker, fall back to general news
+        if not news:
+            news = list(
+                collection.find({"ticker": "news"}, {"_id": 0})
+                .sort([("publish_date", DESCENDING), ("publish_time", DESCENDING)])
+                .limit(20)
+            )
     return news
 
 @app.get("/chart-data")

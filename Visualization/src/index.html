@@ -25,12 +25,15 @@
       --neutral: #bdbdbd;
     }
 
+    * {
+      font-family: "Prompt", sans-serif;
+    }
+
     body {
       background-color: var(--bg);
       color: var(--text);
       max-width: 1200px;
       margin: auto;
-      font-family: "Prompt", sans-serif;
       padding: 20px;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
@@ -171,7 +174,6 @@
       color: var(--text);
       margin: 24px 0;
       cursor: pointer;
-      font-family: "Prompt", sans-serif;
       transition: all 0.3s ease;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
       appearance: none;
@@ -201,7 +203,6 @@
       border-radius: 10px;
       padding: 10px;
       font-size: 1em;
-      font-family: "Prompt", sans-serif;
     }
 
     @media (max-width: 768px) {
@@ -218,78 +219,96 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <button class="toggle-button" onclick="toggleDarkMode()">Darkmode: On/Off</button>
+  <button class="toggle-button" onclick="toggleDarkMode()" id="darkModeToggle">Dark Mode: Off</button>
   <h1 class="prompt-bold">Trending News Summary and Sentiment</h1>
   <div id="sentiment-score"></div>
   <select id="symbolSelect">
     <option value="^GSPC">S&P 500</option>
     <option value="^IXIC">NASDAQ</option>
     <option value="^DJI">Dow Jones</option>
+    <option value="AAPL">Apple (AAPL)</option>
+    <option value="AMD">AMD (AMD)</option>
+    <option value="AMZN">Amazon (AMZN)</option>
+    <option value="GOOGL">Alphabet (GOOGL)</option>
+    <option value="META">Meta (META)</option>
+    <option value="MSFT">Microsoft (MSFT)</option>
+    <option value="NFLX">Netflix (NFLX)</option>
+    <option value="NVDA">NVIDIA (NVDA)</option>
+    <option value="TSLA">Tesla (TSLA)</option>
   </select>
-  <canvas id="indexChart""></canvas>
+  <canvas id="indexChart"></canvas>
   <div id="news"></div>
   <script>
-    fetch('https://stock-analysis-q941.onrender.com/news')
-    //fetch('http://localhost:8000/news')
-      .then(res => res.json())
-      .then(news => {
-        function calculateSentimentScore(news) {
-          const sentimentScores = { 'Positive': 1, 'Negative': -1, 'Neutral': 0 };
-          let weightedSum = 0;
-          let totalImportance = 0;
-          news.forEach(item => {
-            const score = sentimentScores[item.sentiment] ?? 0;
-            const importance = parseInt(item.importance) || 0;
-            weightedSum += score * importance;
-            totalImportance += importance;
-          });
-          if (totalImportance === 0) return 0;
-          return weightedSum / totalImportance;
-        }
+    function loadNews(symbol = '^GSPC') {
+      fetch(`https://stock-analysis-q941.onrender.com/news?ticker=${encodeURIComponent(symbol)}`)
+      //fetch(`http://localhost:8000/news?ticker=${encodeURIComponent(symbol)}`)
+        .then(res => res.json())
+        .then(news => {
+          function calculateSentimentScore(news) {
+            const sentimentScores = { 'Positive': 1, 'Negative': -1, 'Neutral': 0 };
+            let weightedSum = 0;
+            let totalImportance = 0;
+            news.forEach(item => {
+              const score = sentimentScores[item.sentiment] ?? 0;
+              const importance = parseInt(item.importance) || 0;
+              weightedSum += score * importance;
+              totalImportance += importance;
+            });
+            if (totalImportance === 0) return 0;
+            return weightedSum / totalImportance;
+          }
 
-        const score = calculateSentimentScore(news);
-        const scoreDiv = document.getElementById('sentiment-score');
-        let scoreColor = 'gray';
-        if (score > 0.3) scoreColor = 'var(--positive)';
-        else if (score < -0.3) scoreColor = 'var(--negative)';
-        scoreDiv.innerHTML = `<h2 class="prompt-medium">Overall Market Sentiment: <span style='color:${scoreColor};'>${score.toFixed(2)}</span></h2>`;
+          const score = calculateSentimentScore(news);
+          const scoreDiv = document.getElementById('sentiment-score');
+          let scoreColor = 'gray';
+          if (score > 0.3) scoreColor = 'var(--positive)';
+          else if (score < -0.3) scoreColor = 'var(--negative)';
+          scoreDiv.innerHTML = `<h2 class="prompt-medium">Overall Market Sentiment: <span style='color:${scoreColor};'>${score.toFixed(2)}</span></h2>`;
 
-        const container = document.getElementById('news');
-        if (news.length === 0) {
-          container.innerHTML = '<p>No news found.</p>';
-        } else {
-          container.innerHTML = news.map((item, idx) => {
-            const dateTimeStr = `${item.publish_date}T${item.publish_time}`;
-            const utcDate = new Date(dateTimeStr + 'Z');
-            const gmt7Date = new Date(utcDate.getTime());
-            const pad = n => n.toString().padStart(2, '0');
-            const formatted = `${gmt7Date.getFullYear()}-${pad(gmt7Date.getMonth()+1)}-${pad(gmt7Date.getDate())} ${pad(gmt7Date.getHours())}:${pad(gmt7Date.getMinutes())}`;
-            let sentimentClass = 'sentiment-neutral';
-            if (item.sentiment === 'Positive') sentimentClass = 'sentiment-positive';
-            else if (item.sentiment === 'Negative') sentimentClass = 'sentiment-negative';
-            return `
-              <div class="card prompt-regular">
-                <h2 class="prompt-medium">
-                  <span class="card-number">${idx + 1}</span>
-                  <a href="${item.url}" target="_blank">${item.title}</a>
-                </h2>
-                <p><b>Date Time :</b> ${formatted} (UTC+7:00)</p>
-                <p><b>Sentiment :</b> <span class="${sentimentClass}">${item.sentiment}</span></p>
-                <p><b>Importance :</b> ${item.importance} / 5</p>
-                <p><b>Summary :</b> ${item.summary}</p>
-                <p><b>Summary in Thai :</b> ${item.translate}</p>
-              </div>
-            `;
-          }).join('');
-        }
-      });
+          const container = document.getElementById('news');
+          if (news.length === 0) {
+            container.innerHTML = '<p>No news found.</p>';
+          } else {
+            container.innerHTML = news.map((item, idx) => {
+              const dateTimeStr = `${item.publish_date}T${item.publish_time}`;
+              const utcDate = new Date(dateTimeStr + 'Z');
+              const gmt7Date = new Date(utcDate.getTime());
+              const pad = n => n.toString().padStart(2, '0');
+              const formatted = `${gmt7Date.getFullYear()}-${pad(gmt7Date.getMonth()+1)}-${pad(gmt7Date.getDate())} ${pad(gmt7Date.getHours())}:${pad(gmt7Date.getMinutes())}`;
+              let sentimentClass = 'sentiment-neutral';
+              if (item.sentiment === 'Positive') sentimentClass = 'sentiment-positive';
+              else if (item.sentiment === 'Negative') sentimentClass = 'sentiment-negative';
+              return `
+                <div class="card prompt-regular">
+                  <h2 class="prompt-medium">
+                    <span class="card-number">${idx + 1}</span>
+                    <a href="${item.url}" target="_blank">${item.title}</a>
+                  </h2>
+                  <p><b>Date Time :</b> ${formatted} (UTC+7:00)</p>
+                  <p><b>Sentiment :</b> <span class="${sentimentClass}">${item.sentiment}</span></p>
+                  <p><b>Importance :</b> ${item.importance} / 5</p>
+                  <p><b>Summary :</b> ${item.summary}</p>
+                  <p><b>Summary in Thai :</b> ${item.translate}</p>
+                </div>
+              `;
+            }).join('');
+          }
+        });
+    }
 
     function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
+      const body = document.body;
+      const toggleButton = document.getElementById('darkModeToggle');
+      const isDarkMode = body.classList.toggle('dark-mode');
+      
+      // Update button text based on current state
+      toggleButton.textContent = isDarkMode ? 'Dark Mode: On' : 'Dark Mode: Off';
+      
       setTimeout(() => {
         loadChart(document.getElementById('symbolSelect').value);
       }, 10);
     }
+    
     function getCurrentTextColor() {
       return getComputedStyle(document.body).getPropertyValue('--text').trim();
     }
@@ -423,11 +442,20 @@
     }
 
     document.getElementById('symbolSelect').addEventListener('change', e => {
-      loadChart(e.target.value);
+      const selectedSymbol = e.target.value;
+      loadChart(selectedSymbol);
+      loadNews(selectedSymbol);
     });
 
+    // Load initial data
     loadChart();
-    setInterval(fetchSP500, 60000);
+    loadNews();
+    
+    // Refresh data every minute
+    setInterval(() => {
+      const selectedSymbol = document.getElementById('symbolSelect').value;
+      loadNews(selectedSymbol);
+    }, 60000);
   </script>
 </body>
 </html>
