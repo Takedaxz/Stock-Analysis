@@ -1,116 +1,158 @@
-# Stock Analysis Project
+# Stock Analysis Platform
 
 A comprehensive stock market analysis platform that combines data collection, sentiment analysis, technical indicators, quantitative modeling, and interactive visualizations for informed investment decisions.
 
-## Live Applications
+## 🚀 Live Applications
 
 - **News Sentiment Dashboard**: https://takedaxz-stock-news-sentiment.streamlit.app
 
-## Project Structure
+## 📁 Project Structure
 
-### Data Collection (`DataCollection/`)
-Comprehensive data gathering from multiple sources:
-- **`yfinanceAPI.ipynb`** - Yahoo Finance API integration for stock data
-- **`ScrapingStockNews.ipynb`** - Stock-specific news scraping
-- **`ScrapingMarketNews.ipynb`** - General market news collection
-- **`ScrapingTrendingNews.ipynb`** - Trending financial news
-- **`ScrapingFinancials.ipynb`** - Financial statement data extraction
-- **`FinancialStatement.ipynb`** - Financial analysis and reporting
-- **`EarningsCalendar.ipynb`** - Earnings calendar data collection
-- **`EventCalendar.ipynb`** - Market events and calendar data
-- **`Index.ipynb`** - Market index data (S&P 500, NASDAQ 100)
+```
+Stock-Analysis/
+├── src/                          # Source code
+│   ├── data_collection/          # Data gathering modules
+│   │   ├── yahoo_finance_api.ipynb
+│   │   ├── stock_news_scraper.ipynb
+│   │   ├── market_news_scraper.ipynb
+│   │   ├── trending_news_scraper.ipynb
+│   │   ├── financial_data_scraper.ipynb
+│   │   ├── financial_statement_analyzer.ipynb
+│   │   ├── earnings_calendar_scraper.ipynb
+│   │   ├── event_calendar_scraper.ipynb
+│   │   ├── market_index_scraper.ipynb
+│   │   ├── stock_news_processor.ipynb
+│   │   ├── trending_news_processor.ipynb
+│   │   └── data/                 # Collected data
+│   │       ├── all_news/
+│   │       ├── earnings_calendar/
+│   │       ├── event_calendar/
+│   │       ├── financials/
+│   │       ├── financials_analysis/
+│   │       ├── stock_index/
+│   │       ├── info_from_yfinance/
+│   │       ├── stock_news/
+│   │       └── trending_news/
+│   │
+│   ├── sentiment_analysis/       # AI-powered sentiment analysis
+│   │   ├── gemini_sentiment_analyzer.ipynb
+│   │   ├── deepseek_sentiment_analyzer.ipynb
+│   │   ├── mistral_sentiment_analyzer.ipynb
+│   │   ├── secret.env
+│   │   └── output/               # Sentiment analysis results
+│   │       ├── deepseek/
+│   │       ├── gemini/
+│   │       └── mistral/
+│   │
+│   ├── technical_analysis/       # Technical indicators and analysis
+│   │   ├── candlestick_chart_analyzer.ipynb
+│   │   ├── trading_dashboard.ipynb
+│   │   ├── statistical_hypothesis_testing.ipynb
+│   │   └── indicators/           # Technical indicators
+│   │       ├── main.py           # Main orchestrator
+│   │       ├── sma.ipynb
+│   │       ├── ema.ipynb
+│   │       ├── rsi.ipynb
+│   │       ├── macd.ipynb
+│   │       ├── bollinger_bands.ipynb
+│   │       ├── stochastic_oscillator.ipynb
+│   │       ├── momentum.ipynb
+│   │       ├── volume.ipynb
+│   │       ├── support_resistance.ipynb
+│   │       ├── ichimoku_cloud.ipynb
+│   │       ├── elliott_wave.ipynb
+│   │       ├── chart_patterns.ipynb
+│   │       └── output/
+│   │
+│   ├── quantitative_analysis/    # ML models and statistical analysis
+│   │   ├── vix_set50.ipynb
+│   │   └── basic/                # Basic quantitative models
+│   │       ├── basic_price_prediction.ipynb
+│   │       ├── k_means.ipynb
+│   │       ├── yuanta_ml1.ipynb
+│   │       ├── yuanta_ml2.ipynb
+│   │       └── data/
+│   │
+│   ├── visualization/            # Visualization components
+│   │   ├── backend/              # FastAPI backend
+│   │   ├── src/                  # Frontend assets
+│   │   └── return_calculation/
+│   │       ├── dca.ipynb
+│   │       └── dividend.ipynb
+│   │
+│   └── utils/                    # Utility functions
+│       ├── eda.ipynb
+│       ├── english_to_thai.ipynb
+│       ├── dca.ipynb
+│       └── dividend.ipynb
+│
+├── apps/                         # Application deployments
+│   ├── streamlit_apps/           # Streamlit applications
+│   │   ├── stock_app.py
+│   │   ├── news_app.py
+│   │   └── financial_app.py
+│   │
+│   └── web_dashboard/            # Web dashboard
+│       ├── backend/              # FastAPI backend
+│       ├── src/                  # Frontend assets
+│       └── requirements.txt
+│
+├── data/                         # Data storage
+│   ├── raw/                      # Raw collected data
+│   ├── processed/                # Processed data
+│   │   ├── StockNews.ipynb
+│   │   ├── TrendingNews.ipynb
+│   │   └── Data/                # Processed data files
+│   └── models/                   # Trained models
+│
+├── config/                       # Configuration files
+│   └── requirements.txt
+│
+└── docs/                         # Documentation
+    ├── README.md
+    └── project_structure.md
+```
 
-### Complete Pipeline (`CompletePipeline/`)
-End-to-end data processing workflows:
-- **`StockNews.ipynb`** - Automated stock news processing pipeline
-- **`TrendingNews.ipynb`** - Trending news analysis pipeline
-- **`Data/`** - Processed data files with timestamps
+## 🎯 Key Features
 
-### Sentiment Analysis (`SentimentAnalysis/GPT/`)
-AI-powered sentiment analysis using multiple models:
-- **`GeminiNewsAnalysis.ipynb`** - Google Gemini sentiment analysis
-- **`DeepSeekNewsAnalysis.ipynb`** - DeepSeek model analysis
-- **`MistralNewsAnalysis.ipynb`** - Mistral AI sentiment analysis
-- **`Output/`** - Sentiment analysis results by model
-
-### Technical Analysis (`TechnicalAnalysis/`)
-Advanced technical indicators and analysis:
-- **`TradingDashboards.ipynb`** - Interactive trading dashboards
-- **`HypothesisTesting.ipynb`** - Statistical hypothesis testing
-- **`Indicators/`** - Comprehensive technical indicators:
-  - **`main.py`** - Main technical analysis orchestrator
-  - **`SMA.ipynb`** - Simple Moving Averages
-  - **`EMA.ipynb`** - Exponential Moving Averages
-  - **`RSI.ipynb`** - Relative Strength Index
-  - **`MACD.ipynb`** - Moving Average Convergence Divergence
-  - **`BollingerBands.ipynb`** - Bollinger Bands analysis
-  - **`Stochastic_Oscillator.ipynb`** - Stochastic oscillator
-  - **`Momentum.ipynb`** - Momentum indicators
-  - **`Volume.ipynb`** - Volume analysis
-  - **`SupportResistance.ipynb`** - Support and resistance levels
-  - **`Ichimoku_Cloud.ipynb`** - Ichimoku cloud analysis
-  - **`Elliott_Wave.ipynb`** - Elliott Wave theory
-  - **`Chart_Patterns.ipynb`** - Chart pattern recognition
-
-### Quantitative Analysis (`Quantitative/`)
-Machine learning and statistical modeling:
-- **`VixSET50.ipynb`** - VIX and SET50 volatility analysis
-- **`Basic/`** - Basic quantitative models:
-  - **`BasicPricePredicted.ipynb`** - Price prediction models
-  - **`K-Means.ipynb`** - K-means clustering analysis
-  - **`YuantaML1.ipynb`** - Yuanta machine learning models
-  - **`YusantaML2.ipynb`** - Additional Yuanta ML models
-
-### Visualization (`Visualization/`)
-Interactive web applications and charts:
-- **`stock_app.py`** - Stock analysis Streamlit app
-- **`news_app.py`** - News sentiment Streamlit app
-- **`financial_app.py`** - Financial data Streamlit app
-- **`EnglishToThai.ipynb`** - Language translation utilities
-- **`ReturnCalculation/`** - Return analysis:
-  - **`DCA.ipynb`** - Dollar Cost Averaging analysis
-  - **`Dividend.ipynb`** - Dividend analysis
-
-### Core Analysis Files
-- **`CandleStick.ipynb`** - Candlestick chart analysis
-- **`EDA.ipynb`** - Exploratory Data Analysis
-
-## Features
-
-### Data Collection
+### 📊 Data Collection (`src/data_collection/`)
 - **Multi-source data gathering** from Yahoo Finance, news APIs, and financial websites
 - **Automated scraping** of stock news, market news, and trending financial content
 - **Financial statement analysis** with automated data extraction
 - **Earnings and event calendar** tracking
 - **Real-time market data** integration
 
-### Sentiment Analysis
+### 🤖 Sentiment Analysis (`src/sentiment_analysis/`)
 - **Multi-model AI analysis** using Gemini, DeepSeek, and Mistral
 - **News sentiment scoring** with importance weighting
 - **Automated sentiment classification** (Positive/Negative/Neutral)
 - **Thai language support** with translation capabilities
 
-### Technical Analysis
+### 📈 Technical Analysis (`src/technical_analysis/`)
 - **Comprehensive indicator suite** including RSI, MACD, Bollinger Bands, etc.
 - **Advanced pattern recognition** for chart patterns and Elliott Waves
 - **Support and resistance** level identification
 - **Volume analysis** and momentum indicators
 - **Interactive dashboards** for real-time analysis
 
-### Quantitative Modeling
+### 🧮 Quantitative Analysis (`src/quantitative_analysis/`)
 - **Machine learning models** for price prediction
 - **Clustering analysis** for market segmentation
 - **Volatility analysis** using VIX and market indices
 - **Statistical hypothesis testing** for trading strategies
 
-### Visualization & Apps
+### 🎨 Visualization (`src/visualization/`)
 - **Streamlit web applications** for interactive analysis
 - **Real-time data visualization** with Plotly and Matplotlib
 - **Candlestick charts** with technical indicators
 - **Sentiment dashboards** with live updates
 - **Return calculation tools** for investment analysis
 
-## Installation
+### 📱 Applications (`apps/`)
+- **Streamlit Apps** (`apps/streamlit_apps/`): Interactive web applications
+- **Web Dashboard** (`apps/web_dashboard/`): FastAPI backend with frontend
+
+## 🛠️ Installation
 
 1. **Clone the repository**:
 ```bash
@@ -120,16 +162,38 @@ cd Stock-Analysis
 
 2. **Install dependencies**:
 ```bash
-pip install -r requirements.txt
+pip install -r config/requirements.txt
 ```
 
 3. **Set up environment variables** (for API keys):
 ```bash
-cp SentimentAnalysis/GPT/secret.env.example SentimentAnalysis/GPT/secret.env
+cp src/sentiment_analysis/secret.env.template src/sentiment_analysis/secret.env
 # Edit secret.env with your API keys
 ```
 
-## Requirements
+## 🚀 Quick Start
+
+### Running Streamlit Apps
+```bash
+cd apps/streamlit_apps
+streamlit run stock_app.py
+streamlit run news_app.py
+streamlit run financial_app.py
+```
+
+### Running Technical Analysis
+```bash
+cd src/technical_analysis/indicators
+python main.py
+```
+
+### Running Sentiment Analysis
+```bash
+cd src/sentiment_analysis
+jupyter notebook gemini_sentiment_analyzer.ipynb
+```
+
+## 📋 Requirements
 
 The project uses a comprehensive set of Python libraries including:
 
@@ -159,34 +223,7 @@ The project uses a comprehensive set of Python libraries including:
 - `lightning`, `torchmetrics`
 - `wandb` - Experiment tracking
 
-## Usage Examples
-
-### Running the Stock Analysis App
-```bash
-cd Visualization
-streamlit run stock_app.py
-```
-
-### Running News Sentiment Analysis
-```bash
-cd SentimentAnalysis/GPT
-jupyter notebook GeminiNewsAnalysis.ipynb
-```
-
-### Technical Analysis
-```bash
-cd TechnicalAnalysis/Indicators
-python main.py
-```
-
-## Data Sources
-
-- **Yahoo Finance API** - Stock prices, financial data
-- **News APIs** - Financial news and market updates
-- **Financial websites** - Earnings, events, and market data
-- **Market indices** - S&P 500, NASDAQ 100, SET50
-
-## Configuration
+## 🔑 Configuration
 
 ### API Keys Required
 - **OpenAI API** - For GPT-based sentiment analysis
@@ -194,17 +231,23 @@ python main.py
 - **Mistral AI API** - For Mistral sentiment analysis
 
 ### Environment Setup
-Create a `.env` file or use the existing `secret.env` in the SentimentAnalysis/GPT directory.
+Create a `.env` file or use the existing `secret.env` in the `src/sentiment_analysis/` directory.
 
-## Output Formats
+## 📊 Data Sources
 
-- **CSV files** - Structured data with timestamps
-- **JSON files** - API responses and configuration
-- **Interactive charts** - Plotly and Matplotlib visualizations
-- **Streamlit apps** - Web-based dashboards
-- **Jupyter notebooks** - Analysis and documentation
+- **Yahoo Finance API** - Stock prices, financial data
+- **News APIs** - Financial news and market updates
+- **Financial websites** - Earnings, events, and market data
+- **Market indices** - S&P 500, NASDAQ 100, SET50
 
-## Contributing
+## 📈 Data Flow
+
+1. **Data Collection** → Raw data stored in `data/raw/`
+2. **Processing** → Processed data in `data/processed/`
+3. **Analysis** → Results in respective module directories
+4. **Visualization** → Interactive apps in `apps/`
+
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -212,16 +255,14 @@ Create a `.env` file or use the existing `secret.env` in the SentimentAnalysis/G
 4. Add tests if applicable
 5. Submit a pull request
 
-## License
+## 📄 License
 
-This project is for educational and research purposes. Please ensure compliance with data source terms of service and API usage limits.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Links
+## 📞 Support
 
-- **Live Demo**: https://takedaxz-stock-news-sentiment.streamlit.app
-- **Documentation**: See individual notebook files for detailed analysis
-- **Data Sources**: Yahoo Finance, Financial News APIs
+For support and questions, please open an issue on GitHub or contact the maintainers.
 
 ---
 
-**Note**: This project is designed for educational purposes and should not be used as the sole basis for investment decisions. Always conduct thorough research and consider consulting with financial advisors.
+**Note**: This project is for educational and research purposes. Always do your own research before making investment decisions.
