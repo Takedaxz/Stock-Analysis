@@ -1,4 +1,3 @@
 .DS_Store
-TechnicalAnalysis/Indicators/Output/*.ipynb
+src/technical_analysis/indicators/output/*.ipynb
 *.env
-Kaggle

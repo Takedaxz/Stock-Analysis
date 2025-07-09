@@ -1,0 +1,26 @@
+date,company,ticker,estimate_eps,estimate_revenue,market_cap,outtime
+2025-07-10,Progressive,PGR,4.3,20.5B,147.52B,N/A
+2025-07-10,Delta Air Lines,DAL,2.05,15.42B,32.99B,Before Market
+2025-07-10,Conagra Brands,CAG,0.5903,2.85B,9.86B,Before Market
+2025-07-14,Fastenal,FAST,0.2804,2.07B,49.15B,Before Market
+2025-07-15,JPMorgan,JPM,4.46,43.82B,785.87B,Before Market
+2025-07-15,Wells Fargo&Co,WFC,1.41,20.77B,265.51B,Before Market
+2025-07-15,BlackRock,BLK,10.69,5.35B,166.55B,Before Market
+2025-07-15,Citigroup,C,1.64,20.79B,159.82B,Before Market
+2025-07-15,Bank Of NY Mellon,BK,1.75,4.78B,66.31B,Before Market
+2025-07-15,State Street,STT,2.37,3.35B,31.14B,Before Market
+2025-07-15,JB Hunt,JBHT,1.32,2.93B,15.18B,After Market
+2025-07-16,J&J,JNJ,2.68,22.86B,374.84B,Before Market
+2025-07-16,Bank of America,BAC,0.8741,26.81B,355.13B,Before Market
+2025-07-16,ASML  ADR,ASML,6.06,8.68B,309.3B,Before Market
+2025-07-16,Morgan Stanley,MS,2.03,16.06B,226.42B,Before Market
+2025-07-16,Goldman Sachs,GS,9.62,13.44B,204.34B,Before Market
+2025-07-16,Prologis,PLD,0.6907,2.01B,100.96B,Before Market
+2025-07-16,PNC Financial,PNC,3.53,5.61B,78.32B,Before Market
+2025-07-16,Kinder Morgan,KMI,0.2752,3.75B,62.51B,N/A
+2025-07-16,Crown Castle,CCI,0.4495,1.04B,44.67B,N/A
+2025-07-16,Las Vegas Sands,LVS,0.5303,2.82B,34.7B,N/A
+2025-07-16,Equifax,EFX,1.9,1.51B,32.81B,N/A
+2025-07-16,M&T Bank,MTB,3.97,2.39B,32.23B,Before Market
+2025-07-16,United Airlines Holdings,UAL,3.8,15.35B,26.52B,After Market
+2025-07-16,MarketAxesss,MKTX,1.97,218.05M,8.13B,N/A
