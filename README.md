@@ -4,7 +4,7 @@ A comprehensive stock market analysis platform that combines data collection, se
 
 ## 🚀 Live Applications
 
-- **News Sentiment Dashboard**: https://takedaxz-stock-news-sentiment.streamlit.app
+- **News Sentiment Dashboard**: https://stock-analysis-theta-inky.vercel.app
 
 ## 📁 Project Structure
 
