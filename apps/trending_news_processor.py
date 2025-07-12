@@ -1,23 +1,16 @@
 #!/usr/bin/env python3
 """
-Trending News Processor - Automated script version
-Converts Jupyter notebook to standalone Python script for automation
+Trending News Processor - Using News APIs
+Uses NewsAPI and NewsData.io for reliable news fetching
 """
 
 import os
 import re
 import time
-import random
-import asyncio
 import warnings
-from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timedelta
 import pandas as pd
-import nest_asyncio
 import requests
-from htmldate import find_date
-from bs4 import BeautifulSoup
-from newspaper import Article
 from dotenv import load_dotenv
 import google.generativeai as genai
 from tqdm import tqdm
@@ -31,223 +24,158 @@ warnings.filterwarnings('ignore')
 load_dotenv()
 
 # Configuration
-MAX_WORKERS = 10
-MAX_RETRIES = 8
-MAX_PAGES = 1  # TEMP: Only 1 page for debug
+MAX_ARTICLES = 20  # Number of articles to fetch from each API
+FINAL_ARTICLES = 20  # Final number of articles to keep
 
-USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-    # Add more real user agents if you want
-]
-
-HEADERS_BASE = {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Referer": "https://www.google.com/",
-    "DNT": "1",
-    "Connection": "keep-alive",
-}
-
-def fetch_page(page: int):
-    """Fetch trending news links for a specific page"""
-    url = "https://www.investing.com/news/most-popular-news"
-    if page > 1:
-        url += f"/{page}"
+def fetch_newsapi_articles():
+    """Fetch articles from NewsAPI"""
+    print("Fetching articles from NewsAPI...")
     
-    # Use ScraperAPI if available
-    scraper_api_key = os.getenv("SCRAPER_API_KEY")
-    if scraper_api_key:
-        url = f"http://api.scraperapi.com/?api_key={scraper_api_key}&url={url}"
+    api_key = os.getenv("NEWSAPI_KEY")
+    if not api_key:
+        print("NEWSAPI_KEY not found, skipping NewsAPI")
+        return []
     
-    for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            headers = HEADERS_BASE.copy()
-            headers["User-Agent"] = random.choice(USER_AGENTS)
-            time.sleep(random.uniform(2, 5))  # Random delay
-            r = requests.get(url, headers=headers, timeout=30)
-            r.raise_for_status()
-            soup = BeautifulSoup(r.text, "lxml")
-
-            anchors = soup.select(
-                'ul[data-test="news-list"] '
-                'li article a[data-test="article-title-link"]'
-            )
-            return [a["href"] for a in anchors if a.has_attr("href")]
-        except Exception as e:
-            if attempt < MAX_RETRIES:
-                backoff = 2 ** (attempt - 1) + random.random()
-                time.sleep(backoff)
-            else:
-                print(f"Page {page} failed after {MAX_RETRIES}: {e}")
-    return []
-
-def robust_scrape(max_pages=MAX_PAGES):
-    """Robust scraping with retries for trending news"""
-    first = fetch_page(1)
-    PER_PAGE = len(first)
-    if PER_PAGE == 0:
-        raise RuntimeError("Failed to fetch the first page. Please check headers or cookies.")
-
-    print(f"Fetched {PER_PAGE} links on page 1")
-
-    results = {1: first}
-
-    if max_pages == 1 or PER_PAGE == 0:
-        print("Only one page detected or no pagination found.")
-        return first
-
-    pages = list(range(2, max_pages + 1))
-
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
-        futures = {pool.submit(fetch_page, p): p for p in pages}
-        for fut in as_completed(futures):
-            p = futures[fut]
-            results[p] = fut.result()
-
-        for round in range(1, MAX_RETRIES + 1):
-            bad = [p for p, links in results.items() if len(links) != PER_PAGE]
-            if not bad:
-                print(f"All pages OK after {round - 1} retries")
-                break
-            print(f"Retry round {round} for pages: {bad}")
-            futures = {pool.submit(fetch_page, p): p for p in bad}
-            for fut in as_completed(futures):
-                p = futures[fut]
-                results[p] = fut.result()
+    # Get articles from the last 7 days
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=7)
+    
+    url = "https://newsapi.org/v2/everything"
+    params = {
+        'q': 'stock market OR finance OR economy',
+        'language': 'en',
+        'sortBy': 'popularity',
+        'pageSize': MAX_ARTICLES,
+        'from': start_date.strftime('%Y-%m-%d'),
+        'to': end_date.strftime('%Y-%m-%d'),
+        'apiKey': api_key
+    }
+    
+    try:
+        response = requests.get(url, params=params, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+        
+        if data['status'] == 'ok':
+            articles = []
+            for article in data['articles']:
+                articles.append({
+                    'title': article.get('title', 'No title'),
+                    'body_text': article.get('content', article.get('description', '')),
+                    'url': article.get('url', ''),
+                    'publish_date': article.get('publishedAt', '').split('T')[0] if article.get('publishedAt') else datetime.now().strftime('%Y-%m-%d'),
+                    'publish_time': article.get('publishedAt', '').split('T')[1][:5] if article.get('publishedAt') else '00:00',
+                    'source': article.get('source', {}).get('name', 'Unknown')
+                })
+            print(f"Fetched {len(articles)} articles from NewsAPI")
+            return articles
         else:
-            print("Retry limit reached; some pages may still be incomplete.")
+            print(f"NewsAPI error: {data.get('message', 'Unknown error')}")
+            return []
+    except Exception as e:
+        print(f"Error fetching from NewsAPI: {e}")
+        return []
 
-    total_fetched = sum(len(links) for links in results.values())
-    expected = PER_PAGE * max_pages
-    print(f"Total links fetched (including duplicates): {total_fetched} (expected {expected})")
-
-    all_links = set(link for links in results.values() for link in links)
-    print(f"Final: got {len(all_links)} unique URLs")
-    return list(all_links)
-
-def is_placeholder(html: str) -> bool:
-    """Check if HTML is a placeholder page"""
-    lower = html.lower() if html else ""
-    return (
-        'temporarily down for maintenance' in lower
-        or 'just a moment' in lower
-        or "we're temporarily down" in lower
-    )
-
-def safe_find_datetime(url, html_content=None):
-    """Safely extract datetime from URL or HTML content"""
-    try:
-        dt = find_date(url)
-        if dt:
-            return dt, "00:00"
-    except:
-        pass
+def fetch_alphavantage_articles():
+    """Fetch articles from Alpha Vantage News API"""
+    print("Fetching articles from Alpha Vantage...")
     
-    if html_content:
-        m = re.search(r"(\d{1,2}/\d{1,2}/\d{4}),\s*(\d{1,2}:\d{2}\s*(?:AM|PM))", html_content)
-        if m:
-            ds, ts = m.groups()
-            try:
-                dt = datetime.strptime(f"{ds}, {ts}", "%m/%d/%Y, %I:%M %p")
-                return dt.strftime("%Y-%m-%d"), dt.strftime("%H:%M")
-            except:
-                pass
-        
-        m = re.search(r"(\d{2}/\d{2}/\d{4}),\s*(\d{2}:\d{2})", html_content)
-        if m:
-            ds, ts = m.groups()
-            for fmt in ("%d/%m/%Y, %H:%M", "%m/%d/%Y, %H:%M"):
-                try:
-                    dt = datetime.strptime(f"{ds}, {ts}", fmt)
-                    return dt.strftime("%Y-%m-%d"), dt.strftime("%H:%M")
-                except:
-                    continue
+    api_key = os.getenv("ALPHAVANTAGE_KEY")
+    if not api_key:
+        print("ALPHAVANTAGE_KEY not found, skipping Alpha Vantage")
+        return []
     
-    now = datetime.now()
-    return now.strftime("%Y-%m-%d"), now.strftime("%H:%M")
-
-def fetch_html(url, idx, total):
-    """Fetch HTML content with retries"""
-    scraper = requests.Session() # Use a session for persistent cookies
-    MAX_FETCH_RETRIES = 5
-    RETRY_DELAY = 1
-    
-    # Use ScraperAPI if available
-    scraper_api_key = os.getenv("SCRAPER_API_KEY")
-    if scraper_api_key:
-        url = f"http://api.scraperapi.com/?api_key={scraper_api_key}&url={url}"
-    
-    for attempt in range(1, MAX_FETCH_RETRIES + 1):
-        try:
-            headers = HEADERS_BASE.copy()
-            headers["User-Agent"] = random.choice(USER_AGENTS)
-            headers["Referer"] = "https://www.investing.com/" # Keep referer consistent
-            time.sleep(random.uniform(1, 3)) # Random delay
-            resp = scraper.get(url, headers=headers, timeout=30)
-            html = resp.text
-            if is_placeholder(html):
-                raise RuntimeError('Placeholder')
-                
-            return url, html
-            
-        except Exception as e:
-            if attempt < MAX_FETCH_RETRIES:
-                time.sleep(RETRY_DELAY)
-                
-    print(f"[Fetch error] {idx}/{total}: failed after {MAX_FETCH_RETRIES} retries")
-    return url, None
-
-def process_article(arg):
-    """Process a single article"""
-    url, html = arg
-    if not html:
-        return None
-        
-    art = Article(url)
-    art.set_html(html)
+    url = "https://www.alphavantage.co/query"
+    params = {
+        'function': 'NEWS_SENTIMENT',
+        'topics': 'financial_markets',
+        'time_from': '20240101T0000',
+        'limit': MAX_ARTICLES,
+        'apikey': api_key
+    }
     
     try:
-        art.parse()
-    except:
-        return None
+        response = requests.get(url, params=params, timeout=30)
+        response.raise_for_status()
+        data = response.json()
         
-    text = art.text or ""
-    title = (art.title or "").strip() or "No title"
-    
-    date, tm = safe_find_datetime(url, html)
-    
-    return {'ticker': 'news', 'publish_date': date, 'publish_time': tm,
-             'title': title, 'body_text': text, 'url': url}
-
-async def scrape_all(urls):
-    """Scrape all URLs asynchronously"""
-    total = len(urls)
-    loop = asyncio.get_event_loop()
-    
-    FETCH_WORKERS = min(32, os.cpu_count() * 4)
-    PROCESS_WORKERS = os.cpu_count() or 4
-    
-    # Phase 1: Fetch HTML content
-    with ThreadPoolExecutor(max_workers=FETCH_WORKERS) as fetch_pool:
-        fetch_tasks = [loop.run_in_executor(fetch_pool, fetch_html, u, i+1, total)
-                       for i, u in enumerate(urls)]
-        fetched = await asyncio.gather(*fetch_tasks)
-
-    # Phase 2: Process articles
-    records = []
-    with ThreadPoolExecutor(max_workers=PROCESS_WORKERS) as proc_pool:
-        futures = {
-            proc_pool.submit(process_article, fr): fr[0]
-            for fr in fetched if fr[1]
-        }
-        
-        for i, fut in enumerate(as_completed(futures), 1):
-            res = fut.result()
-            if res:
-                records.append(res)
+        if 'feed' in data:
+            articles = []
+            for article in data['feed']:
+                # Parse the time_published
+                time_published = article.get('time_published', '')
+                publish_date = datetime.now().strftime('%Y-%m-%d')
+                publish_time = '00:00'
                 
-    return pd.DataFrame(records)
+                if time_published:
+                    try:
+                        # Alpha Vantage format: 20240101T000000
+                        date_str = time_published[:8]  # YYYYMMDD
+                        time_str = time_published[9:13]  # HHMM
+                        publish_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:8]}"
+                        publish_time = f"{time_str[:2]}:{time_str[2:4]}"
+                    except:
+                        pass
+                
+                articles.append({
+                    'title': article.get('title', 'No title'),
+                    'body_text': article.get('summary', ''),
+                    'url': article.get('url', ''),
+                    'publish_date': publish_date,
+                    'publish_time': publish_time,
+                    'source': article.get('source', 'Unknown')
+                })
+            print(f"Fetched {len(articles)} articles from Alpha Vantage")
+            return articles
+        else:
+            print(f"Alpha Vantage error: {data.get('Note', 'Unknown error')}")
+            return []
+    except Exception as e:
+        print(f"Error fetching from Alpha Vantage: {e}")
+        return []
+
+def combine_articles():
+    """Combine articles from both APIs and return top 20 latest"""
+    print("Combining articles from News APIs...")
+    
+    all_articles = []
+    
+    # Fetch from NewsAPI
+    newsapi_articles = fetch_newsapi_articles()
+    all_articles.extend(newsapi_articles)
+    
+    # Fetch from Alpha Vantage
+    alphavantage_articles = fetch_alphavantage_articles()
+    all_articles.extend(alphavantage_articles)
+    
+    # Remove duplicates based on URL
+    seen_urls = set()
+    unique_articles = []
+    
+    for article in all_articles:
+        url = article.get('url', '')
+        if url and url not in seen_urls:
+            seen_urls.add(url)
+            unique_articles.append(article)
+    
+    print(f"Total unique articles: {len(unique_articles)}")
+    
+    # Convert to DataFrame and sort by date/time
+    if unique_articles:
+        df = pd.DataFrame(unique_articles)
+        # Add ticker column
+        df['ticker'] = 'news'
+        
+        # Sort by publish date and time (newest first)
+        df = df.sort_values(by=['publish_date', 'publish_time'], ascending=[False, False]).reset_index(drop=True)
+        
+        # Take only the top 20 latest articles
+        df = df.head(FINAL_ARTICLES)
+        
+        print(f"Selected top {len(df)} latest articles")
+        return df
+    else:
+        return pd.DataFrame()
 
 def setup_gemini():
     """Setup Gemini API"""
@@ -367,10 +295,8 @@ def setup_mongodb():
     return collection
 
 def main():
-    nest_asyncio.apply()
-    
     print("="*50)
-    print("Starting Trending News Processor")
+    print("Starting News API Processor")
     print("="*50)
     
     # Setup APIs
@@ -378,24 +304,14 @@ def main():
     collection = setup_mongodb()
     
     try:
-        print("Scraping trending news links...")
-        links = robust_scrape(max_pages=MAX_PAGES)
-        print(f"Scraped {len(links)} trending news links")
-        
-        if not links:
-            print("No trending news links found")
-            return
-        
-        print("Scraping articles...")
-        df = asyncio.get_event_loop().run_until_complete(scrape_all(links))
-        print(f"Scraped {len(df)} articles")
+        print("Fetching articles from News APIs...")
+        df = combine_articles()
         
         if df.empty:
-            print("No articles processed")
+            print("No articles found from APIs")
             return
         
-        print("Sorting articles by date/time")
-        df = df.sort_values(by=['publish_date', 'publish_time'], ascending=[False, False]).reset_index(drop=True)
+        print(f"Fetched {len(df)} articles from APIs")
         
         print("Analyzing sentiment...")
         predicted = analyze_sentiment(model, df)
@@ -425,10 +341,10 @@ def main():
         
         now = datetime.now()
         date_time = now.strftime("%Y-%m-%d %H-%M").strip().replace(' ', '_')
-        filename = f"gemini_news_{date_time}.csv".lower()
+        filename = f"news_api_{date_time}.csv".lower()
         
-        os.makedirs("../data/processed", exist_ok=True)
-        df.to_csv(f"../data/processed/{filename}", index=False)
+        os.makedirs("data/processed", exist_ok=True)
+        df.to_csv(f"data/processed/{filename}", index=False)
         print("Saved CSV file")
         
         complete_dict = df.to_dict(orient='records')
@@ -436,11 +352,11 @@ def main():
         print(f"Inserted {len(result.inserted_ids)} documents to MongoDB")
         
         print("="*50)
-        print("Trending News Processing Complete!")
+        print("News API Processing Complete!")
         print("="*50)
         
     except Exception as e:
-        print(f"Error processing trending news: {e}")
+        print(f"Error processing news: {e}")
         raise
 
 if __name__ == "__main__":

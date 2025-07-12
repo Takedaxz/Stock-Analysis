@@ -29,7 +29,8 @@ jobs:
       run: |
         echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
         echo "MONGO_CONNECTION_STRING=${{ secrets.MONGO_CONNECTION_STRING }}" >> .env
-        echo "SCRAPER_API_KEY=${{ secrets.SCRAPER_API_KEY }}" >> .env
+        echo "NEWSAPI_KEY=${{ secrets.NEWSAPI_KEY }}" >> .env
+        echo "ALPHAVANTAGE_KEY=${{ secrets.ALPHAVANTAGE_KEY }}" >> .env
         
     - name: Run trending news processor
       run: |
@@ -37,10 +38,4 @@ jobs:
         python apps/trending_news_processor.py
         echo "Trending News Processor completed."
         
-    - name: Commit and push results
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add data/processed/
-        git commit -m "Auto-update all news data" || echo "No changes to commit"
-        git push 
+ 
