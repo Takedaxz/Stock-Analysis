@@ -4,9 +4,10 @@ cloudscraper
 htmldate
 beautifulsoup4
 lxml
+lxml_html_clean
 newspaper3k
 python-dotenv
 google-generativeai
 tqdm
 google-api-core
-pymongo 
+pymongo
