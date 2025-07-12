@@ -1,4 +1,4 @@
-name: Combined News Processor
+name: Trending News Processor
 
 on:
   schedule:
