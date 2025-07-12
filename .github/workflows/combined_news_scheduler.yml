@@ -30,12 +30,6 @@ jobs:
         echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
         echo "MONGO_CONNECTION_STRING=${{ secrets.MONGO_CONNECTION_STRING }}" >> .env
         
-    - name: Run stock news processor
-      run: |
-        echo "Starting Stock News Processor..."
-        python apps/stock_news_processor.py
-        echo "Stock News Processor completed."
-        
     - name: Run trending news processor
       run: |
         echo "Starting Trending News Processor..."
