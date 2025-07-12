@@ -29,6 +29,7 @@ jobs:
       run: |
         echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
         echo "MONGO_CONNECTION_STRING=${{ secrets.MONGO_CONNECTION_STRING }}" >> .env
+        echo "SCRAPER_API_KEY=${{ secrets.SCRAPER_API_KEY }}" >> .env
         
     - name: Run trending news processor
       run: |
