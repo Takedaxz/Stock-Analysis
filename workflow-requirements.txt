@@ -1,0 +1,12 @@
+pandas
+nest-asyncio
+cloudscraper
+htmldate
+beautifulsoup4
+lxml
+newspaper3k
+python-dotenv
+google-generativeai
+tqdm
+google-api-core
+pymongo 
