@@ -24,7 +24,7 @@ warnings.filterwarnings('ignore')
 load_dotenv()
 
 # Configuration
-MAX_ARTICLES = 20  # Number of articles to fetch from each API
+MAX_ARTICLES = 40  # Number of articles to fetch from NewsAPI (increased since we're only using one API)
 FINAL_ARTICLES = 20  # Final number of articles to keep
 
 def fetch_newsapi_articles():
@@ -42,7 +42,7 @@ def fetch_newsapi_articles():
     
     url = "https://newsapi.org/v2/everything"
     params = {
-        'q': 'stock market OR finance OR economy',
+        'q': 'stock market OR trading OR stocks OR market OR earnings OR fed OR inflation OR interest rates',
         'language': 'en',
         'sortBy': 'popularity',
         'pageSize': MAX_ARTICLES,
@@ -89,7 +89,6 @@ def fetch_alphavantage_articles():
     params = {
         'function': 'NEWS_SENTIMENT',
         'topics': 'financial_markets',
-        'time_from': '20240101T0000',
         'limit': MAX_ARTICLES,
         'apikey': api_key
     }
@@ -135,7 +134,7 @@ def fetch_alphavantage_articles():
         return []
 
 def combine_articles():
-    """Combine articles from both APIs and return top 20 latest"""
+    """Combine articles from NewsAPI and return top 20 latest"""
     print("Combining articles from News APIs...")
     
     all_articles = []
@@ -144,7 +143,7 @@ def combine_articles():
     newsapi_articles = fetch_newsapi_articles()
     all_articles.extend(newsapi_articles)
     
-    # Fetch from Alpha Vantage
+    # For now, skip Alpha Vantage due to potential API issues
     alphavantage_articles = fetch_alphavantage_articles()
     all_articles.extend(alphavantage_articles)
     
@@ -166,13 +165,40 @@ def combine_articles():
         # Add ticker column
         df['ticker'] = 'news'
         
-        # Sort by publish date and time (newest first)
-        df = df.sort_values(by=['publish_date', 'publish_time'], ascending=[False, False]).reset_index(drop=True)
+        # Add impact score based on market-relevant keywords
+        market_keywords = [
+            'stock market', 'trading', 'stocks', 'market', 'earnings', 'fed', 'inflation', 
+            'interest rates', 'dow', 's&p', 'nasdaq', 'trading volume', 'market rally',
+            'market correction', 'bull market', 'bear market', 'volatility', 'recession',
+            'economic', 'financial', 'investor', 'trading session', 'market close'
+        ]
+        
+        def calculate_impact_score(title, body):
+            title_lower = title.lower()
+            body_lower = body.lower()
+            score = 0
+            
+            for keyword in market_keywords:
+                if keyword in title_lower:
+                    score += 2  # Moderate weight for title matches
+                if keyword in body_lower:
+                    score += 1  # Lower weight for body matches
+            
+            return score
+        
+        # Calculate impact score for sorting only (not stored in DB)
+        df['temp_impact_score'] = df.apply(lambda row: calculate_impact_score(row['title'], row['body_text']), axis=1)
+        
+        # Sort by date first (newest), then by impact score
+        df = df.sort_values(by=['publish_date', 'publish_time', 'temp_impact_score'], ascending=[False, False, False]).reset_index(drop=True)
         
         # Take only the top 20 latest articles
         df = df.head(FINAL_ARTICLES)
         
-        print(f"Selected top {len(df)} latest articles")
+        # Remove the temporary impact score column before returning
+        df = df.drop(columns=['temp_impact_score'])
+        
+        print(f"Selected top {len(df)} latest market-relevant articles")
         return df
     else:
         return pd.DataFrame()
@@ -341,7 +367,7 @@ def main():
         
         now = datetime.now()
         date_time = now.strftime("%Y-%m-%d %H-%M").strip().replace(' ', '_')
-        filename = f"news_api_{date_time}.csv".lower()
+        filename = f"gemini_news_api_{date_time}.csv".lower()
         
         os.makedirs("data/processed", exist_ok=True)
         df.to_csv(f"data/processed/{filename}", index=False)
