@@ -44,9 +44,9 @@ COMPANIES = {
 }
 
 # Process all companies or specify one
-TARGET_COMPANIES = ["Tesla", "NVIDIA", "Apple", "Microsoft", "Amazon"]  # Add/remove as needed
+TARGET_COMPANIES = ["Tesla"]  # TEMP: Only Tesla for debug
 
-MAX_PAGE = 2
+MAX_PAGE = 1  # TEMP: Only 1 page for debug
 MAX_WORKERS = 50
 MAX_RETRIES = 8
 
@@ -67,7 +67,7 @@ HEADERS = {
 }
 
 def fetch_page(company, page):
-    """Fetch news links for a specific company and page"""
+    print(f"[DEBUG] Fetching page {page} for {company}")
     global ticker
     url = f"https://www.investing.com/equities/{company}-news/{page}"
     
@@ -104,7 +104,7 @@ def fetch_page(company, page):
     return []
 
 def robust_scrape(company):
-    """Robust scraping with retries"""
+    print(f"[DEBUG] Starting robust_scrape for {company}")
     first = fetch_page(company, 1)
     PER_PAGE = len(first)
     if PER_PAGE == 0:
@@ -139,6 +139,7 @@ def robust_scrape(company):
 
     all_links = set(link for links in results.values() for link in links)
     print(f"Final: got {len(all_links)} unique URLs (expected {expected})")
+    print(f"[DEBUG] robust_scrape complete for {company}")
     return list(all_links)
 
 def is_placeholder(html: str) -> bool:
@@ -207,7 +208,7 @@ def fetch_html(url, idx, total):
     return url, None
 
 def process_article(arg):
-    """Process a single article"""
+    print(f"[DEBUG] Processing article: {arg[0]}")
     url, html = arg
     if not html:
         return None
@@ -229,7 +230,7 @@ def process_article(arg):
              'title': title, 'body_text': text, 'url': url}
 
 async def scrape_all(urls):
-    """Scrape all URLs asynchronously"""
+    print(f"[DEBUG] scrape_all: {len(urls)} URLs")
     total = len(urls)
     loop = asyncio.get_event_loop()
     
@@ -256,16 +257,18 @@ async def scrape_all(urls):
             if res:
                 records.append(res)
                 
+    print(f"[DEBUG] scrape_all complete")
     return pd.DataFrame(records)
 
 def setup_gemini():
-    """Setup Gemini API"""
+    print("[DEBUG] Setting up Gemini API")
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found in environment variables")
     
     genai.configure(api_key=api_key)
     generation_config = genai.GenerationConfig(temperature=0)
+    print("[DEBUG] Gemini API setup complete")
     return genai.GenerativeModel("gemini-2.5-flash-preview-04-17", generation_config=generation_config)
 
 def is_retryable(e) -> bool:
@@ -362,7 +365,7 @@ def translate_summaries(model, df):
     return translate
 
 def setup_mongodb():
-    """Setup MongoDB connection"""
+    print("[DEBUG] Setting up MongoDB connection")
     mongo_connection_string = os.getenv("MONGO_CONNECTION_STRING")
     if not mongo_connection_string:
         raise ValueError("MONGO_CONNECTION_STRING not found in environment variables")
@@ -373,10 +376,11 @@ def setup_mongodb():
     
     client.admin.command('ping')
     print("Successfully connected to MongoDB!")
+    print("[DEBUG] MongoDB connection successful!")
     return collection
 
 def main():
-    """Main function to process stock news"""
+    print("[DEBUG] Main started")
     nest_asyncio.apply()
     
     # Setup APIs
@@ -391,36 +395,36 @@ def main():
         print(f"{'='*50}")
         
         try:
-            # Get company identifier
+            print(f"[DEBUG] Getting company identifier for {company_name}")
             company = COMPANIES[company_name]
-            
-            # Scrape news links
+            print(f"[DEBUG] Scraping news links for {company_name}")
             links = robust_scrape(company)
+            print(f"[DEBUG] Scraped {len(links)} links for {company_name}")
             
             if not links:
                 print(f"No links found for {company_name}")
                 continue
             
-            # Scrape articles
+            print(f"[DEBUG] Scraping articles for {company_name}")
             df = asyncio.get_event_loop().run_until_complete(scrape_all(links))
+            print(f"[DEBUG] Scraped {len(df)} articles for {company_name}")
             
             if df.empty:
                 print(f"No articles processed for {company_name}")
                 continue
             
-            # Sort by date
+            print(f"[DEBUG] Sorting articles by date/time")
             df = df.sort_values(by=['publish_date', 'publish_time'], ascending=[False, False]).reset_index(drop=True)
             
-            # Analyze sentiment
+            print(f"[DEBUG] Analyzing sentiment for {company_name}")
             predicted = analyze_sentiment(model, df)
             df["predicted"] = predicted
+            print(f"[DEBUG] Sentiment analysis complete for {company_name}")
             
-            # Extract sentiment and importance
             df["sentiment"] = df["predicted"].apply(lambda x: x.split("\n")[1].strip() if len(x.split("\n")) > 1 else None)
             df["importance"] = df["predicted"].apply(lambda x: x.split("\n")[10].strip() if len(x.split("\n")) > 10 else None)
             df["summary"] = df["predicted"].apply(lambda x: x.split("\n")[4].strip() if len(x.split("\n")) > 4 else None)
             
-            # Filter valid results
             df = df[df['sentiment'].isin(['Positive', 'Negative', 'Neutral'])]
             df = df[df['importance'].isin(['1', '2', '3', '4', '5'])]
             
@@ -428,30 +432,28 @@ def main():
                 print(f"No valid sentiment analysis for {company_name}")
                 continue
             
-            # Translate summaries
+            print(f"[DEBUG] Translating summaries for {company_name}")
             translate = translate_summaries(model, df)
             df["translate"] = translate
+            print(f"[DEBUG] Translation complete for {company_name}")
             
-            # Clean up
             if 'predicted' in df.columns:
                 df.drop(columns=['predicted'], inplace=True)
             if 'body_text' in df.columns:
                 df.drop(columns=['body_text'], inplace=True)
             
-            # Save to file
             now = datetime.now()
             date_time = now.strftime("%Y-%m-%d %H-%M").strip().replace(' ', '_')
             ticker = df['ticker'].iloc[0] if not df.empty else company_name
             filename = f"gemini_{ticker}_{date_time}.csv".lower()
             
-            # Ensure directory exists
             os.makedirs("../data/processed", exist_ok=True)
             df.to_csv(f"../data/processed/{filename}", index=False)
+            print(f"[DEBUG] Saved CSV for {company_name}")
             
-            # Save to MongoDB
             complete_dict = df.to_dict(orient='records')
             result = collection.insert_many(complete_dict, ordered=True)
-            print(f"Successfully inserted {len(result.inserted_ids)} documents for {company_name}")
+            print(f"[DEBUG] Inserted {len(result.inserted_ids)} documents for {company_name}")
             
             all_results.append(df)
             
