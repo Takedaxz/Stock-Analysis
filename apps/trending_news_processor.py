@@ -14,7 +14,7 @@ from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import pandas as pd
 import nest_asyncio
-import cloudscraper
+import requests
 from htmldate import find_date
 from bs4 import BeautifulSoup
 from newspaper import Article
@@ -33,22 +33,20 @@ load_dotenv()
 # Configuration
 MAX_WORKERS = 10
 MAX_RETRIES = 8
-MAX_PAGES = 1  # Trending news typically has fewer pages
+MAX_PAGES = 1  # TEMP: Only 1 page for debug
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.5",
-    "Accept-Encoding": "gzip, deflate, br",
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+    # Add more real user agents if you want
+]
+
+HEADERS_BASE = {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.google.com/",
+    "DNT": "1",
     "Connection": "keep-alive",
-    "Upgrade-Insecure-Requests": "1",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "none",
-    "Sec-Fetch-User": "?1",
-    "Cache-Control": "max-age=0",
-    "Referer": "https://www.investing.com/",
-    "DNT": "1"
 }
 
 def fetch_page(page: int):
@@ -57,18 +55,17 @@ def fetch_page(page: int):
     if page > 1:
         url += f"/{page}"
     
-    scraper = cloudscraper.create_scraper(
-        browser={
-            'browser': 'chrome',
-            'platform': 'darwin',
-            'mobile': False
-        },
-        delay=2
-    )
+    # Use ScraperAPI if available
+    scraper_api_key = os.getenv("SCRAPER_API_KEY")
+    if scraper_api_key:
+        url = f"http://api.scraperapi.com/?api_key={scraper_api_key}&url={url}"
     
     for attempt in range(1, MAX_RETRIES + 1):
         try:
-            r = scraper.get(url, timeout=30)
+            headers = HEADERS_BASE.copy()
+            headers["User-Agent"] = random.choice(USER_AGENTS)
+            time.sleep(random.uniform(2, 5))  # Random delay
+            r = requests.get(url, headers=headers, timeout=30)
             r.raise_for_status()
             soup = BeautifulSoup(r.text, "lxml")
 
@@ -172,22 +169,29 @@ def safe_find_datetime(url, html_content=None):
 
 def fetch_html(url, idx, total):
     """Fetch HTML content with retries"""
-    scraper = cloudscraper.create_scraper()
+    scraper = requests.Session() # Use a session for persistent cookies
     MAX_FETCH_RETRIES = 5
     RETRY_DELAY = 1
     
+    # Use ScraperAPI if available
+    scraper_api_key = os.getenv("SCRAPER_API_KEY")
+    if scraper_api_key:
+        url = f"http://api.scraperapi.com/?api_key={scraper_api_key}&url={url}"
+    
     for attempt in range(1, MAX_FETCH_RETRIES + 1):
         try:
-            resp = scraper.get(url, timeout=30)
+            headers = HEADERS_BASE.copy()
+            headers["User-Agent"] = random.choice(USER_AGENTS)
+            headers["Referer"] = "https://www.investing.com/" # Keep referer consistent
+            time.sleep(random.uniform(1, 3)) # Random delay
+            resp = scraper.get(url, headers=headers, timeout=30)
             html = resp.text
             if is_placeholder(html):
                 raise RuntimeError('Placeholder')
                 
-            print(f"[Fetch][{idx}/{total}][ok]")
             return url, html
             
-        except Exception:
-            print(f"[Fetch][{idx}/{total}][retry {attempt}]")
+        except Exception as e:
             if attempt < MAX_FETCH_RETRIES:
                 time.sleep(RETRY_DELAY)
                 
@@ -240,7 +244,6 @@ async def scrape_all(urls):
         
         for i, fut in enumerate(as_completed(futures), 1):
             res = fut.result()
-            print(f"[Process][{i}/{total}] {futures[fut]}")
             if res:
                 records.append(res)
                 
@@ -364,7 +367,6 @@ def setup_mongodb():
     return collection
 
 def main():
-    """Main function to process trending news"""
     nest_asyncio.apply()
     
     print("="*50)
@@ -376,36 +378,34 @@ def main():
     collection = setup_mongodb()
     
     try:
-        # Scrape trending news links
-        print("Scraping trending news...")
+        print("Scraping trending news links...")
         links = robust_scrape(max_pages=MAX_PAGES)
+        print(f"Scraped {len(links)} trending news links")
         
         if not links:
             print("No trending news links found")
             return
         
-        # Scrape articles
-        print("Processing articles...")
+        print("Scraping articles...")
         df = asyncio.get_event_loop().run_until_complete(scrape_all(links))
+        print(f"Scraped {len(df)} articles")
         
         if df.empty:
             print("No articles processed")
             return
         
-        # Sort by date
+        print("Sorting articles by date/time")
         df = df.sort_values(by=['publish_date', 'publish_time'], ascending=[False, False]).reset_index(drop=True)
         
-        # Analyze sentiment
         print("Analyzing sentiment...")
         predicted = analyze_sentiment(model, df)
         df["predicted"] = predicted
+        print("Sentiment analysis complete")
         
-        # Extract sentiment and importance
         df["sentiment"] = df["predicted"].apply(lambda x: x.split("\n")[1].strip() if len(x.split("\n")) > 1 else None)
         df["importance"] = df["predicted"].apply(lambda x: x.split("\n")[10].strip() if len(x.split("\n")) > 10 else None)
         df["summary"] = df["predicted"].apply(lambda x: x.split("\n")[4].strip() if len(x.split("\n")) > 4 else None)
         
-        # Filter valid results
         df = df[df['sentiment'].isin(['Positive', 'Negative', 'Neutral'])]
         df = df[df['importance'].isin(['1', '2', '3', '4', '5'])]
         
@@ -413,30 +413,27 @@ def main():
             print("No valid sentiment analysis")
             return
         
-        # Translate summaries
         print("Translating summaries...")
         translate = translate_summaries(model, df)
         df["translate"] = translate
+        print("Translation complete")
         
-        # Clean up
         if 'predicted' in df.columns:
             df.drop(columns=['predicted'], inplace=True)
         if 'body_text' in df.columns:
             df.drop(columns=['body_text'], inplace=True)
         
-        # Save to file
         now = datetime.now()
         date_time = now.strftime("%Y-%m-%d %H-%M").strip().replace(' ', '_')
         filename = f"gemini_news_{date_time}.csv".lower()
         
-        # Ensure directory exists
         os.makedirs("../data/processed", exist_ok=True)
         df.to_csv(f"../data/processed/{filename}", index=False)
+        print("Saved CSV file")
         
-        # Save to MongoDB
         complete_dict = df.to_dict(orient='records')
         result = collection.insert_many(complete_dict, ordered=True)
-        print(f"Successfully inserted {len(result.inserted_ids)} trending news documents")
+        print(f"Inserted {len(result.inserted_ids)} documents to MongoDB")
         
         print("="*50)
         print("Trending News Processing Complete!")
