@@ -24,8 +24,8 @@ warnings.filterwarnings('ignore')
 load_dotenv()
 
 # Configuration
-MAX_ARTICLES = 40  # Number of articles to fetch from NewsAPI (increased since we're only using one API)
-FINAL_ARTICLES = 20  # Final number of articles to keep
+MAX_ARTICLES = 30  # Reduced to avoid rate limits
+FINAL_ARTICLES = 20  # Reduced to avoid rate limits (10 articles = 20 API calls max)
 
 def fetch_newsapi_articles():
     """Fetch articles from NewsAPI"""
@@ -227,6 +227,8 @@ def is_retryable(e) -> bool:
 @retry.Retry(predicate=is_retryable)
 def generate_content_with_rate_limit(model, prompt):
     """Generate content with rate limiting"""
+    # Add delay to respect rate limits (15 requests per minute = 4 seconds between requests)
+    time.sleep(4)  # 4 second delay between requests
     return model.generate_content(prompt).text
 
 def analyze_sentiment(model, df):
@@ -274,8 +276,12 @@ Please provide your analysis in the following format (Don't forget to make space
                 predicted.append("LLM_EMPTY_RESPONSE")
             else:
                 predicted.append(finalprediction)
+                print(f"✅ Processed article {index + 1}/{len(df)}")
         except Exception as e:
             print(f"Row {index}: Error - {e}")
+            if "quota" in str(e).lower() or "429" in str(e).lower():
+                print("⚠️  Rate limit hit - stopping processing")
+                break
             predicted.append("ERROR_UNEXPECTED")
             continue
     
@@ -299,8 +305,12 @@ def translate_summaries(model, df):
                 translate.append("LLM_EMPTY_RESPONSE")
             else:
                 translate.append(finalprediction)
+                print(f"✅ Translated article {index + 1}/{len(df)}")
         except Exception as e:
             print(f"Row {index}: Error - {e}")
+            if "quota" in str(e).lower() or "429" in str(e).lower():
+                print("⚠️  Rate limit hit - stopping translation")
+                break
             translate.append("ERROR_UNEXPECTED")
             continue
     
@@ -340,6 +350,7 @@ def main():
         print(f"Fetched {len(df)} articles from APIs")
         
         print("Analyzing sentiment...")
+        print(f"Processing {len(df)} articles with 4-second delays between API calls...")
         predicted = analyze_sentiment(model, df)
         df["predicted"] = predicted
         print("Sentiment analysis complete")
@@ -356,6 +367,7 @@ def main():
             return
         
         print("Translating summaries...")
+        print(f"Translating {len(df)} summaries with 4-second delays between API calls...")
         translate = translate_summaries(model, df)
         df["translate"] = translate
         print("Translation complete")
