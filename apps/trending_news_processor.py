@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Trending News Processor - Using News APIs
-Uses NewsAPI and NewsData.io for reliable news fetching
+Uses NewsAPI, Alpha Vantage, and Polygon.io for reliable news fetching
 """
 
 import os
@@ -24,8 +24,8 @@ warnings.filterwarnings('ignore')
 load_dotenv()
 
 # Configuration
-MAX_ARTICLES = 30  # Reduced to avoid rate limits
-FINAL_ARTICLES = 20  # Reduced to avoid rate limits (10 articles = 20 API calls max)
+MAX_ARTICLES = 30
+FINAL_ARTICLES = 20
 
 def fetch_newsapi_articles():
     """Fetch articles from NewsAPI"""
@@ -133,8 +133,78 @@ def fetch_alphavantage_articles():
         print(f"Error fetching from Alpha Vantage: {e}")
         return []
 
+def fetch_polygon_articles():
+    """Fetch articles from Polygon.io News API"""
+    print("Fetching articles from Polygon.io...")
+    
+    api_key = os.getenv("POLYGON_API_KEY")
+    if not api_key:
+        print("POLYGON_API_KEY not found, skipping Polygon.io")
+        return []
+    
+    # Get articles from the last 7 days
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=7)
+    
+    url = "https://api.polygon.io/v2/reference/news"
+    params = {
+        'published_utc.gte': start_date.strftime('%Y-%m-%d'),
+        'published_utc.lte': end_date.strftime('%Y-%m-%d'),
+        'order': 'desc',
+        'sort': 'published_utc',
+        'limit': MAX_ARTICLES,
+        'apiKey': api_key
+    }
+    
+    try:
+        response = requests.get(url, params=params, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+        
+        if 'results' in data and data['results']:
+            articles = []
+            for article in data['results']:
+                # Parse the published_utc
+                published_utc = article.get('published_utc', '')
+                publish_date = datetime.now().strftime('%Y-%m-%d')
+                publish_time = '00:00'
+                
+                if published_utc:
+                    try:
+                        # Polygon format: 2024-01-01T00:00:00Z
+                        date_part = published_utc.split('T')[0]
+                        time_part = published_utc.split('T')[1][:5]  # HH:MM
+                        publish_date = date_part
+                        publish_time = time_part
+                    except:
+                        pass
+                
+                # Combine description and insights for body text
+                body_text = article.get('description', '')
+                if article.get('insights'):
+                    insights_text = ' '.join([insight.get('text', '') for insight in article['insights']])
+                    if insights_text:
+                        body_text += f" {insights_text}"
+                
+                articles.append({
+                    'title': article.get('title', 'No title'),
+                    'body_text': body_text,
+                    'url': article.get('article_url', ''),
+                    'publish_date': publish_date,
+                    'publish_time': publish_time,
+                    'source': article.get('publisher', {}).get('name', 'Unknown')
+                })
+            print(f"Fetched {len(articles)} articles from Polygon.io")
+            return articles
+        else:
+            print(f"Polygon.io error: No results found")
+            return []
+    except Exception as e:
+        print(f"Error fetching from Polygon.io: {e}")
+        return []
+
 def combine_articles():
-    """Combine articles from NewsAPI and return top 20 latest"""
+    """Combine articles from News APIs and return top 20 latest"""
     print("Combining articles from News APIs...")
     
     all_articles = []
@@ -143,9 +213,13 @@ def combine_articles():
     newsapi_articles = fetch_newsapi_articles()
     all_articles.extend(newsapi_articles)
     
-    # For now, skip Alpha Vantage due to potential API issues
+    # Fetch from Alpha Vantage
     alphavantage_articles = fetch_alphavantage_articles()
     all_articles.extend(alphavantage_articles)
+    
+    # Fetch from Polygon.io
+    polygon_articles = fetch_polygon_articles()
+    all_articles.extend(polygon_articles)
     
     # Remove duplicates based on URL
     seen_urls = set()
@@ -165,24 +239,81 @@ def combine_articles():
         # Add ticker column
         df['ticker'] = 'news'
         
-        # Add impact score based on market-relevant keywords
-        market_keywords = [
-            'stock market', 'trading', 'stocks', 'market', 'earnings', 'fed', 'inflation', 
-            'interest rates', 'dow', 's&p', 'nasdaq', 'trading volume', 'market rally',
-            'market correction', 'bull market', 'bear market', 'volatility', 'recession',
-            'economic', 'financial', 'investor', 'trading session', 'market close'
-        ]
+        # Enhanced impact score based on market-relevant keywords with different weights
+        market_keywords = {
+            # High priority - US market specific
+            's&p 500': 5, 's&p500': 5, 'sp500': 5, 'spx': 5, 'spy': 5,
+            'dow jones': 5, 'dow': 4, 'djia': 4,
+            'nasdaq': 4, 'nasdaq 100': 4, 'qqq': 4,
+            'us stock market': 5, 'american stock market': 5, 'wall street': 4,
+            
+            # Market indices and ETFs
+            'vix': 4, 'volatility index': 4, 'fear index': 3,
+            'russell 2000': 3, 'russell 3000': 3, 'iwm': 3,
+            'vanguard': 3, 'blackrock': 3, 'state street': 3,
+            
+            # Major US companies (FAANG, etc.)
+            'apple': 3, 'aapl': 3, 'microsoft': 3, 'msft': 3, 'google': 3, 'googl': 3,
+            'amazon': 3, 'amzn': 3, 'tesla': 3, 'tsla': 3, 'nvidia': 3, 'nvda': 3,
+            'meta': 3, 'facebook': 3, 'fb': 3, 'netflix': 3, 'nflx': 3,
+            'berkshire hathaway': 3, 'brk': 3, 'jpmorgan': 3, 'jpm': 3,
+            
+            # Financial terms
+            'stock market': 4, 'trading': 3, 'stocks': 3, 'market': 3,
+            'earnings': 4, 'earnings report': 4, 'quarterly earnings': 4,
+            'fed': 4, 'federal reserve': 4, 'jerome powell': 4,
+            'inflation': 4, 'cpi': 4, 'ppi': 3, 'interest rates': 4,
+            'trading volume': 3, 'market rally': 3, 'market correction': 3,
+            'bull market': 3, 'bear market': 3, 'volatility': 3,
+            'recession': 4, 'economic': 3, 'financial': 3,
+            'investor': 3, 'trading session': 3, 'market close': 3,
+            
+            # Sector specific
+            'technology sector': 3, 'tech stocks': 3, 'financial sector': 3,
+            'healthcare sector': 3, 'energy sector': 3, 'consumer staples': 3,
+            'consumer discretionary': 3, 'utilities': 3, 'real estate': 3,
+            
+            # Market events
+            'market crash': 4, 'market selloff': 3, 'market bounce': 3,
+            'market recovery': 3, 'market volatility': 3, 'market uncertainty': 3,
+            'market sentiment': 3, 'market momentum': 3, 'market trend': 3,
+            
+            # Economic indicators
+            'gdp': 3, 'unemployment': 3, 'jobs report': 3, 'non-farm payrolls': 3,
+            'retail sales': 3, 'housing market': 3, 'mortgage rates': 3,
+            'consumer confidence': 3, 'manufacturing': 3, 'services': 3,
+            
+            # Trading terms
+            'day trading': 3, 'swing trading': 3, 'options': 3, 'futures': 3,
+            'etf': 3, 'mutual fund': 3, 'portfolio': 3, 'diversification': 3,
+            'risk management': 3, 'stop loss': 3, 'take profit': 3
+        }
         
         def calculate_impact_score(title, body):
             title_lower = title.lower()
             body_lower = body.lower()
             score = 0
             
-            for keyword in market_keywords:
+            # Check for keyword matches with weighted scoring
+            for keyword, weight in market_keywords.items():
                 if keyword in title_lower:
-                    score += 2  # Moderate weight for title matches
+                    score += weight * 2  # Double weight for title matches
                 if keyword in body_lower:
-                    score += 1  # Lower weight for body matches
+                    score += weight  # Normal weight for body matches
+            
+            # Bonus for US market focus
+            us_market_indicators = ['us', 'united states', 'american', 'wall street', 'new york']
+            for indicator in us_market_indicators:
+                if indicator in title_lower:
+                    score += 2
+                if indicator in body_lower:
+                    score += 1
+            
+            # Bonus for recent market events
+            recent_events = ['today', 'yesterday', 'this week', 'this month', 'latest', 'breaking']
+            for event in recent_events:
+                if event in title_lower:
+                    score += 1
             
             return score
         
@@ -211,7 +342,7 @@ def setup_gemini():
     
     genai.configure(api_key=api_key)
     generation_config = genai.GenerationConfig(temperature=0)
-    return genai.GenerativeModel("gemini-2.5-flash-preview-04-17", generation_config=generation_config)
+    return genai.GenerativeModel("gemini-2.5-flash", generation_config=generation_config)
 
 def is_retryable(e) -> bool:
     """Check if error is retryable"""
@@ -379,7 +510,7 @@ def main():
         
         now = datetime.now()
         date_time = now.strftime("%Y-%m-%d %H-%M").strip().replace(' ', '_')
-        filename = f"gemini_news_api_{date_time}.csv".lower()
+        filename = f"gemini_news_{date_time}.csv".lower()
         
         os.makedirs("data/processed", exist_ok=True)
         df.to_csv(f"data/processed/{filename}", index=False)
