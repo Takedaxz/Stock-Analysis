@@ -275,7 +275,7 @@ def setup_gemini():
     
     genai.configure(api_key=api_key)
     generation_config = genai.GenerationConfig(temperature=0)
-    return genai.GenerativeModel("gemini-2.5-flash", generation_config=generation_config)
+    return genai.GenerativeModel("gemini-2.0-flash", generation_config=generation_config)
 
 def is_retryable(e) -> bool:
     """Check if error is retryable"""
@@ -295,9 +295,9 @@ def generate_content_with_rate_limit(model, prompt):
     time.sleep(4)  # 4 second delay between requests
     return model.generate_content(prompt).text
 
-def analyze_sentiment(model, df):
-    """Analyze sentiment for all articles"""
-    prompt = """You are a financial news analyst specializing in stock market impact. Your task is to analyze the provided news article, summarize its core content concisely, determine its sentiment (positive, negative, or neutral), and assess its importance to the specified stock.
+def analyze_sentiment_and_translate(model, df, company_name):
+    """Analyze sentiment and translate summary for all articles in one prompt"""
+    prompt = """You are a financial news analyst specializing in stock market impact. Your task is to analyze the provided news article, summarize its core content concisely, determine its sentiment (positive, negative, or neutral), assess its importance to the specified stock, and translate the summary to Thai.
 
 Here is the news from stock [STOCK] title and body:
 ---
@@ -314,19 +314,22 @@ Please provide your analysis in the following format (Don't forget to make space
 **Summary:**
 [Your concise summary of the article, typically 2-3 sentences.]
 
+**Summary in Thai:**
+[Thai translation of the summary. Do not translate proper nouns, company names, product names, abbreviations, or technical terms — keep them in English.]
+
 **Reasoning for Sentiment:**
 [Brief explanation (1-2 sentences) of why you categorized the sentiment as such, referencing key points or tone from the article.]
 
 **Importance to Stock [STOCK]:**
-[1-5, where 1 is minimal importance and 5 is very high importance.Answer in 1-5 only, no explanation.] (Answer only in number 1-5)
+[1-5, where 1 is minimal importance and 5 is very high importance. Answer in 1-5 only, no explanation.]
 
 **Reasoning for Importance:**
 [Brief explanation (1-2 sentences) of why you assigned this importance score, referencing specific details from the article that would impact the stock.]"""
 
-    predicted = []
+    results = []
     
-    for index, row in tqdm(df.iterrows(), total=len(df), desc="Analyzing sentiment"):
-        current_stock = row.get("ticker", "news")
+    for index, row in tqdm(df.iterrows(), total=len(df), desc="Analyzing sentiment and translating"):
+        current_stock = COMPANIES[company_name]
         
         filled_prompt = prompt.replace("[STOCK]", current_stock)
         filled_prompt = filled_prompt.replace("[TITLE]", row["title"])
@@ -334,51 +337,24 @@ Please provide your analysis in the following format (Don't forget to make space
         
         try:
             response = generate_content_with_rate_limit(model, filled_prompt)
-            finalprediction = response.strip()
-            if not finalprediction:
+            finalresult = response.strip()
+            if not finalresult:
                 print(f"Row {index}: LLM returned an empty string.")
-                predicted.append("LLM_EMPTY_RESPONSE")
+                results.append("LLM_EMPTY_RESPONSE")
             else:
-                predicted.append(finalprediction)
+                results.append(finalresult)
                 print(f"✅ Processed article {index + 1}/{len(df)}")
         except Exception as e:
             print(f"Row {index}: Error - {e}")
             if "quota" in str(e).lower() or "429" in str(e).lower():
                 print("⚠️  Rate limit hit - stopping processing")
                 break
-            predicted.append("ERROR_UNEXPECTED")
+            results.append("ERROR_UNEXPECTED")
             continue
     
-    return predicted
+    return results
 
-def translate_summaries(model, df):
-    """Translate summaries to Thai"""
-    prompt = """Translate the following English sentence to Thai. Do not translate proper nouns, company names, product names, abbreviations, or technical terms — keep them in English. Do not provide any explanation, just the translation.
-[TEXT]"""
-    
-    translate = []
-    
-    for index, row in tqdm(df.iterrows(), total=len(df), desc="Translating"):
-        filled_prompt = prompt.replace("[TEXT]", row["summary"])
-        
-        try:
-            response = generate_content_with_rate_limit(model, filled_prompt)
-            finalprediction = response.strip()
-            if not finalprediction:
-                print(f"Row {index}: LLM returned an empty string.")
-                translate.append("LLM_EMPTY_RESPONSE")
-            else:
-                translate.append(finalprediction)
-                print(f"✅ Translated article {index + 1}/{len(df)}")
-        except Exception as e:
-            print(f"Row {index}: Error - {e}")
-            if "quota" in str(e).lower() or "429" in str(e).lower():
-                print("⚠️  Rate limit hit - stopping translation")
-                break
-            translate.append("ERROR_UNEXPECTED")
-            continue
-    
-    return translate
+
 
 def setup_mongodb():
     print("[DEBUG] Setting up MongoDB connection")
@@ -472,31 +448,26 @@ def main():
             
             print(f"Fetched {len(df)} articles for {company_name}")
             
-            print("Analyzing sentiment...")
+            print("Analyzing sentiment and translating...")
             print(f"Processing {len(df)} articles with 4-second delays between API calls...")
-            predicted = analyze_sentiment(model, df)
-            df["predicted"] = predicted
-            print("Sentiment analysis complete")
+            results = analyze_sentiment_and_translate(model, df, company_name)
+            df["results"] = results
+            print("Analysis and translation complete")
             
-            df["sentiment"] = df["predicted"].apply(lambda x: x.split("\n")[1].strip() if len(x.split("\n")) > 1 else None)
-            df["importance"] = df["predicted"].apply(lambda x: x.split("\n")[10].strip() if len(x.split("\n")) > 10 else None)
-            df["summary"] = df["predicted"].apply(lambda x: x.split("\n")[4].strip() if len(x.split("\n")) > 4 else None)
+            df["sentiment"] = df["results"].apply(lambda x: x.split("\n")[1].strip() if len(x.split("\n")) > 1 else None)
+            df["importance"] = df["results"].apply(lambda x: x.split("\n")[13].strip() if len(x.split("\n")) > 13 else None)
+            df["summary"] = df["results"].apply(lambda x: x.split("\n")[4].strip() if len(x.split("\n")) > 4 else None)
+            df["translate"] = df["results"].apply(lambda x: x.split("\n")[7].strip() if len(x.split("\n")) > 7 else None)
             
             df = df[df['sentiment'].isin(['Positive', 'Negative', 'Neutral'])]
             df = df[df['importance'].isin(['1', '2', '3', '4', '5'])]
-            
+            df['ticker'] = COMPANIES[company_name]
             if df.empty:
                 print(f"No valid sentiment analysis for {company_name}")
                 continue
             
-            print("Translating summaries...")
-            print(f"Translating {len(df)} summaries with 4-second delays between API calls...")
-            translate = translate_summaries(model, df)
-            df["translate"] = translate
-            print("Translation complete")
-            
-            if 'predicted' in df.columns:
-                df.drop(columns=['predicted'], inplace=True)
+            if 'results' in df.columns:
+                df.drop(columns=['results'], inplace=True)
             if 'body_text' in df.columns:
                 df.drop(columns=['body_text'], inplace=True)
             
