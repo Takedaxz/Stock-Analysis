@@ -17,6 +17,8 @@ from tqdm import tqdm
 from google.api_core import retry
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from difflib import SequenceMatcher
+import hashlib
 
 warnings.filterwarnings('ignore')
 
@@ -41,6 +43,191 @@ TARGET_COMPANIES = []  # Will be populated by user input
 
 MAX_ARTICLES = 30
 FINAL_ARTICLES = 20
+
+# Duplicate detection settings
+SIMILARITY_THRESHOLD = 0.75  # 75% similarity threshold for content
+TITLE_SIMILARITY_THRESHOLD = 0.45  # 45% similarity threshold for titles (lowered for better detection)
+URL_SIMILARITY_THRESHOLD = 0.90  # 90% similarity threshold for URLs
+ENABLE_DETAILED_LOGGING = True  # Enable detailed logging of duplicate detection
+
+def clean_text(text):
+    """Clean and normalize text for comparison"""
+    if not text:
+        return ""
+    
+    # Convert to lowercase
+    text = text.lower()
+    
+    # Remove URLs
+    text = re.sub(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', text)
+    
+    # Remove special characters and extra whitespace
+    text = re.sub(r'[^\w\s]', ' ', text)
+    text = re.sub(r'\s+', ' ', text)
+    
+    # Remove numbers (optional - uncomment if you want to ignore numbers)
+    # text = re.sub(r'\d+', '', text)
+    
+    # Remove common words that don't add meaning
+    stop_words = {
+        'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 
+        'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 
+        'will', 'would', 'could', 'should', 'may', 'might', 'must', 'can', 'this', 'that', 'these', 
+        'those', 'it', 'its', 'they', 'them', 'their', 'we', 'us', 'our', 'you', 'your', 'he', 'she', 
+        'his', 'her', 'him', 'as', 'from', 'up', 'about', 'into', 'through', 'during', 'before', 
+        'after', 'above', 'below', 'out', 'off', 'over', 'under', 'again', 'further', 'then', 'once'
+    }
+    words = text.split()
+    words = [word for word in words if word not in stop_words and len(word) > 2]
+    
+    return ' '.join(words).strip()
+
+def calculate_similarity(text1, text2):
+    """Calculate similarity between two texts using SequenceMatcher"""
+    if not text1 or not text2:
+        return 0.0
+    
+    clean_text1 = clean_text(text1)
+    clean_text2 = clean_text(text2)
+    
+    if not clean_text1 or not clean_text2:
+        return 0.0
+    
+    return SequenceMatcher(None, clean_text1, clean_text2).ratio()
+
+def is_duplicate_article(article1, article2):
+    """Check if two articles are duplicates based on URL and content similarity"""
+    # Check URL similarity first (fast check)
+    url1 = article1.get('url', '').lower()
+    url2 = article2.get('url', '').lower()
+    
+    # If URLs are identical or very similar, it's a duplicate
+    if url1 and url2:
+        if url1 == url2:
+            return True
+        # Check if URLs are similar (same domain, similar path)
+        if calculate_similarity(url1, url2) > URL_SIMILARITY_THRESHOLD:
+            return True
+    
+    # Check title similarity
+    title1 = article1.get('title', '')
+    title2 = article2.get('title', '')
+    
+    if title1 and title2:
+        title_similarity = calculate_similarity(title1, title2)
+        if title_similarity > TITLE_SIMILARITY_THRESHOLD:
+            return True
+    
+    # Check content similarity
+    body1 = article1.get('body_text', '')
+    body2 = article2.get('body_text', '')
+    
+    if body1 and body2:
+        content_similarity = calculate_similarity(body1, body2)
+        if content_similarity > SIMILARITY_THRESHOLD:
+            return True
+    
+    return False
+
+def remove_duplicates(articles):
+    """Remove duplicate articles based on URL and content similarity"""
+    if not articles:
+        return []
+    
+    unique_articles = []
+    seen_urls = set()
+    duplicate_count = 0
+    
+    for i, article in enumerate(articles):
+        url = article.get('url', '').lower()
+        title = article.get('title', '')
+        
+        # Skip if URL is already seen
+        if url in seen_urls:
+            duplicate_count += 1
+            if ENABLE_DETAILED_LOGGING:
+                print(f"  Duplicate found (URL): {title[:50]}...")
+            continue
+        
+        # Check if this article is a duplicate of any existing unique article
+        is_duplicate = False
+        duplicate_reason = ""
+        
+        for j, unique_article in enumerate(unique_articles):
+            if is_duplicate_article(article, unique_article):
+                is_duplicate = True
+                # Determine the reason for duplication
+                url1 = article.get('url', '').lower()
+                url2 = unique_article.get('url', '').lower()
+                title1 = article.get('title', '')
+                title2 = unique_article.get('title', '')
+                body1 = article.get('body_text', '')
+                body2 = unique_article.get('body_text', '')
+                
+                if url1 and url2 and calculate_similarity(url1, url2) > URL_SIMILARITY_THRESHOLD:
+                    duplicate_reason = "similar URL"
+                elif title1 and title2 and calculate_similarity(title1, title2) > TITLE_SIMILARITY_THRESHOLD:
+                    duplicate_reason = "similar title"
+                elif body1 and body2 and calculate_similarity(body1, body2) > SIMILARITY_THRESHOLD:
+                    duplicate_reason = "similar content"
+                else:
+                    duplicate_reason = "multiple factors"
+                
+                break
+        
+        if is_duplicate:
+            duplicate_count += 1
+            if ENABLE_DETAILED_LOGGING:
+                print(f"  Duplicate found ({duplicate_reason}): {title[:50]}...")
+        else:
+            unique_articles.append(article)
+            if url:
+                seen_urls.add(url)
+    
+    if duplicate_count > 0:
+        print(f"  Removed {duplicate_count} duplicate articles")
+    
+    return unique_articles
+
+def test_duplicate_detection():
+    """Test function to demonstrate duplicate detection functionality"""
+    print("Testing duplicate detection system...")
+    
+    # Sample articles for testing
+    test_articles = [
+        {
+            'title': 'Tesla Reports Strong Q3 Earnings',
+            'body_text': 'Tesla Inc. reported strong third-quarter earnings today, beating analyst expectations.',
+            'url': 'https://example.com/tesla-earnings-2024',
+            'source': 'Financial Times'
+        },
+        {
+            'title': 'Tesla Q3 Earnings Beat Expectations',
+            'body_text': 'Tesla Inc. announced third-quarter results that exceeded Wall Street estimates.',
+            'url': 'https://different-site.com/tesla-q3-results',
+            'source': 'Reuters'
+        },
+        {
+            'title': 'Apple iPhone Sales Decline',
+            'body_text': 'Apple Inc. reported declining iPhone sales in the latest quarter.',
+            'url': 'https://example.com/apple-iphone-sales',
+            'source': 'Bloomberg'
+        },
+        {
+            'title': 'Tesla Reports Strong Q3 Earnings',
+            'body_text': 'Tesla Inc. reported strong third-quarter earnings today, beating analyst expectations.',
+            'url': 'https://example.com/tesla-earnings-2024',
+            'source': 'Financial Times'
+        }
+    ]
+    
+    print(f"Original articles: {len(test_articles)}")
+    unique_articles = remove_duplicates(test_articles)
+    print(f"After duplicate removal: {len(unique_articles)}")
+    
+    print("\nUnique articles:")
+    for i, article in enumerate(unique_articles, 1):
+        print(f"{i}. {article['title']} - {article['source']}")
 
 def fetch_newsapi_articles(ticker):
     """Fetch articles from NewsAPI for specific ticker"""
@@ -240,17 +427,13 @@ def combine_articles_for_ticker(ticker):
     polygon_articles = fetch_polygon_articles(ticker)
     all_articles.extend(polygon_articles)
     
-    # Remove duplicates based on URL
-    seen_urls = set()
-    unique_articles = []
+    print(f"Total articles fetched from all APIs for {ticker}: {len(all_articles)}")
     
-    for article in all_articles:
-        url = article.get('url', '')
-        if url and url not in seen_urls:
-            seen_urls.add(url)
-            unique_articles.append(article)
+    # Remove duplicates based on URL and content similarity
+    unique_articles = remove_duplicates(all_articles)
     
-    print(f"Total unique articles for {ticker}: {len(unique_articles)}")
+    print(f"Total unique articles after duplicate removal for {ticker}: {len(unique_articles)}")
+    print(f"Removed {len(all_articles) - len(unique_articles)} duplicate articles")
     
     # Convert to DataFrame and sort by date/time
     if unique_articles:
@@ -382,7 +565,8 @@ def get_user_input():
         print(f"{i:2d}. {company_name} ({ticker})")
     
     print(f"{len(COMPANIES) + 1:2d}. Process ALL stocks")
-    print(f"{len(COMPANIES) + 2:2d}. Exit")
+    print(f"{len(COMPANIES) + 2:2d}. Test Duplicate Detection")
+    print(f"{len(COMPANIES) + 3:2d}. Exit")
     
     while True:
         try:
@@ -394,6 +578,10 @@ def get_user_input():
                 # Process all stocks
                 selected_companies = list(COMPANIES.keys())
             elif choice_num == len(COMPANIES) + 2:
+                # Test duplicate detection
+                test_duplicate_detection()
+                return []
+            elif choice_num == len(COMPANIES) + 3:
                 # Exit
                 print("Exiting...")
                 return []
@@ -402,7 +590,7 @@ def get_user_input():
                 company_name = list(COMPANIES.keys())[choice_num - 1]
                 selected_companies = [company_name]
             else:
-                print(f"Please enter a number between 1 and {len(COMPANIES) + 2}")
+                print(f"Please enter a number between 1 and {len(COMPANIES) + 3}")
                 continue
             
             return selected_companies
