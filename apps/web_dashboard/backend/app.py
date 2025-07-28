@@ -10,7 +10,7 @@ import ta
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://stock-analysis-theta-inky.vercel.app",],
+    allow_origins=["https://stock-news-analysis.vercel.app",],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
