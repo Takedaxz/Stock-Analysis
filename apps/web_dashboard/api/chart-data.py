@@ -1,84 +1,71 @@
 from http.server import BaseHTTPRequestHandler
-import yfinance as yf
+import requests
 import ta
 import json
 from urllib.parse import urlparse, parse_qs
 from datetime import datetime, timedelta
-import random
+import pandas as pd
 
-def get_mock_data(symbol="^GSPC"):
-    """Generate mock chart data for demonstration"""
-    end_date = datetime.now()
-    start_date = end_date - timedelta(days=180)
-    
-    # Generate dates
-    dates = []
-    current_date = start_date
-    while current_date <= end_date:
-        dates.append(current_date.strftime('%Y-%m-%d'))
-        current_date += timedelta(days=1)
-    
-    # Generate mock prices (starting around 4000 for S&P 500)
-    base_price = 4000 if symbol == "^GSPC" else 150
-    prices = []
-    for i in range(len(dates)):
-        # Add some random variation
-        variation = random.uniform(-0.02, 0.02)
-        price = base_price * (1 + variation)
-        prices.append(round(price, 2))
-        base_price = price
-    
-    # Calculate mock EMAs
-    ema5 = []
-    ema20 = []
-    for i in range(len(prices)):
-        if i < 4:
-            ema5.append(prices[i])
-        else:
-            ema5_val = (prices[i] * 0.4) + (ema5[i-1] * 0.6)
-            ema5.append(round(ema5_val, 2))
-        
-        if i < 19:
-            ema20.append(prices[i])
-        else:
-            ema20_val = (prices[i] * 0.05) + (ema20[i-1] * 0.95)
-            ema20.append(round(ema20_val, 2))
-    
-    return {
-        "symbol": symbol,
-        "timestamps": dates,
-        "prices": prices,
-        "ema20": ema20,
-        "ema5": ema5,
-    }
-
-def get_chart_data(symbol="^GSPC"):
+def get_real_data(symbol="^GSPC"):
+    """Fetch real data from Yahoo Finance using requests"""
     try:
-        print(f"Downloading data for symbol: {symbol}")
-        df = yf.download(symbol, period="6mo", interval="1d", progress=False)
-        print(f"Downloaded data shape: {df.shape}")
+        # Calculate date range (6 months ago to now)
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=180)
         
-        if df.empty:
-            print("No data from yfinance, using mock data")
-            return get_mock_data(symbol)
-            
-        df = df.dropna().reset_index()
-        print(f"After dropna shape: {df.shape}")
-
+        # Format dates for Yahoo Finance
+        start_timestamp = int(start_date.timestamp())
+        end_timestamp = int(end_date.timestamp())
+        
+        # Yahoo Finance API URL
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?period1={start_timestamp}&period2={end_timestamp}&interval=1d"
+        
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+        
+        data = response.json()
+        
+        if 'chart' not in data or 'result' not in data['chart'] or not data['chart']['result']:
+            return {"error": "No data available", "symbol": symbol}
+        
+        result = data['chart']['result'][0]
+        timestamps = result['timestamp']
+        quotes = result['indicators']['quote'][0]
+        
+        # Convert timestamps to dates
+        dates = [datetime.fromtimestamp(ts).strftime('%Y-%m-%d') for ts in timestamps]
+        
+        # Get close prices
+        closes = quotes['close']
+        
+        # Create DataFrame for technical indicators
+        df = pd.DataFrame({
+            'Date': dates,
+            'Close': closes
+        })
+        
+        # Calculate EMAs
         df["EMA5"] = ta.trend.ema_indicator(df["Close"], window=5).bfill()
         df["EMA20"] = ta.trend.ema_indicator(df["Close"], window=20).bfill()
-
+        
         return {
             "symbol": symbol,
-            "timestamps": [d.strftime('%Y-%m-%d') for d in df["Date"]],
-            "prices": df["Close"].values.tolist(),
+            "timestamps": dates,
+            "prices": df["Close"].tolist(),
             "ema20": df["EMA20"].tolist(),
             "ema5": df["EMA5"].tolist(),
         }
+        
     except Exception as e:
-        print(f"Error in get_chart_data: {str(e)}")
-        print("Using mock data instead")
-        return get_mock_data(symbol)
+        print(f"Error fetching real data: {str(e)}")
+        return {"error": str(e), "symbol": symbol}
+
+def get_chart_data(symbol="^GSPC"):
+    return get_real_data(symbol)
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
