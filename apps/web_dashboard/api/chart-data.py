@@ -6,7 +6,7 @@ from urllib.parse import urlparse, parse_qs
 
 def get_chart_data(symbol="^GSPC"):
     try:
-        df = yf.download(symbol, period="6mo", interval="1d", progress=False, multi_level_index=False)
+        df = yf.download(symbol, period="6mo", interval="1d", progress=False)
         df = df.dropna().reset_index()
 
         df["EMA5"] = ta.trend.ema_indicator(df["Close"], window=5).bfill()

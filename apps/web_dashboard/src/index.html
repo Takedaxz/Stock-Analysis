@@ -247,7 +247,14 @@
       fetch(`/api/news?ticker=${encodeURIComponent(symbol)}`)
       //fetch(`https://stock-analysis-q941.onrender.com/news?ticker=${encodeURIComponent(symbol)}`)
       //fetch(`http://localhost:8000/news?ticker=${encodeURIComponent(symbol)}`)
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) {
+            console.error('News API Error:', res.status, res.statusText);
+            document.getElementById('news').innerHTML = '<p style="text-align: center; color: var(--text);">News data unavailable</p>';
+            return;
+          }
+          return res.json();
+        })
         .then(news => {
           function calculateSentimentScore(news) {
             const sentimentScores = { 'Positive': 1, 'Negative': -1, 'Neutral': 0 };
@@ -321,16 +328,30 @@
     let priceChart;
 
     async function loadChart(symbol = '^GSPC') {
-      //const res = await fetch(`http://localhost:8000/chart-data?symbol=${encodeURIComponent(symbol)}`);
-      //const res = await fetch(`https://stock-analysis-q941.onrender.com/chart-data?symbol=${encodeURIComponent(symbol)}`);
-      const res = await fetch(`/api/chart-data?symbol=${encodeURIComponent(symbol)}`);
-      const data = await res.json();
+      try {
+        //const res = await fetch(`http://localhost:8000/chart-data?symbol=${encodeURIComponent(symbol)}`);
+        //const res = await fetch(`https://stock-analysis-q941.onrender.com/chart-data?symbol=${encodeURIComponent(symbol)}`);
+        const res = await fetch(`/api/chart-data?symbol=${encodeURIComponent(symbol)}`);
+        
+        if (!res.ok) {
+          console.error('API Error:', res.status, res.statusText);
+          document.getElementById('indexChart').innerHTML = '<p style="text-align: center; color: var(--text);">Chart data unavailable</p>';
+          return;
+        }
+        
+        const data = await res.json();
+        
+        if (!data || data.error) {
+          console.error('Data Error:', data?.error || 'No data received');
+          document.getElementById('indexChart').innerHTML = '<p style="text-align: center; color: var(--text);">Chart data unavailable</p>';
+          return;
+        }
 
-      const labels = data.timestamps;
-      const prices = data.prices;
-      const ema5 = data.ema5;
-      const ema20 = data.ema20;
-      const rsi = data.rsi;
+        const labels = data.timestamps || [];
+        const prices = data.prices || [];
+        const ema5 = data.ema5 || [];
+        const ema20 = data.ema20 || [];
+        const rsi = data.rsi || [];
 
       const ctxPrice = document.getElementById('indexChart').getContext('2d');
 
@@ -444,7 +465,10 @@
         }
       }
     });
-
+            } catch (error) {
+        console.error('Chart loading error:', error);
+        document.getElementById('indexChart').innerHTML = '<p style="text-align: center; color: var(--text);">Chart data unavailable</p>';
+      }
     }
 
     document.getElementById('symbolSelect').addEventListener('change', e => {
