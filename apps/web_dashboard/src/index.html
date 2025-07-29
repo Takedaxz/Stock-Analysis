@@ -244,7 +244,8 @@
   <div id="news"></div>
   <script>
     function loadNews(symbol = '^GSPC') {
-      fetch(`https://stock-analysis-q941.onrender.com/news?ticker=${encodeURIComponent(symbol)}`)
+      fetch(`/api/news?ticker=${encodeURIComponent(symbol)}`)
+      //fetch(`https://stock-analysis-q941.onrender.com/news?ticker=${encodeURIComponent(symbol)}`)
       //fetch(`http://localhost:8000/news?ticker=${encodeURIComponent(symbol)}`)
         .then(res => res.json())
         .then(news => {
@@ -321,7 +322,8 @@
 
     async function loadChart(symbol = '^GSPC') {
       //const res = await fetch(`http://localhost:8000/chart-data?symbol=${encodeURIComponent(symbol)}`);
-      const res = await fetch(`https://stock-analysis-q941.onrender.com/chart-data?symbol=${encodeURIComponent(symbol)}`);
+      //const res = await fetch(`https://stock-analysis-q941.onrender.com/chart-data?symbol=${encodeURIComponent(symbol)}`);
+      const res = await fetch(`/api/chart-data?symbol=${encodeURIComponent(symbol)}`);
       const data = await res.json();
 
       const labels = data.timestamps;
