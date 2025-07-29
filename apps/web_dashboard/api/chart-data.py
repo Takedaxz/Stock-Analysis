@@ -6,8 +6,15 @@ from urllib.parse import urlparse, parse_qs
 
 def get_chart_data(symbol="^GSPC"):
     try:
+        print(f"Downloading data for symbol: {symbol}")
         df = yf.download(symbol, period="6mo", interval="1d", progress=False)
+        print(f"Downloaded data shape: {df.shape}")
+        
+        if df.empty:
+            return {"error": "No data received from yfinance", "symbol": symbol}
+            
         df = df.dropna().reset_index()
+        print(f"After dropna shape: {df.shape}")
 
         df["EMA5"] = ta.trend.ema_indicator(df["Close"], window=5).bfill()
         df["EMA20"] = ta.trend.ema_indicator(df["Close"], window=20).bfill()
@@ -20,7 +27,8 @@ def get_chart_data(symbol="^GSPC"):
             "ema5": df["EMA5"].tolist(),
         }
     except Exception as e:
-        return {"error": str(e)}
+        print(f"Error in get_chart_data: {str(e)}")
+        return {"error": str(e), "symbol": symbol}
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
