@@ -22,30 +22,26 @@ def get_chart_data(symbol="^GSPC"):
     except Exception as e:
         return {"error": str(e)}
 
-# Vercel serverless function handler
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path.startswith('/api/chart-data'):
-            # Extract query parameters
-            parsed_url = urlparse(self.path)
-            params = parse_qs(parsed_url.query)
-            symbol = params.get('symbol', ['^GSPC'])[0]
-            
-            # Get chart data
-            chart_data = get_chart_data(symbol)
-            
-            # Return response
-            self.send_response(200)
-            self.send_header('Content-type', 'application/json')
-            self.send_header('Access-Control-Allow-Origin', '*')
-            self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-            self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-            self.end_headers()
-            self.wfile.write(json.dumps(chart_data).encode())
-        else:
-            self.send_response(404)
-            self.end_headers()
-            self.wfile.write(b'Not Found')
+        # Parse the URL to get query parameters
+        parsed_url = urlparse(self.path)
+        params = parse_qs(parsed_url.query)
+        symbol = params.get('symbol', ['^GSPC'])[0]
+        
+        # Get chart data
+        chart_data = get_chart_data(symbol)
+        
+        # Set response headers
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
+        
+        # Return JSON response
+        self.wfile.write(json.dumps(chart_data).encode())
     
     def do_OPTIONS(self):
         self.send_response(200)
