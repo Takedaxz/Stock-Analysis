@@ -1,10 +1,26 @@
 from http.server import BaseHTTPRequestHandler
 import requests
-import ta
 import json
 from urllib.parse import urlparse, parse_qs
 from datetime import datetime, timedelta
-import pandas as pd
+
+def calculate_ema(prices, window):
+    """Calculate EMA manually without pandas"""
+    if len(prices) < window:
+        return prices
+    
+    ema = []
+    multiplier = 2 / (window + 1)
+    
+    # First EMA is SMA
+    sma = sum(prices[:window]) / window
+    ema.append(sma)
+    
+    for i in range(1, len(prices)):
+        ema_val = (prices[i] * multiplier) + (ema[i-1] * (1 - multiplier))
+        ema.append(ema_val)
+    
+    return ema
 
 def get_real_data(symbol="^GSPC"):
     """Fetch real data from Yahoo Finance using requests"""
@@ -42,22 +58,16 @@ def get_real_data(symbol="^GSPC"):
         # Get close prices
         closes = quotes['close']
         
-        # Create DataFrame for technical indicators
-        df = pd.DataFrame({
-            'Date': dates,
-            'Close': closes
-        })
-        
-        # Calculate EMAs
-        df["EMA5"] = ta.trend.ema_indicator(df["Close"], window=5).bfill()
-        df["EMA20"] = ta.trend.ema_indicator(df["Close"], window=20).bfill()
+        # Calculate EMAs manually
+        ema5 = calculate_ema(closes, 5)
+        ema20 = calculate_ema(closes, 20)
         
         return {
             "symbol": symbol,
             "timestamps": dates,
-            "prices": df["Close"].tolist(),
-            "ema20": df["EMA20"].tolist(),
-            "ema5": df["EMA5"].tolist(),
+            "prices": closes,
+            "ema20": ema20,
+            "ema5": ema5,
         }
         
     except Exception as e:
