@@ -19,7 +19,7 @@ def quick_check():
     
     try:
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel("gemini-2.5-flash-preview-04-17")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         response = model.generate_content("hi")
         print("✅ API quota available")
         return True
