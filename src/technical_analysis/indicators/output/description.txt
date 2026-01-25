@@ -1,5 +1,4 @@
 ##To run all files
 
-1.  !cd TechnicalAnalysis
-2.  !cd Indicators
+1.  !cd src/technical_analysis/indicators
 3.  !python main.py

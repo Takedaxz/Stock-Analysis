@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import requests
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai
 from tqdm import tqdm
 from google.api_core import retry
 from pymongo.mongo_client import MongoClient
@@ -335,32 +335,33 @@ def combine_articles():
         return pd.DataFrame()
 
 def setup_gemini():
-    """Setup Gemini API"""
+    """Setup Gemini API using the new google-genai SDK"""
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found in environment variables")
     
-    genai.configure(api_key=api_key)
-    generation_config = genai.GenerationConfig(temperature=0)
-    return genai.GenerativeModel("gemini-2.5-flash", generation_config=generation_config)
+    return genai.Client(api_key=api_key)
 
 def is_retryable(e) -> bool:
-    """Check if error is retryable"""
-    if retry.if_transient_error(e):
+    """Check if error is retryable for the new SDK"""
+    error_str = str(e).lower()
+    if "429" in error_str or "quota" in error_str:
         return True
-    elif (isinstance(e, genai.errors.ClientError) and e.code == 429):
+    if "503" in error_str or "unavailable" in error_str:
         return True
-    elif (isinstance(e, genai.errors.ServerError) and e.code == 503):
-        return True
-    else:
-        return False
+    return False
 
 @retry.Retry(predicate=is_retryable)
-def generate_content_with_rate_limit(model, prompt):
-    """Generate content with rate limiting"""
-    # Add delay to respect rate limits (15 requests per minute = 4 seconds between requests)
-    time.sleep(4)  # 4 second delay between requests
-    return model.generate_content(prompt).text
+def generate_content_with_rate_limit(client, prompt):
+    """Generate content with rate limiting using the new SDK"""
+    # Add delay to respect rate limits
+    time.sleep(4)
+    response = client.models.generate_content(
+        model="gemini-3-flash-preview",
+        contents=prompt,
+        config={'temperature': 0}
+    )
+    return response.text
 
 def analyze_sentiment_and_translate(model, df):
     """Analyze sentiment and translate summary for all articles in one prompt"""

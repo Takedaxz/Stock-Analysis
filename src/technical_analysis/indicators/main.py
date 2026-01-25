@@ -1,9 +1,28 @@
 import papermill as pm
 
-#Configuration
-TICKER = "NVDA"
-start_date = "2024-01-01"
-end_date = "2025-07-09"
+# Default Configuration
+DEFAULT_TICKER = "TSLA"
+DEFAULT_START_DATE = "2024-01-01"
+DEFAULT_END_DATE = "2026-01-26"
+
+print("="*40)
+print(" TECHNICAL ANALYSIS INDICATORS PROCESSOR ")
+print("="*40)
+
+# Get parameters with defaults
+user_ticker = input(f"Enter Ticker [{DEFAULT_TICKER}]: ").strip()
+TICKER = user_ticker if user_ticker else DEFAULT_TICKER
+
+user_start = input(f"Enter Start Date (YYYY-MM-DD) [{DEFAULT_START_DATE}]: ").strip()
+start_date = user_start if user_start else DEFAULT_START_DATE
+
+user_end = input(f"Enter End Date (YYYY-MM-DD) [{DEFAULT_END_DATE}]: ").strip()
+end_date = user_end if user_end else DEFAULT_END_DATE
+
+print("-" * 40)
+print(f"Processing for: {TICKER}")
+print(f"Date Range: {start_date} to {end_date}")
+print("-" * 40)
 
 
 #Notebook list
