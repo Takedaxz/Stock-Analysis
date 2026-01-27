@@ -1,0 +1,40 @@
+name: Trending News Processor
+
+on:
+  schedule:
+    # Run daily at 8:00 PM GMT+7 (1:00 PM UTC) and 11:00 AM GMT+7 (4:00 AM UTC)
+    - cron: '0 13 * * *'  # 8:00 PM GMT+7
+    - cron: '0 4 * * *'   # 11:00 AM GMT+7
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  process-all-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r workflow-requirements.txt
+        
+    - name: Create environment file
+      run: |
+        echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
+        echo "MONGO_CONNECTION_STRING=${{ secrets.MONGO_CONNECTION_STRING }}" >> .env
+        echo "NEWSAPI_KEY=${{ secrets.NEWSAPI_KEY }}" >> .env
+        echo "ALPHAVANTAGE_KEY=${{ secrets.ALPHAVANTAGE_KEY }}" >> .env
+        
+    - name: Run trending news processor
+      continue-on-error: true
+      run: |
+        echo "Starting Trending News Processor..."
+        python apps/trending_news_processor.py
+        echo "Trending News Processor completed."
