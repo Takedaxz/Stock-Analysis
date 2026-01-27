@@ -11,4 +11,4 @@ google-generativeai
 tqdm
 google-api-core
 pymongo
-google-geneai
+google-genai
