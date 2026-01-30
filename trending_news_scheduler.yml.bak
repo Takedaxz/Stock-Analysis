@@ -33,9 +33,8 @@ jobs:
         echo "ALPHAVANTAGE_KEY=${{ secrets.ALPHAVANTAGE_KEY }}" >> .env
         
     - name: Run trending news processor
+      continue-on-error: true
       run: |
         echo "Starting Trending News Processor..."
         python apps/trending_news_processor.py
         echo "Trending News Processor completed."
-        
- 
